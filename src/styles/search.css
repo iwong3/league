@@ -1,0 +1,37 @@
+.Search {
+    display: flex;
+    width: 100%;
+}
+
+.Search > form {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    width: 100%;
+    border-radius: 2px;
+
+}
+
+.Search #searchBar {
+    border: 1px solid black;
+    border-right: none;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.19);
+    font-size: 20px;
+    padding: 5px 20px;
+    height: 40px;
+    width: 30%;
+}
+
+/*change search text to icon*/
+.Search #searchButton {
+    background: #ffffff;
+    border: 1px solid black;
+    border-left: none;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.19);
+    font-size: 16px;
+    padding: 5px 20px;
+}

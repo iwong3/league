@@ -1,0 +1,9 @@
+.App {
+  display: flex;
+  flex-flow: column nowrap;
+}
+
+.App_body {
+  display: flex;
+  justify-content: center;
+}

@@ -1,0 +1,56 @@
+.SummonerHeader {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: left;
+    width: 1215px;
+    min-height: 300px;
+    font-family: Arial;
+    font-style: italic;
+    border: 2px #ffffff solid;
+    border-bottom: none;
+}
+
+.summonerName {
+    display: flex;
+    align-items: center;
+    background: transparent url(../images/summoner_name_bg.png) left no-repeat;
+    margin-top: 120px;
+    margin-bottom: 10px;
+    min-width: 450px;
+    height: 70px;
+}
+
+.summonerName #profileIcon {
+    height: 60px;
+    padding-left: 100px;
+}
+
+.summonerName h4 {
+    font-size: 50px;
+    color: #ffbf00;
+    text-shadow: 0 0 40px black;
+    text-align: center;
+    margin: 0;
+    padding-left: 20px;
+}
+
+.mostPlayedChampions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent url(../images/most_played_bg.png) left no-repeat;
+    width: 375px;
+}
+
+.mostPlayedChampions p {
+    font-size: 16px;
+    color: #ffffff;
+    margin-left: 20px;
+    margin-right: 15px;
+}
+
+.mostPlayedChampions img {
+    border: 1px solid #ffbf00;
+    margin-left: 5px;
+    margin-right: 5px;
+}

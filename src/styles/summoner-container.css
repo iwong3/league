@@ -1,0 +1,8 @@
+.SummonerContainer {
+    display: flex;
+    flex-direction: column;
+    /* border: 1px solid black; */
+    margin-top: 50px;
+    align-items: center;
+    /* justify-content: center; */
+}
