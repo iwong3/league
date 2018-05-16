@@ -18,3 +18,14 @@
     width: 100%;
     margin: 0;
 }
+
+.logo {
+    height: 65px;
+    width: 65px;
+}
+
+.line {
+    border: 1px solid #ccbe91;
+    margin: 0px 50px;
+    width: 100px;
+}

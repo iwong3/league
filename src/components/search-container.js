@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+import { Link } from "react-router-dom";
 
 import Search from './search';
 import SummonerContainer from './summoner-container';
+
 import '../styles/search-container.css';
 
 
@@ -33,11 +35,8 @@ export default class SearchContainer extends Component {
             "display": "flex",
             "justifyContent": "space-evenly",
             "alignItems": "center",
-            "borderTop": "2px solid #ccbe91",
-            "borderBottom": "2px solid #ccbe91",
             "paddingTop": "10%",
             "paddingBottom": "10%",
-            "width": "100%",
             "height": "375px"
         })
     }
