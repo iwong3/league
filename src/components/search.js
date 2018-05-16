@@ -18,6 +18,7 @@ export default class Search extends Component {
         this.handleSearchChange = this.handleSearchChange.bind(this);
     }
 
+    //Keeps track of input changes and updates state accordingly
     handleSearchChange = (event) => {
         this.setState({
             summonerName: event.target.value,
@@ -26,10 +27,12 @@ export default class Search extends Component {
         });
     }
 
+    //If valid summoner name, update our window.location
+    //Otherwise, set alert states
     handleSearch = (event) => {
         event.preventDefault();
         if (this.state.summonerName && this.state.summonerName.length > 3) {
-            this.props.updateSummonerName(this.state.summonerName);
+            window.location = "/summoner/" + this.state.summonerName;
         } else if (this.state.summonerName) {
             this.setState({
                 showAlert: true,

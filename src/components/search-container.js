@@ -16,15 +16,22 @@ export default class SearchContainer extends Component {
             summonerName: ""
         }
 
-        this.updateSummonerName = this.updateSummonerName.bind(this);
+        this.setStyle = this.setStyle.bind(this);
     }
 
-    updateSummonerName = (name) => {
+    //Get summonerName from URL
+    componentDidMount = () => {
+        let urlSummonerName = "";
+        if (this.props.location.pathname.length > 10) {
+            urlSummonerName = this.props.location.pathname.substring(10);
+        }
         this.setState({
-            summonerName: name
+            summonerName: urlSummonerName
         });
     }
 
+    //If there is a summoner name to search, just show the Search bar
+    //Otherwise, show the flashy background and styling
     setStyle = () => {
         if (this.state.summonerName) {
             return ({
@@ -45,7 +52,7 @@ export default class SearchContainer extends Component {
         return (
             <div className="SearchContainer"
                  style={this.setStyle()} >
-                <Search updateSummonerName={this.updateSummonerName} />
+                <Search />
                 <SummonerContainer summonerName={this.state.summonerName}/>
             </div>
         );
