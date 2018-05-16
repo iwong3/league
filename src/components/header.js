@@ -33,23 +33,33 @@ export default class Header extends Component {
     render() {
         return (
             <div className="Header">
-                <div className="headerBanner">
-                    <h1> REEAGUE OF REGENDS </h1>
-                </div>
-                <div className="headerNav">
-                        <Link to="/"
-                            onClick={() => this.setActiveTab("home")}
-                            style={this.checkActiveTabStyle("home")}>
-                            Home
-                        </Link>
-                        <Link to="/champions"
-                            onClick={() => this.setActiveTab("champions")}
-                            style={this.checkActiveTabStyle("champions")}>
-                            Champions
-                        </Link>
-                </div>
+                <Link to="/">
+                    <h1>LEAGUE APP</h1>
+                </Link>
             </div>
         )
     }
+
+    // render() {
+    //     return (
+    //         <div className="Header">
+    //             <div className="headerBanner">
+    //                 <h1> REEAGUE OF REGENDS </h1>
+    //             </div>
+    //             <div className="headerNav">
+    //                     <Link to="/"
+    //                         onClick={() => this.setActiveTab("home")}
+    //                         style={this.checkActiveTabStyle("home")}>
+    //                         Home
+    //                     </Link>
+    //                     <Link to="/champions"
+    //                         onClick={() => this.setActiveTab("champions")}
+    //                         style={this.checkActiveTabStyle("champions")}>
+    //                         Champions
+    //                     </Link>
+    //             </div>
+    //         </div>
+    //     )
+    // }
 
 }

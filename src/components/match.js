@@ -107,6 +107,10 @@ export default class Match extends Component {
                 style["backgroundPosition"] = "0% 27%";
                 style["backgroundSize"] = "auto 514%";
                 break;
+            case ("Fizz"):
+                style["backgroundPosition"] = "100% 15%";
+                style["backgroundSize"] = "auto 405%";
+                break;
             case ("Galio"):
                 style["backgroundPosition"] = "21% 3%";
                 break;
@@ -163,6 +167,9 @@ export default class Match extends Component {
                 break;
             case ("Leona"):
                 style["backgroundPosition"] = "70% 7%";
+                break;
+            case ("Lucian"):
+                style["backgroundPosition"] = "67% 38%";
                 break;
             case ("Lulu"):
                 style["backgroundPosition"] = "59% 37%";
@@ -266,11 +273,17 @@ export default class Match extends Component {
             case ("Volibear"):
                 style["backgroundPosition"] = "59% 7%";
                 break;
+            case ("MonkeyKing"):
+                style["backgroundPosition"] = "45% 26%";
+                break;
             case ("Xayah"):
                 style["backgroundPosition"] = "52% 28%";
                 break;
             case ("XinZhao"):
                 style["backgroundPosition"] = "24% 19%";
+                break;
+            case ("Yasuo"):
+                style["backgroundPosition"] = "77% 30%";
                 break;
             case ("Yorick"):
                 style["backgroundPosition"] = "50% 8%";

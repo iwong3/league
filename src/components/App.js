@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
-import '../styles/App.css';
 import Header from './header';
+import Navigation from './navigation';
 import SearchContainer from './search-container';
 import Champions from './champions';
+
+import '../styles/App.css';
 
 
 export default class App extends Component {
@@ -16,11 +18,11 @@ export default class App extends Component {
           <Header />
           <div className="App_body">
             <Route exact path={"/"}
-                   component={SearchContainer}
-            />
+                   component={Navigation} />
+            <Route path={"/summoner"}
+                   component={SearchContainer} />
             <Route path={"/champions"}
-                   component={Champions}
-            />
+                   component={Champions} />
           </div>
         </div>
       </Router>

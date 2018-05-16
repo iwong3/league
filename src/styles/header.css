@@ -1,7 +1,26 @@
+/* @font-face {
+    font-family: 'Trajanus';
+    src: url(http://localhost:3000/fonts/trajanus-roman/TRAJANUS.TTF) format('truetype');
+    font-weight: normal;
+    font-style: normal;
+} */
+
 .Header {
     width: 100%;
     background: black;
-    margin-bottom: 50px;
+    /* margin-bottom: 50px; */
+}
+
+.Header a {
+    text-decoration: none;
+}
+
+.Header h1 {
+    font-family: "Lusitana", sans-serif;
+    color: #f1e6d2;
+    font-size: 50px;
+    text-align: center;
+    width: 100%;
 }
 
 .headerBanner {
@@ -16,6 +35,7 @@
 
 .headerBanner h1 {
     align-self: center;
+    /* font-family: 'Trajanus'; */
 }
 
 .headerNav {

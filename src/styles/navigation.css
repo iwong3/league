@@ -1,0 +1,47 @@
+.Navigation {
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+}
+
+.Navigation a {
+    text-decoration: none;
+}
+
+.navItemBorder {
+    display: flex;
+    background: #1d282c;
+    border: 1px solid #000000;
+    padding: 1px;
+    width: 225px;
+    height: 250px;
+}
+
+.navItemBorder:hover {
+    background: linear-gradient(180deg,#f1e6d2 0,#634b25);
+    filter: brightness(1.2);
+}
+
+.navItemContent {
+    display: flex;
+    align-items: center;
+    background: linear-gradient(360deg,#000a13 10%, #1d282c 50%,#000a13 90%,#000a13);
+    border: 1px solid black;
+    opacity: 1;
+    transition: opacity 0.4s ease;
+    width: 100%;
+}
+
+.navItemBorder:hover .navItemContent {
+    background: linear-gradient(360deg,#000a13 0%, #1d282c 50%,#000a13 100%,#000a13);
+    opacity: 0.95;
+}
+
+.navItemText {
+    text-align: center;
+    font-family: 'Lusitana', serif;
+    letter-spacing: .075em;
+    color: #f1e6d2;
+    font-size: 22px;
+    width: 100%;
+}
