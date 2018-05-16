@@ -6,8 +6,8 @@
     min-height: 300px;
     font-family: Arial;
     font-style: italic;
-    border: 2px #ffffff solid;
-    border-bottom: none;
+    /* border: 2px #ffffff solid; */
+    /* border-bottom: none; */
 }
 
 .summonerName {
