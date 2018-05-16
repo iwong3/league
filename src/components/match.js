@@ -66,6 +66,9 @@ export default class Match extends Component {
             case ("Aatrox"):
                 style["backgroundPosition"] = "63% 22%";
                 break;
+            case ("Ahri"):
+                style["backgroundPosition"] = "41% 18%";
+                break;
             case ("Alistar"):
                 style["backgroundPosition"] = "0% 42%";
                 style["backgroundSize"] = "auto 462%";
@@ -82,6 +85,9 @@ export default class Match extends Component {
             case ("Blitzcrank"):
                 style["backgroundPosition"] = "62% 28%";
                 break;
+            case ("Brand"):
+                style["backgroundPosition"] = "76% 20%";
+                break;
             case ("Braum"):
                 style["backgroundPosition"] = "76% 13%";
                 break;
@@ -91,11 +97,17 @@ export default class Match extends Component {
             case ("Camille"):
                 style["backgroundPosition"] = "96% 16%";
                 break;
+            case ("Cassiopeia"):
+                style["backgroundPosition"] = "43% 33%";
+                break;
             case ("Draven"):
                 style["backgroundPosition"] = "69% 27%";
                 break;
             case ("DrMundo"):
                 style["backgroundPosition"] = "70% 31%";
+                break;
+            case ("Ekko"):
+                style["backgroundPosition"] = "67% 20%";
                 break;
             case ("Elise"):
                 style["backgroundPosition"] = "66% 14%";
@@ -127,6 +139,13 @@ export default class Match extends Component {
             case ("Hecarim"):
                 style["backgroundPosition"] = "75% 9%";
                 break;
+            case ("Heimerdinger"):
+                style["backgroundPosition"] = "0% 40%";
+                style["backgroundSize"] = "111% auto";
+                break;
+            case ("Illaoi"):
+                style["backgroundPosition"] = "41% 1%";
+                break;
             case ("Irelia"):
                 style["backgroundPosition"] = "23% 5%";
                 break;
@@ -151,12 +170,22 @@ export default class Match extends Component {
             case ("Karma"):
                 style["backgroundPosition"] = "69% 15%";
                 break;
+            case ("Kayn"):
+                style["backgroundPosition"] = "22% 44%";
+                break;
             case ("Kennen"):
                 style["backgroundPosition"] = "0% 22%";
                 style["backgroundSize"] = "auto 375%";
                 break;
             case ("Khazix"):
                 style["backgroundPosition"] = "70% 54%";
+                break;
+            case ("Kindred"):
+                style["backgroundPosition"] = "43% 31%";
+                break;
+            case ("Kled"):
+                style["backgroundPosition"] = "0% 10%";
+                style["backgroundSize"] = "auto 364%";
                 break;
             case ("KogMaw"):
                 style["backgroundPosition"] = "0% 62%";
@@ -201,6 +230,9 @@ export default class Match extends Component {
             case ("Orianna"):
                 style["backgroundPosition"] = "78% 7%";
                 style["backgroundSize"] = "auto 500%";
+                break;
+            case ("Ornn"):
+                style["backgroundPosition"] = "23% 33%";
                 break;
             case ("Quinn"):
                 style["backgroundPosition"] = "51% 29%";
@@ -270,6 +302,9 @@ export default class Match extends Component {
                 style["backgroundPosition"] = "0% 41%";
                 style["backgroundSize"] = "auto 471%";
                 break;
+            case ("Viktor"):
+                style["backgroundPosition"] = "47% 19%";
+                break;
             case ("Volibear"):
                 style["backgroundPosition"] = "59% 7%";
                 break;
@@ -291,6 +326,9 @@ export default class Match extends Component {
             case ("Zac"):
                 style["backgroundPosition"] = "0% 60%";
                 style["backgroundSize"] = "auto 401%";
+                break;
+            case ("Zed"):
+                style["backgroundPosition"] = "50% 12%";
                 break;
             case ("Zoe"):
                 style["backgroundPosition"] = "0% 20%";

@@ -4,9 +4,9 @@
     align-items: left;
     width: 1215px;
     min-height: 300px;
-    font-family: Arial;
+    font-family: "Lato", sans-serif;
     font-style: italic;
-    /* border: 2px #ffffff solid; */
+    border: 2px #ccbe91 solid;
     /* border-bottom: none; */
 }
 
@@ -27,8 +27,8 @@
 
 .summonerName h4 {
     font-size: 50px;
-    color: #ffbf00;
-    text-shadow: 0 0 40px black;
+    color: #ccbe91;
+    /* text-shadow: 0 0 40px black; */
     text-align: center;
     margin: 0;
     padding-left: 20px;

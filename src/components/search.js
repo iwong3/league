@@ -24,7 +24,11 @@ export default class Search extends Component {
 
     handleSearch = (event) => {
         event.preventDefault();
-        this.props.updateSummonerName(this.state.summonerName);
+        if (this.state.summonerName) {
+            this.props.updateSummonerName(this.state.summonerName);
+        } else {
+            alert("hi");
+        }
     }
 
     render() {

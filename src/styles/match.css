@@ -44,8 +44,9 @@
 }
 
 .kdaGroup {
-    font-size: 24px;
-    color: #ffffff;
+    font-size: 16px;
+    font-family: "Lato", sans-serif;
+    color: #f1e6d2;
 }
 
 .kda {

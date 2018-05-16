@@ -1,88 +1,20 @@
-/* @font-face {
-    font-family: 'Trajanus';
-    src: url(http://localhost:3000/fonts/trajanus-roman/TRAJANUS.TTF) format('truetype');
-    font-weight: normal;
-    font-style: normal;
-} */
-
 .Header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #000000;
     width: 100%;
-    background: black;
-    /* margin-bottom: 50px; */
+    height: 100px;
 }
 
 .Header a {
     text-decoration: none;
 }
 
-.Header h1 {
+.Header p {
     font-family: "Lusitana", sans-serif;
-    color: #f1e6d2;
     font-size: 50px;
-    text-align: center;
+    color: #f1e6d2;
     width: 100%;
-}
-
-.headerBanner {
-    display: flex;
-    background-image: url(../images/header.jpg);
-    background-size: 100%;
-    background-repeat: no-repeat;
-    background-position: 0% 45%;
-    color: #ffffff;
-    height:300px;
-}
-
-.headerBanner h1 {
-    align-self: center;
-    /* font-family: 'Trajanus'; */
-}
-
-.headerNav {
-    display: flex;
-    justify-content: space-around;
-    height: 50px;
-}
-
-/*nav bar button*/
-.headerNav button {
-    border: none;
-    background: none;
-    font-size: 16px;
-    width: 100px;
-    border-bottom: 2px solid transparent;
-}
-
-/*nav bar button text*/
-.headerNav button a {
-    color: white;
-    text-decoration: none;
-    align-self: center;
-}
-
-/*nav bar button on hover*/
-.headerNav button:hover {
-    border-bottom: 2px solid #ffbf00;
-    font-size: 16px;
-    color: #ffbf00;
-}
-
-/*nav bar button on hover text*/
-.headerNav button:hover a {
-    color: #ffbf00;
-}
-
-.headerNav a {
-    font-size: 16px;
-    color: white;
-    text-decoration: none;
-    text-align: center;
-    border-bottom: 2px solid transparent;
-    padding-top: 15px;
-    width: 100px;
-}
-
-.headerNav a:hover, .headerNav a:active {
-    border-bottom: 2px solid #ffbf00;
-    color: #ffbf00;
+    margin: 0;
 }
