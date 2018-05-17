@@ -429,21 +429,32 @@ export default class Match extends Component {
                         }
                         <div className="verticalLine"></div>
                         <div className="statGroup">
-                            <p className="kda">
-                                {this.state.matchStats.kills} | {this.state.matchStats.deaths} | {this.state.matchStats.assists}
-                            </p>
-                            <p className="kda2">
-                                {utility.getKDA(this.state.matchStats.kills, this.state.matchStats.deaths, this.state.matchStats.assists)}
-                            </p>
+                            <div className="statRow">
+                                <div className="kda">
+                                    {this.state.matchStats.kills} | {this.state.matchStats.deaths} | {this.state.matchStats.assists}
+                                </div>
+                            </div>
+                            <div className="statRow">
+                                <img src={utility.getScoreboardIcons("score")} alt="kda2" />
+                                <div className="kda2">
+                                    {utility.getKDA(this.state.matchStats.kills, this.state.matchStats.deaths, this.state.matchStats.assists)}
+                                </div>
+                            </div>
                         </div>
                         <div className="verticalLine"></div>
                         <div className="statGroup">
-                            <p className="cs">
-                                {this.state.matchStats.totalMinionsKilled}
-                            </p>
-                            <p className="gold">
-                                {this.state.matchStats.goldEarned}
-                            </p>
+                            <div className="statRow">
+                                <img src={utility.getScoreboardIcons("minion")} alt="cs" />
+                                <div className="cs">
+                                    {this.state.matchStats.totalMinionsKilled}
+                                </div>
+                            </div>
+                            <div className="statRow">
+                                <img src={utility.getScoreboardIcons("gold")} alt="gold" />
+                                <div className="gold">
+                                    {this.state.matchStats.goldEarned}
+                                </div>
+                            </div>
                         </div>
                         <div className="verticalLine"></div>
                         <div className="itemGroup">
@@ -453,7 +464,9 @@ export default class Match extends Component {
                         </div>
                     </div>
                     <div className="matchBanner" style={this.setBanner(this.props.match.champion)} >
-                        <div className="matchBannerBlackOverlay"></div>
+                        <div className="matchBannerBlackOverlay">
+                            <div className="matchBannerBlackOverlayGradient"></div>
+                        </div>
                     </div>
                 </div>
             );

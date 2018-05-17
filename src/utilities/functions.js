@@ -76,3 +76,8 @@ export function getItemUrl(item) {
 export function getSummonerSpellUrl(summonerSpell) {
     return "http://ddragon.leagueoflegends.com/cdn/" + constant.version + "/img/spell/" + summonerSpell + ".png";
 }
+
+//champion, gold, items, minion, score, spells
+export function getScoreboardIcons(icon) {
+    return "http://ddragon.leagueoflegends.com/cdn/5.5.1/img/ui/" + icon + ".png";
+}
