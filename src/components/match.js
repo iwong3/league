@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 
 import * as utility from '../utilities/functions';
 
@@ -11,59 +10,59 @@ export default class Match extends Component {
     constructor(props) {
         super(props);
 
-        this.state = {
-            matchDetails: null,
-            participantIndex: null,
-            matchStats: null
-        }
-
-        this.getParticipantId = this.getParticipantId.bind(this);
-        this.getMatchStats = this.getMatchStats.bind(this);
         this.setBanner = this.setBanner.bind(this);
-        this.getItems = this.getItems.bind(this);
-        this.getItemsHelper = this.getItemsHelper.bind(this);
-        this.getTrinket = this.getTrinket.bind(this);
-        this.getSummonerSpells = this.getSummonerSpells.bind(this);
-        this.getSummonerSpellsHelper = this.getSummonerSpellsHelper.bind(this);
-    }
-    
-    componentWillReceiveProps = (newProps) => {
-        let matchUrl = utility.getMatchUrl(newProps.match.gameId);
-        axios.get(matchUrl).then(res => {
-            this.setState({
-                matchDetails: res.data
-            }, function() {
-                this.getParticipantId(this.state.matchDetails.participantIdentities);
-            });
-        });
+        this.setMatchBorder = this.setMatchBorder.bind(this);
+        this.setVerticalLineColor = this.setVerticalLineColor.bind(this);
     }
 
-    componentDidMount = () => {
-        let matchUrl = utility.getMatchUrl(this.props.match.gameId);
-        axios.get(matchUrl).then(res => {
-            this.setState({
-                matchDetails: res.data
-            }, function() {
-                this.getParticipantId(this.state.matchDetails.participantIdentities);
-            });
-        });
-    }
+    getTimeSinceMatch = (details) => {
+        let date = new Date();
+        let currentTime = date.getTime();
+        let timeSinceMatch = currentTime - details.gameCreation;
+        let hoursSinceMatch = parseInt(timeSinceMatch/(1000*60*60), 10);
 
-    getParticipantId = (participantIds) => {
-        for (let i = 0; i < participantIds.length; i++) {
-            if (this.props.accountId === participantIds[i].player.accountId) {
-                this.setState({
-                    participantIndex: (participantIds[i].participantId - 1)
-                }, function() {
-                    this.getMatchStats(this.state.participantIndex);
-                });
-            }
+        if (hoursSinceMatch === 1) {
+            return "1 hour ago";
         }
+        if (hoursSinceMatch < 24) {
+            return hoursSinceMatch + " hours ago";
+        }
+        if (hoursSinceMatch >= 24 && hoursSinceMatch < 48) {
+            return "1 day ago";
+        }
+        return parseInt(hoursSinceMatch / 24, 10) + " days ago";
     }
 
-    getMatchStats = (participantIndex) => {
-        this.setState({
-            matchStats: this.state.matchDetails.participants[this.state.participantIndex].stats
+    getGameDuration = (details) => {
+        let hours = parseInt(parseInt(details.gameDuration / 60, 10) / 60, 10);
+        let minutes = parseInt(details.gameDuration / 60, 10) % 60;
+        let seconds = parseInt(details.gameDuration % 60, 10);
+
+        if (hours >= 1) {
+            return hours + "h " + minutes + "m " + seconds + "s";
+        }
+        return minutes + "m " + seconds + "s";
+    }
+
+    setMatchBorder = (win) => {
+        if (win) {
+            return ({
+                "border": "1px solid #ccbe91"
+            });
+        }
+        return ({
+            "border": "1px solid #cd2626"
+        });
+    }
+
+    setVerticalLineColor = (win) => {
+        if (win) {
+            return ({
+                "borderLeft": "1px solid #ccbe91"
+            });
+        }
+        return ({
+            "borderLeft": "1px solid #cd2626"
         });
     }
 
@@ -76,7 +75,7 @@ export default class Match extends Component {
                 style["backgroundPosition"] = "63% 22%";
                 break;
             case ("Ahri"):
-                style["backgroundPosition"] = "41% 18%";
+                style["backgroundPosition"] = "42% 18%";
                 break;
             case ("Alistar"):
                 style["backgroundPosition"] = "0% 42%";
@@ -89,7 +88,7 @@ export default class Match extends Component {
                 style["backgroundPosition"] = "71% 17%";
                 break;
             case ("Bard"):
-                style["backgroundPosition"] = "45% 20%";
+                style["backgroundPosition"] = "42% 20%";
                 break;
             case ("Blitzcrank"):
                 style["backgroundPosition"] = "62% 28%";
@@ -108,6 +107,12 @@ export default class Match extends Component {
                 break;
             case ("Cassiopeia"):
                 style["backgroundPosition"] = "43% 33%";
+                break;
+            case ("Darius"):
+                style["backgroundPosition"] = "30% 12%";
+                break;
+            case ("Diana"):
+                style["backgroundPosition"] = "58% 33%";
                 break;
             case ("Draven"):
                 style["backgroundPosition"] = "69% 27%";
@@ -128,12 +133,20 @@ export default class Match extends Component {
                 style["backgroundPosition"] = "0% 27%";
                 style["backgroundSize"] = "auto 514%";
                 break;
+            case ("Fiora"):
+                style["backgroundPosition"] = "17% 4%";
+                style["backgroundSize"] = "auto 496%";
+                break;
             case ("Fizz"):
                 style["backgroundPosition"] = "100% 15%";
-                style["backgroundSize"] = "auto 405%";
+                style["backgroundSize"] = "auto 450%";
                 break;
             case ("Galio"):
-                style["backgroundPosition"] = "21% 3%";
+                style["backgroundPosition"] = "20% 3%";
+                break;
+            case ("Gangplank"):
+                style["backgroundPosition"] = "0% 19%";
+                style["backgroundSize"] = "auto 408%";
                 break;
             case ("Garen"):
                 style["backgroundPosition"] = "80% 34%";
@@ -158,14 +171,17 @@ export default class Match extends Component {
             case ("Irelia"):
                 style["backgroundPosition"] = "23% 5%";
                 break;
+            case ("JarvanIV"):
+                style["backgroundPosition"] = "66% 20%";
+                break;
             case ("Jax"):
-                style["backgroundPosition"] = "67% 17%";
+                style["backgroundPosition"] = "65% 17%";
                 break;
             case ("Jayce"):
                 style["backgroundPosition"] = "78% 26%";
                 break;
             case ("Jhin"):
-                style["backgroundPosition"] = "41% 19%";
+                style["backgroundPosition"] = "40% 19%";
                 break;
             case ("Jinx"):
                 style["backgroundPosition"] = "52% 16%";
@@ -179,12 +195,15 @@ export default class Match extends Component {
             case ("Karma"):
                 style["backgroundPosition"] = "69% 15%";
                 break;
+            case ("Kassadin"):
+                style["backgroundPosition"] = "54% 32%";
+                break;
             case ("Kayn"):
                 style["backgroundPosition"] = "22% 44%";
                 break;
             case ("Kennen"):
                 style["backgroundPosition"] = "0% 22%";
-                style["backgroundSize"] = "auto 375%";
+                style["backgroundSize"] = "auto 393%";
                 break;
             case ("Khazix"):
                 style["backgroundPosition"] = "70% 54%";
@@ -199,6 +218,9 @@ export default class Match extends Component {
             case ("KogMaw"):
                 style["backgroundPosition"] = "0% 62%";
                 style["backgroundSize"] = "120% auto";
+                break;
+            case ("Leblanc"):
+                style["backgroundPosition"] = "55% 19%";
                 break;
             case ("LeeSin"):
                 style["backgroundPosition"] = "48% 17%";
@@ -225,7 +247,7 @@ export default class Match extends Component {
                 style["backgroundPosition"] = "70% 30%";
                 break; 
             case ("Mordekaiser"):
-                style["backgroundPosition"] = "62% 20%";
+                style["backgroundPosition"] = "61% 20%";
                 break;
             case ("Morgana"):
                 style["backgroundPosition"] = "75% 31%";
@@ -235,6 +257,16 @@ export default class Match extends Component {
                 break;
             case ("Nidalee"):
                 style["backgroundPosition"] = "74% 13%";
+                break;
+            case ("Nocturne"):
+                style["backgroundPosition"] = "44% 49%";
+                break;
+            case ("Nunu"):
+                style["backgroundPosition"] = "70% 12%";
+                style["backgroundSize"] = "auto 415%";
+                break;
+            case ("Olaf"):
+                style["backgroundPosition"] = "47% 28%";
                 break;
             case ("Orianna"):
                 style["backgroundPosition"] = "78% 7%";
@@ -253,6 +285,17 @@ export default class Match extends Component {
             case ("Rakan"):
                 style["backgroundPosition"] = "31% 12%";
                 break;
+            case ("Renekton"):
+                style["backgroundPosition"] = "0% 18%";
+                style["backgroundSize"] = "auto 482%";
+                break;
+            case ("Rengar"):
+                style["backgroundPosition"] = "0% 35%";
+                style["backgroundSize"] = "auto 411%";
+                break;
+            case ("Riven"):
+                style["backgroundPosition"] = "75% 20%";
+                break;
             case ("Singed"):
                 style["backgroundPosition"] = "0% 15%";
                 style["backgroundSize"] = "auto 387%";
@@ -263,6 +306,10 @@ export default class Match extends Component {
             case ("Sivir"):
                 style["backgroundPosition"] = "38% 34%";
                 break;
+            case ("Skarner"):
+                style["backgroundPosition"] = "0% 40%";
+                style["backgroundSize"] = "auto 408%";
+                break;
             case ("Sona"):
                 style["backgroundPosition"] = "53% 14%";
                 break;
@@ -271,6 +318,9 @@ export default class Match extends Component {
                 break;
             case ("Swain"):
                 style["backgroundPosition"] = "58% 9%";
+                break;
+            case ("Talon"):
+                style["backgroundPosition"] = "52% 30%";
                 break;
             case ("Taric"):
                 style["backgroundPosition"] = "84% 6%";
@@ -314,8 +364,15 @@ export default class Match extends Component {
             case ("Viktor"):
                 style["backgroundPosition"] = "47% 19%";
                 break;
+            case ("Vladimir"):
+                style["backgroundPosition"] = "73% 16%";
+                break;
             case ("Volibear"):
                 style["backgroundPosition"] = "59% 7%";
+                break;
+            case ("Warwick"):
+                style["backgroundPosition"] = "0% 63%";
+                style["backgroundSize"] = "auto 430%";
                 break;
             case ("MonkeyKing"):
                 style["backgroundPosition"] = "45% 26%";
@@ -323,11 +380,14 @@ export default class Match extends Component {
             case ("Xayah"):
                 style["backgroundPosition"] = "52% 28%";
                 break;
+            case ("Xerath"):
+                style["backgroundPosition"] = "37% 9%";
+                break;
             case ("XinZhao"):
                 style["backgroundPosition"] = "24% 19%";
                 break;
             case ("Yasuo"):
-                style["backgroundPosition"] = "77% 30%";
+                style["backgroundPosition"] = "78% 30%";
                 break;
             case ("Yorick"):
                 style["backgroundPosition"] = "50% 8%";
@@ -341,7 +401,7 @@ export default class Match extends Component {
                 break;
             case ("Zoe"):
                 style["backgroundPosition"] = "0% 20%";
-                style["backgroundSize"] = "auto 502%";
+                style["backgroundSize"] = "auto 527%";
                 break;
             case ("Zyra"):
                 style["backgroundPosition"] = "69% 21%";
@@ -352,129 +412,52 @@ export default class Match extends Component {
         return style;
     }
 
-    getItems = (stats) => {
-        let itemIcons = [];
-        let row = [];
-        for (let i = 0; i < 6; i++) {
-            if (row.length < 3) {
-                row.push(this.getItemsHelper(stats["item" + i]));
-            }
-            if (row.length % 3 === 0) {
-                itemIcons.push(<div>{row}</div>);
-                row = [];
-            }
-        }
-        return (
-            <div>{itemIcons}</div>
-        );
-    }
-
-    getItemsHelper = (item) => {
-        if (item !== 0) {
-            let itemUrl = utility.getItemUrl(item);
-            return (
-                <img src={itemUrl}
-                     alt={"Item"} />
-            );
-        }
-        return <none/>
-    }
-
-    getTrinket = (stats) => {
-        if (stats.item6 !== 0) {
-            let trinketUrl = utility.getItemUrl(stats.item6);
-            return (
-                <img src={trinketUrl}
-                     alt={"Trinket"} />
-            );
-        }
-        return <none/>
-    }
-
-    getSummonerSpells = (details) => {
-        let summonerSpellIcons = [];
-        summonerSpellIcons.push(<div>{this.getSummonerSpellsHelper(utility.summonerSpellIdToName(details.spell1Id))}</div>);
-        summonerSpellIcons.push(<div>{this.getSummonerSpellsHelper(utility.summonerSpellIdToName(details.spell2Id))}</div>);
-        return (
-            <div>{summonerSpellIcons}</div>
-        );
-    }
-
-    getSummonerSpellsHelper = (summonerSpell) => {
-        let summonerSpellUrl = utility.getSummonerSpellUrl(summonerSpell);
-        return (
-            <img src={summonerSpellUrl}
-                 alt={summonerSpell} />
-        );
-    }
-
     render() {
-        if (this.state.matchStats) {
-            return (
-                <div className="Match">
-                    {
-                        this.state.matchStats.win
-                        ?
-                        <div className="matchHover" style={{"backgroundColor": "#ffbf00"}}></div>
-                        :
-                        <div className="matchHover" style={{"backgroundColor": "#cd2626"}}></div>
-                    }
-                    <div className="matchStats">
-                        {
-                            this.state.matchStats.win
-                            ?
-                            <p className="matchResult" style={{"color": "#ccbe91"}}>VICTORY</p>
-                            :
-                            <p className="matchResult" style={{"color": "#cd2626"}}>DEFEAT</p>
-                        }
-                        <div className="verticalLine"></div>
-                        <div className="statGroup">
-                            <div className="statRow">
-                                <div className="kda">
-                                    {this.state.matchStats.kills} | {this.state.matchStats.deaths} | {this.state.matchStats.assists}
-                                </div>
-                            </div>
-                            <div className="statRow">
-                                <img src={utility.getScoreboardIcons("score")} alt="kda2" />
-                                <div className="kda2">
-                                    {utility.getKDA(this.state.matchStats.kills, this.state.matchStats.deaths, this.state.matchStats.assists)}
-                                </div>
-                            </div>
+        return (
+            <div className="Match"
+                    style={this.setMatchBorder(this.props.matchStats.win)}
+                    onClick={this.props.handleClick} >
+                <div className="matchStats">
+                    <div className="statGroup">
+                        <div className="statRow">
+                            {
+                                this.props.matchStats.win
+                                ?
+                                <div className="matchResult" style={{"color": "#ccbe91"}}>VICTORY</div>
+                                :
+                                <div className="matchResult" style={{"color": "#cd2626"}}>DEFEAT</div>
+                            }
                         </div>
-                        <div className="verticalLine"></div>
-                        <div className="statGroup">
-                            <div className="statRow">
-                                <img src={utility.getScoreboardIcons("minion")} alt="cs" />
-                                <div className="cs">
-                                    {this.state.matchStats.totalMinionsKilled}
-                                </div>
+                        <div className="statRow">
+                            <div className="gameDuration">
+                                {this.getGameDuration(this.props.matchDetails)}
                             </div>
-                            <div className="statRow">
-                                <img src={utility.getScoreboardIcons("gold")} alt="gold" />
-                                <div className="gold">
-                                    {this.state.matchStats.goldEarned}
-                                </div>
-                            </div>
-                        </div>
-                        <div className="verticalLine"></div>
-                        <div className="itemGroup">
-                            {this.getItems(this.state.matchStats)}
-                            {this.getTrinket(this.state.matchStats)}
-                            {this.getSummonerSpells(this.state.matchDetails.participants[this.state.participantIndex])}
+                            -
+                            <div className="timeSinceMatch">
+                                {this.getTimeSinceMatch(this.props.matchDetails)}
+                            </div>  
                         </div>
                     </div>
-                    <div className="matchBanner" style={this.setBanner(this.props.match.champion)} >
-                        <div className="matchBannerBlackOverlay">
-                            <div className="matchBannerBlackOverlayGradient"></div>
+                    <div className="verticalLine" style={this.setVerticalLineColor(this.props.matchStats.win)}></div>
+                    <div className="statGroup">
+                        <div className="statRow2">
+                            <div className="kda">
+                                {this.props.matchStats.kills} - {this.props.matchStats.deaths} - {this.props.matchStats.assists}
+                            </div>
+                            {/* <div className="kda2">
+                                <img src={utility.getScoreboardIcons("score")} alt="kda2" />
+                                {utility.getKDA(this.state.matchStats.kills, this.state.matchStats.deaths, this.state.matchStats.assists)}
+                            </div> */}
                         </div>
                     </div>
                 </div>
-            );
-        } else {
-            return (
-                <none/>
-            );
-        }
+                <div className="matchBanner" style={this.setBanner(this.props.championId)} >
+                    <div className="matchBannerBlackOverlay">
+                        <div className="matchBannerBlackOverlayGradient"></div>
+                    </div>
+                </div>
+            </div>
+        );
     }
 
 }

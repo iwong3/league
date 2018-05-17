@@ -59,7 +59,7 @@ export default class Search extends Component {
                 <form onSubmit={this.handleSearch}>
                     <input id="searchBar"
                            type="text"
-                           autocomplete="off"
+                           autoComplete="off"
                            value={this.state.summonerName}
                            placeholder="Summoner Name..."
                            onChange={this.handleSearchChange}

@@ -53,22 +53,24 @@ export default class SummonerHeader extends Component {
 
     //have to set custom styling for each champion's banner
     setBanner = (id) => {
-        let championName = utility.championIdToName(id);
-        let bannerUrl = utility.getChampionSplashUrl(championName);
-        let style = {"backgroundImage": "url(" + bannerUrl + ")"};
-        switch (championName) {
-            case ("Talon"):
-            case ("Vayne"):
-            case ("Zyra"):
-                style["backgroundPosition"] = "0% 20%";
-                break;
-            case ("Lucian"):
-                style["backgroundPosition"] = "0% 45%";
-                break;
-            default:
-                style["backgroundPosition"] = "0% 0%";
+        if (id) {
+            let championName = utility.championIdToName(id);
+            let bannerUrl = utility.getChampionSplashUrl(championName);
+            let style = {"backgroundImage": "url(" + bannerUrl + ")"};
+            switch (championName) {
+                case ("Talon"):
+                case ("Vayne"):
+                case ("Zyra"):
+                    style["backgroundPosition"] = "0% 20%";
+                    break;
+                case ("Lucian"):
+                    style["backgroundPosition"] = "0% 45%";
+                    break;
+                default:
+                    style["backgroundPosition"] = "0% 0%";
+            }
+            return style;
         }
-        return style;
     }
 
     setMostPlayedChampions = (ids) => {

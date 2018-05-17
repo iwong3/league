@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import Match from './match';
+import MatchContainer from './match-container';
 
 import '../styles/match-history.css';
 
@@ -18,7 +18,7 @@ export default class MatchHistory extends Component {
     componentWillReceiveProps = (newProps) => {
         if (newProps.matchHistory) {
             this.setState({
-                numMatches: 10
+                numMatches: newProps.matchHistory.matches.length
             });
         }
     }
@@ -33,8 +33,9 @@ export default class MatchHistory extends Component {
 
     displayMatchHistoryHelper = (match) => {
         return (
-            <Match match={match}
-                   accountId={this.props.accountId} />
+            <MatchContainer match={match}
+                            accountId={this.props.accountId}
+                            key={match.gameId} />
         );
     }
 

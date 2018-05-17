@@ -6,7 +6,7 @@
     min-height: 300px;
     font-family: "Lato", sans-serif;
     font-style: italic;
-    border: 2px #ccbe91 solid;
+    border: 2px solid #ccbe91;
     /* border-bottom: none; */
 }
 
@@ -50,7 +50,7 @@
 }
 
 .mostPlayedChampions img {
-    border: 1px solid #ffbf00;
+    border: 1px solid #ccbe91;
     margin-left: 5px;
     margin-right: 5px;
 }

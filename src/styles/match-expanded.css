@@ -1,0 +1,30 @@
+.MatchExpanded {
+    display: flex;
+    align-items: center;
+    background: #1d282c;
+    font-family: "Lato", sans-serif;
+    /* transition: max-height 300ms ease-in-out, border-color 300ms linear; */
+    /* padding: 1px; */
+    height: 200px;
+    width: 1217px;
+}
+
+.matchHidden{
+    max-height: 0;
+    overflow: hidden;
+}
+
+.matchExpanded {
+    overflow: hidden;
+    max-height: 1200px;
+    border: 1px solid #ccbe91;
+    border-top: none;
+}
+
+.matchExpandedStats {
+    display: flex;
+    align-items: center;
+    /* background-image: url("../images/match_banner.png"); */
+    height: 100%;
+    /* width: 49%; */
+}
