@@ -1,5 +1,6 @@
 import * as constant from './constants';
 import * as champions from './champions';
+import * as summonerSpells from './summoner-spells';
 
 
 export function championIdToName(id) {
@@ -10,6 +11,22 @@ export function championIdToName(id) {
             return champions.champions.data[championProperties[i]].key;
         }
     }
+}
+
+export function summonerSpellIdToName(id) {
+    let summonerSpellsProperties = Object.getOwnPropertyNames(summonerSpells.summonerSpells.data);
+    for (let i = 0; i < summonerSpellsProperties.length; i++) {
+        if (id === summonerSpells.summonerSpells.data[summonerSpellsProperties[i]].id) {
+            return summonerSpells.summonerSpells.data[summonerSpellsProperties[i]].key;
+        }
+    }
+}
+
+export function getKDA(k, d, a) {
+    if (d === 0 && (k > 0 || a > 0)) {
+        return "∞";
+    }
+    return ((k + a) / d).toFixed(2);
 }
 
 export function getVersionUrl() {
@@ -52,3 +69,10 @@ export function getMatchUrl(gameId) {
     return "https://na1.api.riotgames.com/lol/match/v3/matches/" + gameId + "?api_key=" + process.env.REACT_APP_RIOT_API_KEY;
 }
 
+export function getItemUrl(item) {
+    return "http://ddragon.leagueoflegends.com/cdn/" + constant.version + "/img/item/" + item + ".png"
+}
+
+export function getSummonerSpellUrl(summonerSpell) {
+    return "http://ddragon.leagueoflegends.com/cdn/" + constant.version + "/img/spell/" + summonerSpell + ".png";
+}

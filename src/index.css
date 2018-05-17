@@ -1,8 +1,3 @@
-@font-face {
-  font-family: 'Trajanus';
-  src: local('Trajanus'), url('./fonts/trajanus-roman/TRAJANUS.TTF') format('truetype');
-}
-
 body {
   margin: 0;
   padding: 0;

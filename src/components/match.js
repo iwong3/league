@@ -16,8 +16,17 @@ export default class Match extends Component {
             participantIndex: null,
             matchStats: null
         }
-    }
 
+        this.getParticipantId = this.getParticipantId.bind(this);
+        this.getMatchStats = this.getMatchStats.bind(this);
+        this.setBanner = this.setBanner.bind(this);
+        this.getItems = this.getItems.bind(this);
+        this.getItemsHelper = this.getItemsHelper.bind(this);
+        this.getTrinket = this.getTrinket.bind(this);
+        this.getSummonerSpells = this.getSummonerSpells.bind(this);
+        this.getSummonerSpellsHelper = this.getSummonerSpellsHelper.bind(this);
+    }
+    
     componentWillReceiveProps = (newProps) => {
         let matchUrl = utility.getMatchUrl(newProps.match.gameId);
         axios.get(matchUrl).then(res => {
@@ -341,14 +350,68 @@ export default class Match extends Component {
                 style["backgroundPosition"] = "0% 0%";
         }
         return style;
-        return style;
+    }
+
+    getItems = (stats) => {
+        let itemIcons = [];
+        let row = [];
+        for (let i = 0; i < 6; i++) {
+            if (row.length < 3) {
+                row.push(this.getItemsHelper(stats["item" + i]));
+            }
+            if (row.length % 3 === 0) {
+                itemIcons.push(<div>{row}</div>);
+                row = [];
+            }
+        }
+        return (
+            <div>{itemIcons}</div>
+        );
+    }
+
+    getItemsHelper = (item) => {
+        if (item !== 0) {
+            let itemUrl = utility.getItemUrl(item);
+            return (
+                <img src={itemUrl}
+                     alt={"Item"} />
+            );
+        }
+        return <none/>
+    }
+
+    getTrinket = (stats) => {
+        if (stats.item6 !== 0) {
+            let trinketUrl = utility.getItemUrl(stats.item6);
+            return (
+                <img src={trinketUrl}
+                     alt={"Trinket"} />
+            );
+        }
+        return <none/>
+    }
+
+    getSummonerSpells = (details) => {
+        let summonerSpellIcons = [];
+        summonerSpellIcons.push(<div>{this.getSummonerSpellsHelper(utility.summonerSpellIdToName(details.spell1Id))}</div>);
+        summonerSpellIcons.push(<div>{this.getSummonerSpellsHelper(utility.summonerSpellIdToName(details.spell2Id))}</div>);
+        return (
+            <div>{summonerSpellIcons}</div>
+        );
+    }
+
+    getSummonerSpellsHelper = (summonerSpell) => {
+        let summonerSpellUrl = utility.getSummonerSpellUrl(summonerSpell);
+        return (
+            <img src={summonerSpellUrl}
+                 alt={summonerSpell} />
+        );
     }
 
     render() {
         if (this.state.matchStats) {
             return (
                 <div className="Match">
-                {/* <div className="Match" style={this.setBanner(this.props.match.champion)} > */}
                     {
                         this.state.matchStats.win
                         ?
@@ -357,28 +420,40 @@ export default class Match extends Component {
                         <div className="matchHover" style={{"backgroundColor": "#cd2626"}}></div>
                     }
                     <div className="matchStats">
-                        {/* <img src={utility.getChampionIconUrl(utility.championIdToName(this.props.match.champion))} /> */}
                         {
                             this.state.matchStats.win
                             ?
-                            <p className="matchResult" style={{"color": "#ffbf00"}}>VICTORY</p>
+                            <p className="matchResult" style={{"color": "#ccbe91"}}>VICTORY</p>
                             :
                             <p className="matchResult" style={{"color": "#cd2626"}}>DEFEAT</p>
                         }
-                        <div className="kdaGroup">
+                        <div className="verticalLine"></div>
+                        <div className="statGroup">
                             <p className="kda">
-                                {this.state.matchStats.kills} / {this.state.matchStats.deaths} / {this.state.matchStats.assists}
+                                {this.state.matchStats.kills} | {this.state.matchStats.deaths} | {this.state.matchStats.assists}
                             </p>
                             <p className="kda2">
-                                KDA: {((this.state.matchStats.kills + this.state.matchStats.assists) / this.state.matchStats.deaths).toFixed(2)}
+                                {utility.getKDA(this.state.matchStats.kills, this.state.matchStats.deaths, this.state.matchStats.assists)}
                             </p>
                         </div>
-                        {/* <img src={utility.getChampionLoadingUrl(utility.championIdToName(this.props.match.champion))}
-                            style={{"height": "200px"}} /> */}
+                        <div className="verticalLine"></div>
+                        <div className="statGroup">
+                            <p className="cs">
+                                {this.state.matchStats.totalMinionsKilled}
+                            </p>
+                            <p className="gold">
+                                {this.state.matchStats.goldEarned}
+                            </p>
+                        </div>
+                        <div className="verticalLine"></div>
+                        <div className="itemGroup">
+                            {this.getItems(this.state.matchStats)}
+                            {this.getTrinket(this.state.matchStats)}
+                            {this.getSummonerSpells(this.state.matchDetails.participants[this.state.participantIndex])}
+                        </div>
                     </div>
                     <div className="matchBanner" style={this.setBanner(this.props.match.champion)} >
-                        <div className="matchBannerBlackOverlay">
-                        </div>
+                        <div className="matchBannerBlackOverlay"></div>
                     </div>
                 </div>
             );

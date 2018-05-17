@@ -87,8 +87,7 @@ export default class SummonerHeader extends Component {
             <img key={id}
                  src={iconUrl}
                  alt={utility.championIdToName(id)}
-                 style={{"width": "50px"}}
-            />
+                 style={{"width": "50px"}} />
         );
     }
 
