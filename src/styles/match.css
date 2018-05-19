@@ -59,6 +59,31 @@
     padding: 0px 5px;
 }
 
+[data-title]:hover:after {
+    opacity: 1;
+    visibility: visible;
+    transition: all 0.5s ease;
+}
+
+[data-title]:after {
+    position: absolute;
+    content: attr(data-title);
+    background-color: #000000;
+    border: 1px solid #ccbe91;
+    font-size: 14px;
+    color: #f1e6d2;
+    opacity: 0;
+    z-index: 99999;
+    visibility: hidden;
+    padding: 5px 10px;
+    bottom: 125%;
+    width: 100px;
+}
+
+[data-title] {
+    position: relative;
+}
+
 .kda {
     font-size: 32px;
 }

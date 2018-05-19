@@ -1,0 +1,123 @@
+.Champions {
+    width: 1200px;
+    height: 1200px;
+}
+
+.championsSortMenu {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.championsSortPrimaryOptions, .championsSortSecondaryOptions {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+}
+
+.championsSortPrimaryOptions {
+    border-top: 2px solid #ccbe91;
+    border-bottom: 1px solid #ccbe91;
+    text-align: center;
+    height: 50px;
+}
+
+.championsSortPrimaryText {
+    font-size: 20px;
+    color: #f1e6d2;
+    width: 150px;
+}
+
+.championsSortSecondaryGroup {
+    display: flex;
+    flex-direction: column;
+    width: 150px;
+    height: 100%;
+}
+
+.championsSortSecondaryText {
+    font-size: 14px;
+    color: #f1e6d2;
+}
+
+.championsSortSecondaryOptions {
+    border-top: 1px solid #ccbe91;
+    border-bottom: 2px solid #ccbe91;
+    margin-bottom: 20px;
+    height: 100px;
+}
+
+/* .championsSortOptions {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    border-top: 2px solid #ccbe91;
+    border-bottom: 2px solid #ccbe91;
+    font-size: 20px;
+    color: #f1e6d2;
+    margin-bottom: 20px;
+    width: 100%;
+    height: 50px;
+}
+
+.championsSortOptionAZ:hover, .championsSortOptionZA:hover {
+    font-size: 24px;
+}
+
+.championsSortDropdown {
+    display: inline-block;
+    position: relative;
+    width: 150px;
+    height: 100%;
+}
+
+.championsSortDropdownText {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;  
+}
+
+.championsSortDropdownOptions {
+    display: none;
+    position: absolute;
+    background-color: #000000;
+    border: 2px solid #ccbe91;
+    border-top: none;
+    text-align: center;
+    min-width: 150px;
+    z-index: 1;
+}
+
+.championsSortDropdown:hover .championsSortDropdownOptions {
+    display: block;
+}
+
+.championsSortDropdownOption {
+    display: block;
+    color: #f1e6d2;
+    padding: 12px 16px;
+}
+
+.championsSortDropdownOption:hover {
+    background: #f1e6d2;
+    color: #000000;
+} */
+
+.championsGallery {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.championRow {
+    display: flex;
+    justify-content: center;
+}
+
+.championRow img {
+    width: 100px;
+    height: 100px;
+}

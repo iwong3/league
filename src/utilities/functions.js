@@ -81,3 +81,11 @@ export function getSummonerSpellUrl(summonerSpell) {
 export function getScoreboardIcons(icon) {
     return "http://ddragon.leagueoflegends.com/cdn/5.5.1/img/ui/" + icon + ".png";
 }
+
+export function getMonthString(month) {
+    let months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    
+    if (month >= 1 && month <= 12) {
+        return months[month-1];
+    }
+}

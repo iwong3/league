@@ -28,6 +28,7 @@
 .navItemBorder:hover {
     background: linear-gradient(180deg,#f1e6d2 0,#634b25);
     filter: brightness(1.2);
+    /* transform: scale(1.01); */
 }
 
 .navItemContent {
