@@ -13,8 +13,8 @@
 .championsSortPrimaryOptions, .championsSortSecondaryOptions {
     display: flex;
     align-items: center;
-    padding: 0px 100px;
-    width: 1000px;
+    padding: 0px 75px;
+    width: 1050px;
 }
 
 .championsSortPrimaryOptions {
@@ -30,7 +30,7 @@
 }
 
 .championsSortPrimaryTextLarge {
-    width: 475px;
+    width: 525px;
 }
 
 .championsSortSecondaryOptions {
@@ -48,14 +48,14 @@
 }
 
 .championsSortSecondaryGroupLarge {
-    width: 475px;
+    width: 525px;
 }
 
 .championsSortSecondaryText {
     font-size: 16px;
     color: #f1e6d2;
     padding-bottom: 5px;
-    padding-right: 10px;
+    width: 175px;
     cursor: pointer;
 }
 

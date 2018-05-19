@@ -13,7 +13,11 @@ export default class Champions extends Component {
     constructor(props) {
         super(props);
 
-        //roles: [assassin, fighter, mage, marksman, support, tank]
+        //- champions represents the array of champions to be displayed
+        //  - will be modified by sort criteria
+        //- originalChampions is the array of all champions - sorting is performed on this array
+        //- sort provides criteria for sorting
+        //  - roles: [assassin, fighter, mage, marksman, support, tank]
         this.state = {
             champions: [],
             originalChampions: [],
@@ -27,6 +31,7 @@ export default class Champions extends Component {
         };
     }
 
+    //standardize format of champions for sorting, then run initial sort (alphabetical) for render
     componentDidMount = () => {
         this.setState ({
             originalChampions: this.standardizeChampions(championsSort.championsSort.data)
@@ -35,6 +40,27 @@ export default class Champions extends Component {
         });
     }
 
+    //If we want to grab the data from the API
+    // componentDidMount = () => {
+    //     let championsUrl = utility.getChampionsUrl();
+    //     axios.get(championsUrl)
+    //         .then(res => {
+    //             this.setState({
+    //                 originalChampions: this.standardizeChampions(res.data.data)
+    //             }, function() {
+    //                 this.sortChampions(this.state.originalChampions, this.state.sort, this.state.search);
+    //             });
+    //         })
+    //         .catch(error => {
+    //             this.setState ({
+    //                 originalChampions: this.standardizeChampions(champions.champions.data),
+    //             }, function() {
+    //                 this.sortChampions(this.state.originalChampions, this.state.sort, this.state.search);
+    //             });
+    //         });
+    // }
+
+    //updates this.state.sort properties
     setSearchCriteria = (criteria) => {
         let sortCopy = this.state.sort;
         switch (criteria) {
@@ -130,6 +156,7 @@ export default class Champions extends Component {
         });
     }
 
+    //returns gold/red depending on if criteria is active
     setCriteriaStyle = (criteria) => {
         let active = false;
         switch (criteria) {
@@ -230,9 +257,12 @@ export default class Champions extends Component {
         });
     }
 
+    //sorts champions based on sort criteria + search
     sortChampions = (champions, sort, search) => {
+        //will be the array of champions we return after all sorting/seraching
         let championsCopy = champions;
 
+        //update championsCopy with selected roles
         if (sort.roles[0]) {
             championsCopy = this.sortChampionsTags(championsCopy, "Assassin");
         }
@@ -252,13 +282,16 @@ export default class Champions extends Component {
             championsCopy = this.sortChampionsTags(championsCopy, "Tank");
         }
 
+        //update championsCopy by abilityCost
         if (sort.abilityCost !== "all") {
             championsCopy = this.sortChampionsPartype(championsCopy, sort.abilityCost);
         }
 
+        //update championsCopy by stat
         if (sort.stats !== "none") {
             championsCopy = this.sortChampionsStats(championsCopy, sort.stats);
         } else {
+            //if no stat, sort alphabetically
             if (!sort.alphabetReverse) {
                 championsCopy = this.sortChampionsAlphabetically(championsCopy);
             } else {
@@ -266,6 +299,7 @@ export default class Champions extends Component {
             } 
         }
 
+        //finally, update championsCopy by search criteria
         if (search) {
             championsCopy = this.sortChampionsSearch(championsCopy, search);
         }
@@ -274,27 +308,6 @@ export default class Champions extends Component {
             champions: championsCopy
         });
     }
-
-    //If we want to grab the data from the API
-    // componentDidMount = () => {
-    //     let championsUrl = utility.getChampionsUrl();
-    //     axios.get(championsUrl)
-    //         .then(res => {
-    //             this.setState({
-    //                 originalChampions: this.standardizeChampions(res.data.data)
-    //             }, function() {
-    //                 this.sortChampionsAlphabetically(this.state.originalChampions);
-    //             });
-    //         })
-    //         .catch(error => {
-    //             this.setState ({
-    //                 originalChampions: this.standardizeChampions(champions.champions.data),
-    //                 championsPartype: this.standardizeChampions(championsPartype.championsPartype.data)
-    //             }, function() {
-    //                 this.sortChampionsAlphabetically(this.state.originalChampions);
-    //             });
-    //         });
-    // }
 
     //Helper function to standardize format of champions
     //Allows sorting functions to recieve and output in same format
@@ -325,6 +338,7 @@ export default class Champions extends Component {
         return icons;
     }
 
+    //to change: return a ChampionCard Component instead
     displayChampionsHelper = (champion) => {
         let championIconUrl = utility.getChampionIconUrl(champion.key);
         return (
@@ -440,6 +454,7 @@ export default class Champions extends Component {
         let championsSorted = [];
 
         for (let a = 0; a < champions.length; a++) {
+            //If search is greater than champion name, continue
             if (search.length > champions[a].name.length) {
                 continue;
             }
@@ -451,6 +466,7 @@ export default class Champions extends Component {
         return championsSorted;
     }
 
+    //update search state as user types
     handleSearchChange = (event) => {
         this.setState({
             search: event.target.value
@@ -459,7 +475,7 @@ export default class Champions extends Component {
         });
     }
 
-    //Displays Stats sorting criteria
+    //Displays Stats sorting criteria HTML components
     displayStatsCriteria = () => {
         let statsCriteria = constant.championSortStats.map((stat) => this.displayStatsCriteriaHelper(stat));
         return statsCriteria;
@@ -487,14 +503,17 @@ export default class Champions extends Component {
             return (
                 <div className="Champions">
                     <div className="championsSortMenu">
+                        {/* PRIMARY SORTING CRITERIA */}
                         <div className="championsSortPrimaryOptions">
                             <div className="championsSortPrimaryText">Alphabetically</div>
                             <div className="championsSortPrimaryText">Role</div>
                             <div className="championsSortPrimaryText">Ability Cost</div>
                             <div className="championsSortPrimaryTextLarge">Stats</div>
                         </div>
+                        {/* SECONDARY SORTING CRITERIA */}
                         <div className="championsSortSecondaryOptions">
                             <div className="championsSortSecondaryGroup">
+                                {/* ALPHABETICAL */}
                                 <div className="championsSortSecondaryText"
                                      onClick={() => this.setSearchCriteria("alphabet")}
                                      style={this.setCriteriaStyle("alphabet")} >
@@ -506,6 +525,7 @@ export default class Champions extends Component {
                                     Z - A
                                 </div>
                             </div>
+                            {/* ROLE */}
                             <div className="championsSortSecondaryGroup">
                                 <div className="championsSortSecondaryText"
                                      onClick={() => this.setSearchCriteria("assassin")}
@@ -538,6 +558,7 @@ export default class Champions extends Component {
                                     Tank
                                 </div>
                             </div>
+                            {/* ABILITY COST */}
                             <div className="championsSortSecondaryGroup">
                                 <div className="championsSortSecondaryText"
                                      onClick={() => this.setSearchCriteria("mana")}
@@ -560,11 +581,13 @@ export default class Champions extends Component {
                                     Other
                                 </div>
                             </div>
+                            {/* STATS */}
                             <div className="championsSortSecondaryGroupLarge">
                                 {this.displayStatsCriteria()}
                             </div>
                         </div>
                     </div>
+                    {/* SEARCH BAR */}
                     <div className="championSearch">
                         <input id="searchBar"
                             type="text"
@@ -574,6 +597,7 @@ export default class Champions extends Component {
                             onChange={this.handleSearchChange}
                         />
                     </div>
+                    {/* CHAMPIONS */}
                     <div className="championsGallery">
                         {this.displayChampions(this.state.champions)}
                     </div>
