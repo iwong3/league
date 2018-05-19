@@ -53,10 +53,10 @@ export const championSortStatsText = {
     "hpregen": "Health Regen",
     "hpregenperlevel": "Scaling Health Regen",
     "movespeed": "Movement Speed",
-    "mp": "Mana",
-    "mpperlevel": "Scaling Mana",
-    "mpregen": "Mana Regen",
-    "mpregenperlevel": "Scaling Mana Regen",
+    "mp": "MP",
+    "mpperlevel": "Scaling MP",
+    "mpregen": "MP Regen",
+    "mpregenperlevel": "Scaling MP Regen",
     "spellblock": "Magic Resist",
     "spellblockperlevel": "Scaling Magic Resist"
 }
