@@ -23,6 +23,7 @@ export default class Champions extends Component {
                 abilityCost: "all",
                 stats: "none"
             },
+            search: ""
         };
     }
 
@@ -30,7 +31,7 @@ export default class Champions extends Component {
         this.setState ({
             originalChampions: this.standardizeChampions(championsSort.championsSort.data)
         }, function() {
-            this.sortChampions(this.state.originalChampions, this.state.sort);
+            this.sortChampions(this.state.originalChampions, this.state.sort, this.state.search);
         });
     }
 
@@ -125,7 +126,7 @@ export default class Champions extends Component {
         this.setState({
             sort: sortCopy
         }, function() {
-            this.sortChampions(this.state.originalChampions, this.state.sort);
+            this.sortChampions(this.state.originalChampions, this.state.sort, this.state.search);
         });
     }
 
@@ -229,7 +230,7 @@ export default class Champions extends Component {
         });
     }
 
-    sortChampions = (champions, sort) => {
+    sortChampions = (champions, sort, search) => {
         let championsCopy = champions;
 
         if (sort.roles[0]) {
@@ -263,6 +264,10 @@ export default class Champions extends Component {
             } else {
                 championsCopy = this.sortChampionsReverseAlphabetically(championsCopy);
             } 
+        }
+
+        if (search) {
+            championsCopy = this.sortChampionsSearch(championsCopy, search);
         }
 
         this.setState({
@@ -416,13 +421,45 @@ export default class Champions extends Component {
             if (champA.stats[stat] < champB.stats[stat]) {
                 return 1;
             }
+            //If stats are equal, sort by name
+            if (champA.stats[stat] === champB.stats[stat]) {
+                if (champA.name.toLowerCase() < champB.name.toLowerCase()) {
+                    return -1;
+                }
+                if (champA.name.toLowerCase() > champB.name.toLowerCase()) {
+                    return 1;
+                }
+            }
             return 0;
         });
 
-        console.log(championsSorted);
         return championsSorted;
     }
 
+    sortChampionsSearch = (champions, search) => {
+        let championsSorted = [];
+
+        for (let a = 0; a < champions.length; a++) {
+            if (search.length > champions[a].name.length) {
+                continue;
+            }
+            if (search.toLowerCase() === champions[a].name.substring(0, search.length).toLowerCase()) {
+                championsSorted.push(champions[a]);
+            }
+        }
+
+        return championsSorted;
+    }
+
+    handleSearchChange = (event) => {
+        this.setState({
+            search: event.target.value
+        }, function() {
+            this.sortChampions(this.state.originalChampions, this.state.sort, this.state.search);
+        });
+    }
+
+    //Displays Stats sorting criteria
     displayStatsCriteria = () => {
         let statsCriteria = constant.championSortStats.map((stat) => this.displayStatsCriteriaHelper(stat));
         return statsCriteria;
@@ -527,6 +564,15 @@ export default class Champions extends Component {
                                 {this.displayStatsCriteria()}
                             </div>
                         </div>
+                    </div>
+                    <div className="championSearch">
+                        <input id="searchBar"
+                            type="text"
+                            autoComplete="off"
+                            value={this.state.search}
+                            placeholder="Champion Name..."
+                            onChange={this.handleSearchChange}
+                        />
                     </div>
                     <div className="championsGallery">
                         {this.displayChampions(this.state.champions)}
