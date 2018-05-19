@@ -19,33 +19,45 @@
 .championsSortPrimaryOptions {
     border-top: 2px solid #ccbe91;
     border-bottom: 1px solid #ccbe91;
-    text-align: center;
+    /* text-align: center; */
     height: 50px;
 }
 
-.championsSortPrimaryText {
+.championsSortPrimaryText, .championsSortPrimaryTextLarge {
     font-size: 20px;
     color: #f1e6d2;
     width: 150px;
 }
 
-.championsSortSecondaryGroup {
-    display: flex;
-    flex-direction: column;
-    width: 150px;
-    height: 100%;
-}
-
-.championsSortSecondaryText {
-    font-size: 14px;
-    color: #f1e6d2;
+.championsSortPrimaryTextLarge {
+    width: 450px;
 }
 
 .championsSortSecondaryOptions {
     border-top: 1px solid #ccbe91;
     border-bottom: 2px solid #ccbe91;
     margin-bottom: 20px;
-    height: 100px;
+    height: 150px;
+}
+
+.championsSortSecondaryGroup, .championsSortSecondaryGroupLarge {
+    display: flex;
+    flex-flow: column wrap;
+    margin-top: 10px;
+    width: 150px;
+    height: 100%;
+}
+
+.championsSortSecondaryGroupLarge {
+    width: 450px;
+}
+
+.championsSortSecondaryText {
+    font-size: 16px;
+    color: #f1e6d2;
+    padding-bottom: 5px;
+    padding-right: 10px;
+    cursor: pointer;
 }
 
 /* .championsSortOptions {

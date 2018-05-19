@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 // import axios from 'axios';
 
-import * as champions from '../utilities/champions';
-import * as championsPartype from '../utilities/champions-partype';
-import * as championsStats from '../utilities/champions-stats';
-import * as championsTags from '../utilities/champions-tags';
+import * as championsSort from '../utilities/champions-sort';
+import * as constant from '../utilities/constants';
 import * as utility from '../utilities/functions';
 
 import '../styles/champions.css';
@@ -15,38 +13,260 @@ export default class Champions extends Component {
     constructor(props) {
         super(props);
 
+        //roles: [assassin, fighter, mage, marksman, support, tank]
         this.state = {
             champions: [],
             originalChampions: [],
             sort: {
                 alphabetReverse: false,
-                role: [],
+                roles: [false, false, false, false, false, false],
                 abilityCost: "all",
                 stats: "none"
-            }
+            },
         };
     }
 
-    // constructor(props) {
-    //     super(props);
-
-    //     this.state = {
-    //         champions: [],
-    //         originalChampions: [],
-    //         championsPartype: [],
-    //         championsStats: [],
-    //         championsTags: []
-    //     };
-    // }
-
     componentDidMount = () => {
         this.setState ({
-            originalChampions: this.standardizeChampions(champions.champions.data),
-            championsPartype: this.standardizeChampions(championsPartype.championsPartype.data),
-            championsStats: this.standardizeChampions(championsStats.championsStats.data),
-            championsTags: this.standardizeChampions(championsTags.championsTags.data)
+            originalChampions: this.standardizeChampions(championsSort.championsSort.data)
         }, function() {
-            this.sortChampionsAlphabetically(this.state.originalChampions);
+            this.sortChampions(this.state.originalChampions, this.state.sort);
+        });
+    }
+
+    setSearchCriteria = (criteria) => {
+        let sortCopy = this.state.sort;
+        switch (criteria) {
+            //ALPHABET
+            case ("alphabet"):
+                sortCopy.alphabetReverse = false;
+                sortCopy.stats = "none";
+                break;
+            case ("alphabetReverse"):
+                sortCopy.alphabetReverse = true;
+                sortCopy.stats = "none";
+                break;
+            //ROLE
+            case ("assassin"):
+                sortCopy.roles[0] = !sortCopy.roles[0];
+                break;
+            case ("fighter"):
+                sortCopy.roles[1] = !sortCopy.roles[1];
+                break;
+            case ("mage"):
+                sortCopy.roles[2] = !sortCopy.roles[2];
+                break;
+            case ("marksman"):
+                sortCopy.roles[3] = !sortCopy.roles[3];
+                break;
+            case ("support"):
+                sortCopy.roles[4] = !sortCopy.roles[4];
+                break;
+            case ("tank"):
+                sortCopy.roles[5] = !sortCopy.roles[5];
+                break;
+            //ABILITY COST
+            case ("mana"):
+                if (sortCopy.abilityCost === "Mana") {
+                    sortCopy.abilityCost = "all";
+                    break;
+                }
+                sortCopy.abilityCost = "Mana";
+                break;
+            case ("energy"):
+                if (sortCopy.abilityCost === "Energy") {
+                    sortCopy.abilityCost = "all";
+                    break;
+                }
+                sortCopy.abilityCost = "Energy";
+                break;
+            case ("noCost"):
+                if (sortCopy.abilityCost === "None") {
+                    sortCopy.abilityCost = "all";
+                    break;
+                }
+                sortCopy.abilityCost = "None";
+                break;
+            case ("other"):
+                if (sortCopy.abilityCost === "Other") {
+                    sortCopy.abilityCost = "all";
+                    break;
+                }
+                sortCopy.abilityCost = "Other";
+                break;
+            //STATS
+            case ("armor"):
+            case ("armorperlevel"):
+            case ("attackdamage"):
+            case ("attackdamageperlevel"):
+            case ("attackrange"):
+            case ("hp"):
+            case ("hpperlevel"):
+            case ("hpregen"):
+            case ("hpregenperlevel"):
+            case ("movespeed"):
+            case ("mp"):
+            case ("mpperlevel"):
+            case ("mpregen"):
+            case ("mpregenperlevel"):
+            case ("spellblock"):
+            case ("spellblockperlevel"):
+                if (sortCopy.stats === criteria) {
+                    sortCopy.stats = "none";
+                    break;
+                }
+                sortCopy.stats = criteria;
+                sortCopy.alphabetReverse = false;
+                break;
+            default:
+                break;
+        }
+
+        this.setState({
+            sort: sortCopy
+        }, function() {
+            this.sortChampions(this.state.originalChampions, this.state.sort);
+        });
+    }
+
+    setCriteriaStyle = (criteria) => {
+        let active = false;
+        switch (criteria) {
+            //ALPHABET
+            case ("alphabet"):
+                if (this.state.sort.stats === "none" && !this.state.sort.alphabetReverse) {
+                    active = true;
+                }
+                break;
+            case ("alphabetReverse"):
+                if (this.state.sort.stats === "none" && this.state.sort.alphabetReverse) {
+                    active = true;
+                }
+                break;
+            //ROLE
+            case ("assassin"):
+                if (this.state.sort.roles[0]) {
+                    active = true;
+                }
+                break;
+            case ("fighter"):
+                if (this.state.sort.roles[1]) {
+                    active = true;
+                }
+                break;
+            case ("mage"):
+                if (this.state.sort.roles[2]) {
+                    active = true;
+                }
+                break;
+            case ("marksman"):
+                if (this.state.sort.roles[3]) {
+                    active = true;
+                }
+                break;
+            case ("support"):
+                if (this.state.sort.roles[4]) {
+                    active = true;
+                }
+                break;
+            case ("tank"):
+                if (this.state.sort.roles[5]) {
+                    active = true;
+                }
+                break;
+            //ABILITY COST
+            case ("mana"):
+                if (this.state.sort.abilityCost === "Mana") {
+                    active = true;
+                }
+                break;
+            case ("energy"):
+                if (this.state.sort.abilityCost === "Energy") {
+                    active = true;
+                }
+                break;
+            case ("noCost"):
+                if (this.state.sort.abilityCost === "None") {
+                    active = true;
+                }
+                break;
+            case ("other"):
+                if (this.state.sort.abilityCost === "Other") {
+                    active = true;
+                }
+                break;
+            //STATS
+            case ("armor"):
+            case ("armorperlevel"):
+            case ("attackdamage"):
+            case ("attackdamageperlevel"):
+            case ("attackrange"):
+            case ("hp"):
+            case ("hpperlevel"):
+            case ("hpregen"):
+            case ("hpregenperlevel"):
+            case ("movespeed"):
+            case ("mp"):
+            case ("mpperlevel"):
+            case ("mpregen"):
+            case ("mpregenperlevel"):
+            case ("spellblock"):
+            case ("spellblockperlevel"):
+                if (this.state.sort.stats === criteria) {
+                    active = true;
+                }
+                break;
+            default:
+                break;
+        }
+        if (active) {
+            return ({
+                "color": "#cd2626"
+            });
+        }
+        return ({
+            "color": "#f1e6d2"
+        });
+    }
+
+    sortChampions = (champions, sort) => {
+        let championsCopy = champions;
+
+        if (sort.roles[0]) {
+            championsCopy = this.sortChampionsTags(championsCopy, "Assassin");
+        }
+        if (sort.roles[1]) {
+            championsCopy = this.sortChampionsTags(championsCopy, "Fighter");
+        }
+        if (sort.roles[2]) {
+            championsCopy = this.sortChampionsTags(championsCopy, "Mage");
+        }
+        if (sort.roles[3]) {
+            championsCopy = this.sortChampionsTags(championsCopy, "Marksman");
+        }
+        if (sort.roles[4]) {
+            championsCopy = this.sortChampionsTags(championsCopy, "Support");
+        }
+        if (sort.roles[5]) {
+            championsCopy = this.sortChampionsTags(championsCopy, "Tank");
+        }
+
+        if (sort.abilityCost !== "all") {
+            championsCopy = this.sortChampionsPartype(championsCopy, sort.abilityCost);
+        }
+
+        if (sort.stats !== "none") {
+            championsCopy = this.sortChampionsStats(championsCopy, sort.stats);
+        } else {
+            if (!sort.alphabetReverse) {
+                championsCopy = this.sortChampionsAlphabetically(championsCopy);
+            } else {
+                championsCopy = this.sortChampionsReverseAlphabetically(championsCopy);
+            } 
+        }
+
+        this.setState({
+            champions: championsCopy
         });
     }
 
@@ -109,6 +329,7 @@ export default class Champions extends Component {
 
     sortChampionsAlphabetically = (champions) => {
         let championsSorted = champions;
+
         championsSorted.sort(function(champA, champB) {
             if (champA.name.toLowerCase() < champB.name.toLowerCase()) {
                 return -1;
@@ -119,9 +340,7 @@ export default class Champions extends Component {
             return 0;
         });
 
-        this.setState({
-            champions: championsSorted
-        });
+        return championsSorted;
     }
 
     sortChampionsReverseAlphabetically = (champions) => {
@@ -137,9 +356,7 @@ export default class Champions extends Component {
             return 0;
         });
 
-        this.setState({
-            champions: championsSorted
-        });
+        return championsSorted;
     }
 
     sortChampionsPartype = (champions, partype) => {
@@ -172,7 +389,7 @@ export default class Champions extends Component {
             }
         }
 
-        this.sortChampionsAlphabetically(championsSorted);
+        return championsSorted;
     }
 
     sortChampionsTags = (champions, tag) => {
@@ -186,7 +403,7 @@ export default class Champions extends Component {
             }
         }
 
-        this.sortChampionsAlphabetically(championsSorted);
+        return championsSorted;
     }
 
     sortChampionsStats = (champions, stat) => {
@@ -202,9 +419,23 @@ export default class Champions extends Component {
             return 0;
         });
 
-        this.setState({
-            champions: championsSorted
-        });
+        console.log(championsSorted);
+        return championsSorted;
+    }
+
+    displayStatsCriteria = () => {
+        let statsCriteria = constant.championSortStats.map((stat) => this.displayStatsCriteriaHelper(stat));
+        return statsCriteria;
+    }
+
+    displayStatsCriteriaHelper = (stat) => {
+        return (
+            <div className="championsSortSecondaryText"
+                 onClick={() => this.setSearchCriteria(stat)}
+                 style={this.setCriteriaStyle(stat)} >
+                {constant.championSortStatsText[stat]}
+            </div>
+        );
     }
 
     //- on menu click, set state for that property to be sorted on to be true
@@ -223,22 +454,77 @@ export default class Champions extends Component {
                             <div className="championsSortPrimaryText">Alphabetically</div>
                             <div className="championsSortPrimaryText">Role</div>
                             <div className="championsSortPrimaryText">Ability Cost</div>
-                            <div className="championsSortPrimaryText">Stats</div>
+                            <div className="championsSortPrimaryTextLarge">Stats</div>
                         </div>
                         <div className="championsSortSecondaryOptions">
                             <div className="championsSortSecondaryGroup">
-                                <div className="championsSortSecondaryText">A - Z</div>
-                                <div className="championsSortSecondaryText">Z - A</div>
+                                <div className="championsSortSecondaryText"
+                                     onClick={() => this.setSearchCriteria("alphabet")}
+                                     style={this.setCriteriaStyle("alphabet")} >
+                                    A - Z
+                                </div>
+                                <div className="championsSortSecondaryText"
+                                     onClick={() => this.setSearchCriteria("alphabetReverse")}
+                                     style={this.setCriteriaStyle("alphabetReverse")} >
+                                    Z - A
+                                </div>
                             </div>
                             <div className="championsSortSecondaryGroup">
-                                <div className="championsSortSecondaryText">Assassin</div>
+                                <div className="championsSortSecondaryText"
+                                     onClick={() => this.setSearchCriteria("assassin")}
+                                     style={this.setCriteriaStyle("assassin")} >
+                                    Assassin
+                                </div>
+                                <div className="championsSortSecondaryText"
+                                     onClick={() => this.setSearchCriteria("fighter")}
+                                     style={this.setCriteriaStyle("fighter")} >
+                                    Fighter
+                                </div>
+                                <div className="championsSortSecondaryText"
+                                     onClick={() => this.setSearchCriteria("mage")}
+                                     style={this.setCriteriaStyle("mage")} >
+                                    Mage
+                                </div>
+                                <div className="championsSortSecondaryText"
+                                     onClick={() => this.setSearchCriteria("marksman")}
+                                     style={this.setCriteriaStyle("marksman")} >
+                                    Marksman
+                                </div>
+                                <div className="championsSortSecondaryText"
+                                     onClick={() => this.setSearchCriteria("support")}
+                                     style={this.setCriteriaStyle("support")} >
+                                    Support
+                                </div>
+                                <div className="championsSortSecondaryText"
+                                     onClick={() => this.setSearchCriteria("tank")}
+                                     style={this.setCriteriaStyle("tank")} >
+                                    Tank
+                                </div>
                             </div>
                             <div className="championsSortSecondaryGroup">
-                                <div className="championsSortSecondaryText">Mana</div>
-                                <div className="championsSortSecondaryText">Energy</div>
+                                <div className="championsSortSecondaryText"
+                                     onClick={() => this.setSearchCriteria("mana")}
+                                     style={this.setCriteriaStyle("mana")} >
+                                    Mana
+                                </div>
+                                <div className="championsSortSecondaryText"
+                                     onClick={() => this.setSearchCriteria("energy")}
+                                     style={this.setCriteriaStyle("energy")} >
+                                    Energy
+                                </div>
+                                <div className="championsSortSecondaryText"
+                                     onClick={() => this.setSearchCriteria("noCost")}
+                                     style={this.setCriteriaStyle("noCost")} >
+                                    No Cost
+                                </div>
+                                <div className="championsSortSecondaryText"
+                                     onClick={() => this.setSearchCriteria("other")}
+                                     style={this.setCriteriaStyle("other")} >
+                                    Other
+                                </div>
                             </div>
-                            <div className="championsSortSecondaryGroup">
-                                <div className="championsSortSecondaryText">Armor</div>
+                            <div className="championsSortSecondaryGroupLarge">
+                                {this.displayStatsCriteria()}
                             </div>
                         </div>
                     </div>
@@ -253,208 +539,5 @@ export default class Champions extends Component {
             );
         }
     }
-                        
-                        /* <div className="championsSortDropdown">
-                            <div className="championsSortDropdownText">Alphabetically</div>
-                            <div className="championsSortDropdownOptions">
-                                <div className="championsSortDropdownOption"
-                                     onClick={() => this.sortChampionsAlphabetically(this.state.originalChampions)}>
-                                    A - Z
-                                </div>
-                                <div className="championsSortDropdownOption"
-                                     onClick={() => this.sortChampionsReverseAlphabetically(this.state.originalChampions)}>
-                                    Z - A
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div className="championsSortDropdown">
-                            <div className="championsSortDropdownText">Role</div>
-                            <div className="championsSortDropdownOptions">
-                                <div className="championsSortDropdownOption"
-                                     onClick={() => this.sortChampionsTags(this.state.championsTags, "Assassin")}>
-                                    Assassin
-                                </div>
-                                <div className="championsSortDropdownOption"
-                                     onClick={() => this.sortChampionsTags(this.state.championsTags, "Fighter")}>
-                                    Fighter
-                                </div>
-                                <div className="championsSortDropdownOption"
-                                     onClick={() => this.sortChampionsTags(this.state.championsTags, "Mage")}>
-                                    Mage
-                                </div>
-                                <div className="championsSortDropdownOption"
-                                     onClick={() => this.sortChampionsTags(this.state.championsTags, "Marksman")}>
-                                    Marksman
-                                </div>
-                                <div className="championsSortDropdownOption"
-                                     onClick={() => this.sortChampionsTags(this.state.championsTags, "Support")}>
-                                    Support
-                                </div>
-                                <div className="championsSortDropdownOption"
-                                     onClick={() => this.sortChampionsTags(this.state.championsTags, "Tank")}>
-                                    Tank
-                                </div>
-                            </div>
-                        </div>
 
-                        <div className="championsSortDropdown">
-                            <div className="championsSortDropdownText">Ability Cost</div>
-                            <div className="championsSortDropdownOptions">
-                                <div className="championsSortDropdownOption"
-                                     onClick={() => this.sortChampionsPartype(this.state.championsPartype, "Mana")}>
-                                    Mana
-                                </div>
-                                <div className="championsSortDropdownOption"
-                                     onClick={() => this.sortChampionsPartype(this.state.championsPartype, "Energy")}>
-                                    Energy
-                                </div>
-                                <div className="championsSortDropdownOption"
-                                     onClick={() => this.sortChampionsPartype(this.state.championsPartype, "None")}>
-                                    No Cost
-                                </div>
-                                <div className="championsSortDropdownOption"
-                                     onClick={() => this.sortChampionsPartype(this.state.championsPartype, "Other")}>
-                                    Other
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div className="championsSortDropdown">
-                            <div className="championsSortDropdownText">Stats</div>
-                            <div className="championsSortDropdownOptions">
-                                <div className="championsSortDropdownOption"
-                                     onClick={() => this.sortChampionsStats(this.state.championsStats, "armor")}>
-                                    Armor
-                                </div>
-                                <div className="championsSortDropdownOption"
-                                     onClick={() => this.sortChampionsStats(this.state.championsStats, "attackdamage")}>
-                                    Base AD
-                                </div>
-                                <div className="championsSortDropdownOption"
-                                     onClick={() => this.sortChampionsStats(this.state.championsStats, "attackdamageperlevel")}>
-                                    Scaling AD
-                                </div>
-                                <div className="championsSortDropdownOption"
-                                     onClick={() => this.sortChampionsStats(this.state.championsStats, "attackrange")}>
-                                    Range
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="championsGallery">
-                        {this.displayChampions(this.state.champions)}
-                    </div>
-                </div>
-            ); 
-        }
-        return (
-            <none/>
-        );
-    } */}
-
-    //change height of champions.js to match other components, or try to fix logo shifting
-    // render() {
-    //     if (this.state.champions) {
-    //         return (
-    //             <div className="Champions">
-    //                 <div className="championsSortOptions">
-    //                     {/* BY ALPHABET */}
-    //                     <div className="championsSortDropdown">
-    //                         <div className="championsSortDropdownText">Alphabetically</div>
-    //                         <div className="championsSortDropdownOptions">
-    //                             <div className="championsSortDropdownOption"
-    //                                  onClick={() => this.sortChampionsAlphabetically(this.state.originalChampions)}>
-    //                                 A - Z
-    //                             </div>
-    //                             <div className="championsSortDropdownOption"
-    //                                  onClick={() => this.sortChampionsReverseAlphabetically(this.state.originalChampions)}>
-    //                                 Z - A
-    //                             </div>
-    //                         </div>
-    //                     </div>
-    //                     {/* BY ROLE */}
-    //                     <div className="championsSortDropdown">
-    //                         <div className="championsSortDropdownText">Role</div>
-    //                         <div className="championsSortDropdownOptions">
-    //                             <div className="championsSortDropdownOption"
-    //                                  onClick={() => this.sortChampionsTags(this.state.championsTags, "Assassin")}>
-    //                                 Assassin
-    //                             </div>
-    //                             <div className="championsSortDropdownOption"
-    //                                  onClick={() => this.sortChampionsTags(this.state.championsTags, "Fighter")}>
-    //                                 Fighter
-    //                             </div>
-    //                             <div className="championsSortDropdownOption"
-    //                                  onClick={() => this.sortChampionsTags(this.state.championsTags, "Mage")}>
-    //                                 Mage
-    //                             </div>
-    //                             <div className="championsSortDropdownOption"
-    //                                  onClick={() => this.sortChampionsTags(this.state.championsTags, "Marksman")}>
-    //                                 Marksman
-    //                             </div>
-    //                             <div className="championsSortDropdownOption"
-    //                                  onClick={() => this.sortChampionsTags(this.state.championsTags, "Support")}>
-    //                                 Support
-    //                             </div>
-    //                             <div className="championsSortDropdownOption"
-    //                                  onClick={() => this.sortChampionsTags(this.state.championsTags, "Tank")}>
-    //                                 Tank
-    //                             </div>
-    //                         </div>
-    //                     </div>
-    //                     {/* BY ABILITY COST */}
-    //                     <div className="championsSortDropdown">
-    //                         <div className="championsSortDropdownText">Ability Cost</div>
-    //                         <div className="championsSortDropdownOptions">
-    //                             <div className="championsSortDropdownOption"
-    //                                  onClick={() => this.sortChampionsPartype(this.state.championsPartype, "Mana")}>
-    //                                 Mana
-    //                             </div>
-    //                             <div className="championsSortDropdownOption"
-    //                                  onClick={() => this.sortChampionsPartype(this.state.championsPartype, "Energy")}>
-    //                                 Energy
-    //                             </div>
-    //                             <div className="championsSortDropdownOption"
-    //                                  onClick={() => this.sortChampionsPartype(this.state.championsPartype, "None")}>
-    //                                 No Cost
-    //                             </div>
-    //                             <div className="championsSortDropdownOption"
-    //                                  onClick={() => this.sortChampionsPartype(this.state.championsPartype, "Other")}>
-    //                                 Other
-    //                             </div>
-    //                         </div>
-    //                     </div>
-    //                     {/* BY STAT */}
-    //                     <div className="championsSortDropdown">
-    //                         <div className="championsSortDropdownText">Stats</div>
-    //                         <div className="championsSortDropdownOptions">
-    //                             <div className="championsSortDropdownOption"
-    //                                  onClick={() => this.sortChampionsStats(this.state.championsStats, "armor")}>
-    //                                 Armor
-    //                             </div>
-    //                             <div className="championsSortDropdownOption"
-    //                                  onClick={() => this.sortChampionsStats(this.state.championsStats, "attackdamage")}>
-    //                                 Base AD
-    //                             </div>
-    //                             <div className="championsSortDropdownOption"
-    //                                  onClick={() => this.sortChampionsStats(this.state.championsStats, "attackdamageperlevel")}>
-    //                                 Scaling AD
-    //                             </div>
-    //                             <div className="championsSortDropdownOption"
-    //                                  onClick={() => this.sortChampionsStats(this.state.championsStats, "attackrange")}>
-    //                                 Range
-    //                             </div>
-    //                         </div>
-    //                     </div>
-    //                 </div>
-    //                 <div className="championsGallery">
-    //                     {this.displayChampions(this.state.champions)}
-    //                 </div>
-    //             </div>
-    //         ); 
-    //     }
-    //     return (
-    //         <none/>
-    //     );
-    // }
+}
