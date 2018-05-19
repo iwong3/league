@@ -450,17 +450,29 @@ export default class Champions extends Component {
         return championsSorted;
     }
 
+    //todo: add nicknames, maybe sort by region?
     sortChampionsSearch = (champions, search) => {
         let championsSorted = [];
 
         for (let a = 0; a < champions.length; a++) {
+            //Nicknames
+            if (search.toLowerCase() === "cow" && champions[a].name === "Alistar") {
+                championsSorted.push(champions[a]);
+            }
+            if ((search.toLowerCase() === "j4" || search.toLowerCase() === "jiv") && champions[a].name === "Jarvan IV") {
+                championsSorted.push(champions[a]);
+            }
+
             //If search is greater than champion name, continue
             if (search.length > champions[a].name.length) {
                 continue;
             }
-            if (search.toLowerCase() === champions[a].name.substring(0, search.length).toLowerCase()) {
+            if (champions[a].name.toLowerCase().includes(search.toLowerCase())) {
                 championsSorted.push(champions[a]);
             }
+            // if (search.toLowerCase() === champions[a].name.substring(0, search.length).toLowerCase()) {
+            //     championsSorted.push(champions[a]);
+            // }
         }
 
         return championsSorted;
