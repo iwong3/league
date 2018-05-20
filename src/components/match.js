@@ -320,6 +320,9 @@ export default class Match extends Component {
             case ("Riven"):
                 style["backgroundPosition"] = "75% 20%";
                 break;
+            case ("Ryze"):
+                style["backgroundPosition"] = "79% 34%";
+                break;
             case ("Singed"):
                 style["backgroundPosition"] = "0% 15%";
                 style["backgroundSize"] = "auto 387%";

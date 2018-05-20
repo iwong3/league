@@ -9,7 +9,10 @@
 }
 
 .alert {
-    color: #ccbe91;
+    font-family: "Tajawal", sans-serif;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #f1e6d2;
     text-shadow: 2px 2px #000000;
     height: 28px;
 }
@@ -29,6 +32,9 @@
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.19);
+    font-family: "Tajawal", sans-serif;
+    letter-spacing: 1px;
+    text-transform: uppercase;
     font-size: 20px;
     color: #ccbe91;
     padding: 5px 20px;
@@ -48,6 +54,9 @@
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.19);
+    font-family: "Tajawal", sans-serif;
+    letter-spacing: 1px;
+    text-transform: uppercase;
     font-size: 16px;
     padding: 5px 20px;
     cursor: pointer;

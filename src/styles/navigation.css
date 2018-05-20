@@ -18,17 +18,20 @@
 .navItemBorder {
     display: flex;
     background: #1d282c;
+    filter: brightness(0.9);
     border: 1px solid #000000;
+    transition-property: transform;
+    transition-timing-function: ease,linear,ease;
+    transition-duration: .2s, .2s, .2s;
     padding: 1px;
     width: 225px;
     height: 500px;
-    transition: filter 0.2s linear;
 }
 
 .navItemBorder:hover {
     background: linear-gradient(180deg,#f1e6d2 0,#634b25);
     filter: brightness(1.2);
-    /* transform: scale(1.01); */
+    transform: scale(1.05);
 }
 
 .navItemContent {
@@ -54,8 +57,9 @@
     background: linear-gradient(180deg,rgba(0,10,19,0) 0,#000a13 100%,#000a13);
     text-align: center;
     font-family: 'Lusitana', serif;
+    font-weight: 400;
     font-size: 22px;
-    letter-spacing: .075em;
+    letter-spacing: 4px;
     color: #f1e6d2;
     text-shadow: 2px 2px #000000;
     padding-top: 75%;

@@ -598,16 +598,19 @@ export default class Champions extends Component {
                                 {this.displayStatsCriteria()}
                             </div>
                         </div>
+                        {/* SEARCH BAR */}
+                        <div className="championSearch">
+                            <input id="searchBar"
+                                type="text"
+                                autoComplete="off"
+                                value={this.state.search}
+                                placeholder="Find A Champion..."
+                                onChange={this.handleSearchChange}
+                            />
+                        </div>
                     </div>
-                    {/* SEARCH BAR */}
-                    <div className="championSearch">
-                        <input id="searchBar"
-                            type="text"
-                            autoComplete="off"
-                            value={this.state.search}
-                            placeholder="Champion Name..."
-                            onChange={this.handleSearchChange}
-                        />
+                    <div className="championsLabel">
+                        <h1>Champions</h1>
                     </div>
                     {/* CHAMPIONS */}
                     <div className="championsGallery">
