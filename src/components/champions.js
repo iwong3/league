@@ -614,7 +614,12 @@ export default class Champions extends Component {
                     </div>
                     {/* CHAMPIONS */}
                     <div className="championsGallery">
-                        {this.displayChampions(this.state.champions)}
+                        {   this.state.champions.length > 0
+                            ?
+                            this.displayChampions(this.state.champions)
+                            :
+                            <div className="noChamps">No Champions Found</div>
+                        }
                     </div>
                 </div>
             );

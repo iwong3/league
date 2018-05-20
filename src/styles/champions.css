@@ -104,7 +104,7 @@
     font-family: "Lusitana", sans-serif;
     font-size: 50px;
     font-weight: 400;
-    letter-spacing: 10px;
+    letter-spacing: 15px;
     text-transform: uppercase;
     background: -webkit-linear-gradient(#9f814a,#7e6234);
     -webkit-background-clip: text;
@@ -127,4 +127,13 @@
 .championRow img {
     width: 100px;
     height: 100px;
+}
+
+.noChamps {
+    font-family: "Lusitana", sans-serif;
+    font-size: 30px;
+    font-weight: 400;
+    letter-spacing: 10px;
+    text-transform: uppercase;
+    color: #ccbe91;
 }
