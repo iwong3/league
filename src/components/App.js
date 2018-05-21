@@ -24,6 +24,7 @@ export default class App extends Component {
             <Route path={"/champions"}
                    component={Champions} />
           </div>
+          <div className="App_footer"></div>
         </div>
       </Router>
     );

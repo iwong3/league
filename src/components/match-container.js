@@ -21,6 +21,8 @@ export default class MatchContainer extends Component {
 
         this.getParticipantId = this.getParticipantId.bind(this);
         this.getMatchStats = this.getMatchStats.bind(this);
+        this.handleClick = this.handleClick.bind(this);
+        this.showMatchExpanded = this.showMatchExpanded.bind(this);
     }
 
     componentDidMount = () => {
@@ -83,8 +85,7 @@ export default class MatchContainer extends Component {
                     <Match championId={this.props.match.champion}
                            matchDetails={this.state.matchDetails}
                            matchStats={this.state.matchStats}
-                           handleClick={this.handleClick}
-                           className={this.showMatchExpanded()} />
+                           handleClick={this.handleClick} />
                     <MatchExpanded matchDetails={this.state.matchDetails}
                                    participantIndex={this.state.participantIndex}
                                    matchStats={this.state.matchStats}

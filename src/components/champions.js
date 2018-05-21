@@ -5,7 +5,7 @@ import * as championsSort from '../utilities/champions-sort';
 import * as constant from '../utilities/constants';
 import * as utility from '../utilities/functions';
 
-import ChampionCard from './champion-card';
+import ChampionCardContainer from './champion-card-container';
 
 import '../styles/champions.css';
 
@@ -427,7 +427,7 @@ export default class Champions extends Component {
 
     displayChampionsCardsHelper = (champion) => {
         return (
-            <ChampionCard champion={champion} />
+            <ChampionCardContainer champion={champion} />
         );
     }
 

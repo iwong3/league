@@ -10,30 +10,17 @@ export default class Match extends Component {
     constructor(props) {
         super(props);
 
-        this.getTimeSinceMatch = this.getTimeSinceMatch.bind(this);
-        this.getGameDuration = this.getGameDuration.bind(this);
-        this.getGameDate = this.getGameDate.bind(this);
+        this.setBanner = this.setBanner.bind(this);
         this.setMatchBorder = this.setMatchBorder.bind(this);
         this.setVerticalLineColor = this.setVerticalLineColor.bind(this);
-        this.setBanner = this.setBanner.bind(this);
     }
 
-    //gets time since end of match
-    //gameCreation is in ms, gameDuration is in s
     getTimeSinceMatch = (details) => {
         let date = new Date();
         let currentTime = date.getTime();
-        let timeSinceMatch = currentTime - (details.gameCreation + (details.gameDuration * 1000));
-        let hoursSinceMatch = parseInt(timeSinceMatch / (1000 * 60 * 60), 10);
+        let timeSinceMatch = currentTime - details.gameCreation;
+        let hoursSinceMatch = parseInt(timeSinceMatch/(1000*60*60), 10);
 
-        if (hoursSinceMatch === 0) {
-            let minsSinceMatch = parseInt(timeSinceMatch / (1000 * 60), 10);
-
-            if (minsSinceMatch === 1) {
-                return "1 minute ago";
-            }
-            return minsSinceMatch + " minutes ago";
-        }
         if (hoursSinceMatch === 1) {
             return "1 hour ago";
         }
@@ -55,13 +42,6 @@ export default class Match extends Component {
             return hours + "h " + minutes + "m " + seconds + "s";
         }
         return minutes + "m " + seconds + "s";
-    }
-
-    getGameDate = (details) => {
-        let date = new Date(details.gameCreation + (details.gameDuration * 1000));
-        return (
-            utility.getMonthString(date.getMonth()) + " " + date.getDay() + ", " + (date.getYear() + 1900)
-        );
     }
 
     setMatchBorder = (win) => {
@@ -127,10 +107,6 @@ export default class Match extends Component {
                 break;
             case ("Cassiopeia"):
                 style["backgroundPosition"] = "43% 33%";
-                break;
-            case ("Chogath"):
-                style["backgroundPosition"] = "0% 31%";
-                style["backgroundSize"] = "auto 462%";
                 break;
             case ("Darius"):
                 style["backgroundPosition"] = "30% 12%";
@@ -218,6 +194,9 @@ export default class Match extends Component {
                 break;
             case ("Karma"):
                 style["backgroundPosition"] = "69% 15%";
+                break;
+            case ("Karthus"):
+                style["backgroundPosition"] = "59% 10%";
                 break;
             case ("Kassadin"):
                 style["backgroundPosition"] = "54% 32%";
@@ -320,9 +299,6 @@ export default class Match extends Component {
             case ("Riven"):
                 style["backgroundPosition"] = "75% 20%";
                 break;
-            case ("Ryze"):
-                style["backgroundPosition"] = "79% 34%";
-                break;
             case ("Singed"):
                 style["backgroundPosition"] = "0% 15%";
                 style["backgroundSize"] = "auto 387%";
@@ -346,6 +322,10 @@ export default class Match extends Component {
             case ("Swain"):
                 style["backgroundPosition"] = "58% 9%";
                 break;
+            case ("Taliyah"):
+                style["backgroundPosition"] = "63% 15%";
+                style["backgroundSize"] = "auto 425%";
+                break;
             case ("Talon"):
                 style["backgroundPosition"] = "52% 30%";
                 break;
@@ -366,9 +346,6 @@ export default class Match extends Component {
             case ("Trundle"):
                 style["backgroundPosition"] = "0% 27%";
                 style["backgroundSize"] = "auto 502%";
-                break;
-            case ("TwistedFate"):
-                style["backgroundPosition"] = "70% 22%";
                 break;
             case ("Twitch"):
                 style["backgroundPosition"] = "0% 35%";
@@ -458,7 +435,7 @@ export default class Match extends Component {
                                 <div className="matchResult" style={{"color": "#cd2626"}}>DEFEAT</div>
                             }
                         </div>
-                        <div className="statRow" data-title={this.getGameDate(this.props.matchDetails)} >
+                        <div className="statRow">
                             <div className="gameDuration">
                                 {this.getGameDuration(this.props.matchDetails)}
                             </div>

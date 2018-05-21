@@ -1,9 +1,14 @@
 .App {
   display: flex;
   flex-flow: column nowrap;
+  height: 100%;
 }
 
 .App_body {
   display: flex;
-  justify-content: center;
+  flex: 1 1 auto;
+}
+
+.App_footer {
+  height: 85px;
 }

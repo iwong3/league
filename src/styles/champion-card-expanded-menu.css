@@ -1,0 +1,31 @@
+.ChampionCardExpandedMenu {
+    display: flex;
+    width: 100%;
+    height: 50px;
+}
+
+/* active = no bottom border */
+.cardMenuButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #1d282c;
+    border-bottom: 1px solid #ccbe91;
+    border-left: 1px solid #ccbe91;
+    font-family: "Tajawal", sans-serif;
+    font-size: 18px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #ccbe91;
+    width: 50%;
+}
+
+.cardMenuButton:hover {
+    background: #000000;
+}
+
+.activeCardTab {
+    background: #000000;
+    border-bottom: none;
+    color: #ccbe91;
+}

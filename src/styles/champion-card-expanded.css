@@ -1,0 +1,18 @@
+.ChampionCardExpanded {
+    display: flex;
+    flex-direction: column;
+    margin: 0px 10px;
+    height: 500px;
+}
+
+.championCardHidden {
+    max-height: 0;
+    overflow: hidden;
+}
+
+.championCardExpanded {
+    overflow: hidden;
+    max-height: 1200px;
+    border: 1px solid #ccbe91;
+    border-top: none;
+}
