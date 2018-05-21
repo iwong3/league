@@ -38,6 +38,28 @@ export default class ChampionCardExpandedDetails extends Component {
         }
     }
 
+    displayStats = (champion) => {
+        let stats = [];
+        let statsKeys = Object.keys(champion.stats);
+
+        for (let i = 0; i < statsKeys.length; i++) {
+            stats.push(
+                <div className="statLine">
+                    <div className="statLabel">
+                        {statsKeys[i]}
+                    </div>
+                    <div className="stat">
+                        {champion.stats[statsKeys[i]]}
+                    </div>
+                </div>
+            )
+        }
+
+        return (
+            <div className="stats">{stats}</div>
+        );
+    }
+
     render() {
         return (
             <div className="ChampionCardExpandedDetails">
@@ -45,6 +67,13 @@ export default class ChampionCardExpandedDetails extends Component {
                     this.props.activeTab === "lore"
                     ?
                     <div className="lore">{this.state.lore}</div>
+                    :
+                    <none/>
+                }
+                {
+                    this.props.activeTab === "stats"
+                    ?
+                    this.displayStats(this.props.champion)
                     :
                     <none/>
                 }

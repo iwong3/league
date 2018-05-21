@@ -43,10 +43,10 @@ export const championSortStats = [
 ]
 
 export const championSortStatsText = {
-    "armor": "Armor",
-    "armorperlevel": "Scaling Armor",
-    "attackdamage": "Attack Damage",
-    "attackdamageperlevel": "Scaling Attack Damage",
+    "armor": "Base Armor",
+    "armorperlevel": "Armor Per Level",
+    "attackdamage": "Base AD",
+    "attackdamageperlevel": "AD Per Level",
     "attackrange": "Range",
     "hp": "Health",
     "hpperlevel": "Scaling Health",

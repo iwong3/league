@@ -3,11 +3,16 @@
     flex-direction: column;
     margin: 0px 10px;
     height: 500px;
+    transition-property: max-height, filter, border;
+    transition-timing-function: linear, ease;
+    transition-duration: .4s, .4s;
 }
 
 .championCardHidden {
     max-height: 0;
     overflow: hidden;
+    border: 1px solid transparent;
+    filter: brightness(0);
 }
 
 .championCardExpanded {
