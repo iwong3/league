@@ -21,7 +21,6 @@
 .championsSortPrimaryOptions, .championsSortSecondaryOptions {
     display: flex;
     align-items: center;
-    letter-spacing: 1px;
     text-transform: uppercase;
     width: 1200px;
 }
@@ -30,36 +29,46 @@
     height: 50px;
 }
 
-.championsSortPrimaryText, .championsSortPrimaryTextLarge {
+.championsSortPrimaryText, .championsSortPrimaryTextMedium, .championsSortPrimaryTextLarge {
     font-size: 20px;
-    color: #f1e6d2;
-    width: 200px;
+    letter-spacing: 0.15em;
+    color: #ccbe91;
+    width: 150px;
+}
+
+.championsSortPrimaryTextMedium {
+    width: 300px
 }
 
 .championsSortPrimaryTextLarge {
-    width: 600px;
+    width: 450px;
 }
 
 .championsSortSecondaryOptions {
-    height: 200px;
+    height: 150px;
 }
 
-.championsSortSecondaryGroup, .championsSortSecondaryGroupLarge {
+.championsSortSecondaryGroup, .championsSortSecondaryGroupMedium, .championsSortSecondaryGroupLarge {
     display: flex;
     flex-flow: column wrap;
-    width: 200px;
+    width: 150px;
     height: 100%;
 }
 
+.championsSortSecondaryGroupMedium {
+    width: 300px;
+}
+
 .championsSortSecondaryGroupLarge {
-    width: 600px;
+    width: 450px;
 }
 
 .championsSortSecondaryText {
-    font-size: 16px;
+    font-size: 14px;
+    letter-spacing: 0.075em;
     color: #f1e6d2;
-    padding-bottom: 5px;
-    width: 175px;
+    padding-bottom: 2px;
+    width: 150px;
     cursor: pointer;
 }
 
@@ -96,8 +105,18 @@
     color: #ccbe91;
 }
 
+.championsGroup {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: url(../images/runeterra_map.png) no-repeat;
+    background-position: 30% -3.5%;
+    background-size: auto 40%;
+}
+
 .championsLabel {
     margin: 50px 0;
+    background: transparent;
 }
 
 .championsLabel h1 {
@@ -115,7 +134,6 @@
 .championsGallery {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     margin-bottom: 100px
 }
 

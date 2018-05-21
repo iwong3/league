@@ -25,7 +25,8 @@ export default class Champions extends Component {
                 alphabetReverse: false,
                 roles: [false, false, false, false, false, false],
                 abilityCost: "all",
-                stats: "none"
+                stats: "none",
+                region: "none"
             },
             search: ""
         };
@@ -145,6 +146,26 @@ export default class Champions extends Component {
                 sortCopy.stats = criteria;
                 sortCopy.alphabetReverse = false;
                 break;
+            //REGION
+            case ("Bandle City"):
+            case ("Bilgewater"):
+            case ("Demacia"):
+            case ("Freljord"):
+            case ("Ionia"):
+            case ("Mount Targon"):
+            case ("Noxus"):
+            case ("Piltover"):
+            case ("Shurima"):
+            case ("Shadow Isles"):
+            case ("Runeterra"):
+            case ("Void"):
+            case ("Zaun"):
+                if (sortCopy.region === criteria) {
+                    sortCopy.region = "none";
+                    break;
+                }
+                sortCopy.region = criteria;
+                break;
             default:
                 break;
         }
@@ -244,6 +265,23 @@ export default class Champions extends Component {
                     active = true;
                 }
                 break;
+            case ("Bandle City"):
+            case ("Bilgewater"):
+            case ("Demacia"):
+            case ("Freljord"):
+            case ("Ionia"):
+            case ("Mount Targon"):
+            case ("Noxus"):
+            case ("Piltover"):
+            case ("Shurima"):
+            case ("Shadow Isles"):
+            case ("Runeterra"):
+            case ("Void"):
+            case ("Zaun"):
+                if (this.state.sort.region === criteria) {
+                    active = true;
+                }
+                break;
             default:
                 break;
         }
@@ -285,6 +323,10 @@ export default class Champions extends Component {
         //update championsCopy by abilityCost
         if (sort.abilityCost !== "all") {
             championsCopy = this.sortChampionsPartype(championsCopy, sort.abilityCost);
+        }
+
+        if (sort.region !== "none") {
+            championsCopy = this.sortChampionsRegion(championsCopy, sort.region);
         }
 
         //update championsCopy by stat
@@ -450,6 +492,219 @@ export default class Champions extends Component {
         return championsSorted;
     }
 
+    sortChampionsRegion = (champions, region) => {
+        let championsSorted = [];
+
+        for (let a = 0; a < champions.length; a++) {
+            if (region === "Bandle City") {
+                if (champions[a].name === "Corki" ||
+                    champions[a].name === "Lulu" ||
+                    champions[a].name === "Rumble" ||
+                    champions[a].name === "Teemo" ||
+                    champions[a].name === "Tristana" ||
+                    champions[a].name === "Veigar") {
+                        championsSorted.push(champions[a]);
+                }
+            }
+
+            if (region === "Bilgewater") {
+                if (champions[a].name === "Gangplank" ||
+                    champions[a].name === "Graves" ||
+                    champions[a].name === "Illaoi" ||
+                    champions[a].name === "Miss Fortune" ||
+                    champions[a].name === "Nautilus" ||
+                    champions[a].name === "Twisted Fate") {
+                        championsSorted.push(champions[a]);
+                }
+            }
+
+            if (region === "Demacia") {
+                if (champions[a].name === "Fiora" ||
+                    champions[a].name === "Galio" ||
+                    champions[a].name === "Garen" ||
+                    champions[a].name === "Jarvan IV" ||
+                    champions[a].name === "Lucian" ||
+                    champions[a].name === "Lux" ||
+                    champions[a].name === "Poppy" ||
+                    champions[a].name === "Quinn" ||
+                    champions[a].name === "Shyvana" ||
+                    champions[a].name === "Sona" ||
+                    champions[a].name === "Vayne" ||
+                    champions[a].name === "Xin Zhao") {
+                        championsSorted.push(champions[a]);
+                }
+            }
+
+            if (region === "Freljord") {
+                if (champions[a].name === "Anivia" ||
+                    champions[a].name === "Ashe" ||
+                    champions[a].name === "Braum" ||
+                    champions[a].name === "Lissandra" ||
+                    champions[a].name === "Nunu" ||
+                    champions[a].name === "Olaf" ||
+                    champions[a].name === "Ornn" ||
+                    champions[a].name === "Sejuani" ||
+                    champions[a].name === "Trundle" ||
+                    champions[a].name === "Tryndamere" ||
+                    champions[a].name === "Udyr" ||
+                    champions[a].name === "Volibear") {
+                        championsSorted.push(champions[a]);
+                }
+            }
+
+            if (region === "Ionia") {
+                if (champions[a].name === "Ahri" ||
+                    champions[a].name === "Akali" ||
+                    champions[a].name === "Irelia" ||
+                    champions[a].name === "Jhin" ||
+                    champions[a].name === "Karma" ||
+                    champions[a].name === "Kayn" ||
+                    champions[a].name === "Kennen" ||
+                    champions[a].name === "Lee Sin" ||
+                    champions[a].name === "Master Yi" ||
+                    champions[a].name === "Rakan" ||
+                    champions[a].name === "Shen" ||
+                    champions[a].name === "Soraka" ||
+                    champions[a].name === "Syndra" ||
+                    champions[a].name === "Varus" ||
+                    champions[a].name === "Wukong" || 
+                    champions[a].name === "Xayah" ||
+                    champions[a].name === "Yasuo" ||
+                    champions[a].name === "Zed") {
+                        championsSorted.push(champions[a]);
+                }
+            }
+
+            if (region === "Mount Targon") {
+                if (champions[a].name === "Diana" ||
+                    champions[a].name === "Leona" ||
+                    champions[a].name === "Pantheon" ||
+                    champions[a].name === "Taric" ||
+                    champions[a].name === "Zoe") {
+                        championsSorted.push(champions[a]);
+                }
+            }
+
+            if (region === "Noxus") {
+                if (champions[a].name === "Cassiopeia" ||
+                    champions[a].name === "Darius" ||
+                    champions[a].name === "Draven" ||
+                    champions[a].name === "Katarina" ||
+                    champions[a].name === "Kled" ||
+                    champions[a].name === "LeBlanc" ||
+                    champions[a].name === "Riven" ||
+                    champions[a].name === "Sion" ||
+                    champions[a].name === "Swain" ||
+                    champions[a].name === "Talon" ||
+                    champions[a].name === "Vladimir") {
+                        championsSorted.push(champions[a]);
+                }
+            }
+
+            if (region === "Piltover") {
+                if (champions[a].name === "Caitlyn" ||
+                    champions[a].name === "Camille" ||
+                    champions[a].name === "Ezreal" ||
+                    champions[a].name === "Heimerdinger" ||
+                    champions[a].name === "Jayce" ||
+                    champions[a].name === "Orianna" ||
+                    champions[a].name === "Vi") {
+                        championsSorted.push(champions[a]);
+                }
+            }
+
+            if (region === "Shurima") {
+                if (champions[a].name === "Amumu" ||
+                    champions[a].name === "Azir" ||
+                    champions[a].name === "Nasus" ||
+                    champions[a].name === "Rammus" ||
+                    champions[a].name === "Renekton" ||
+                    champions[a].name === "Sivir" ||
+                    champions[a].name === "Skarner" ||
+                    champions[a].name === "Taliyah" ||
+                    champions[a].name === "Xerath") {
+                        championsSorted.push(champions[a]);
+                }
+            }
+
+            if (region === "Shadow Isles") {
+                if (champions[a].name === "Elise" ||
+                    champions[a].name === "Hecarim" ||
+                    champions[a].name === "Kalista" ||
+                    champions[a].name === "Karthus" ||
+                    champions[a].name === "Maokai" ||
+                    champions[a].name === "Mordekaiser" ||
+                    champions[a].name === "Thresh" ||
+                    champions[a].name === "Yorick") {
+                        championsSorted.push(champions[a]);
+                }
+            }
+
+            if (region === "Runeterra") {
+                if (champions[a].name === "Aatrox" ||
+                    champions[a].name === "Alistar" ||
+                    champions[a].name === "Annie" ||
+                    champions[a].name === "Aurelion Sol" ||
+                    champions[a].name === "Bard" ||
+                    champions[a].name === "Brand" ||
+                    champions[a].name === "Evelynn" ||
+                    champions[a].name === "Fiddlesticks" ||
+                    champions[a].name === "Fizz" |
+                    champions[a].name === "Gnar" ||
+                    champions[a].name === "Gragas" ||
+                    champions[a].name === "Ivern" ||
+                    champions[a].name === "Jax" ||
+                    champions[a].name === "Kayle" ||
+                    champions[a].name === "Kindred" ||
+                    champions[a].name === "Malphite" ||
+                    champions[a].name === "Morgana" ||
+                    champions[a].name === "Nami" ||
+                    champions[a].name === "Nidalee" ||
+                    champions[a].name === "Nocturne" ||
+                    champions[a].name === "Rengar" ||
+                    champions[a].name === "Ryze" ||
+                    champions[a].name === "Shaco" ||
+                    champions[a].name === "Tahm Kench" ||
+                    champions[a].name === "Zilean" ||
+                    champions[a].name === "Zyra") {
+                        championsSorted.push(champions[a]);
+                }
+            }
+
+            if (region === "Void") {
+                if (champions[a].name === "Cho'Gath" ||
+                    champions[a].name === "Kai'Sa" ||
+                    champions[a].name === "Kassadin" ||
+                    champions[a].name === "Kha'Zix" ||
+                    champions[a].name === "Kog'Maw" ||
+                    champions[a].name === "Malzahar" ||
+                    champions[a].name === "Rek'Sai" ||
+                    champions[a].name === "Vel'Koz") {
+                        championsSorted.push(champions[a]);
+                }
+            }
+
+            if (region === "Zaun") {
+                if (champions[a].name === "Blitzcrank" ||
+                    champions[a].name === "Dr. Mundo" ||
+                    champions[a].name === "Ekko" ||
+                    champions[a].name === "Janna" ||
+                    champions[a].name === "Jinx" ||
+                    champions[a].name === "Singed" ||
+                    champions[a].name === "Twitch" ||
+                    champions[a].name === "Urgot" ||
+                    champions[a].name === "Viktor" ||
+                    champions[a].name === "Warwick" ||
+                    champions[a].name === "Zac" ||
+                    champions[a].name === "Ziggs") {
+                        championsSorted.push(champions[a]);
+                }
+            }
+        }
+
+        return championsSorted;
+    }
+
     //todo: add nicknames, maybe sort by region?
     sortChampionsSearch = (champions, search) => {
         let championsSorted = [];
@@ -459,7 +714,14 @@ export default class Champions extends Component {
             if (search.toLowerCase() === "cow" && champions[a].name === "Alistar") {
                 championsSorted.push(champions[a]);
             }
+            //ABBREVIATIONS
             if ((search.toLowerCase() === "j4" || search.toLowerCase() === "jiv") && champions[a].name === "Jarvan IV") {
+                championsSorted.push(champions[a]);
+            }
+            if ((search.toLowerCase() === "mf") && champions[a].name === "Miss Fortune") {
+                championsSorted.push(champions[a]);
+            }
+            if ((search.toLowerCase() === "tf") && champions[a].name === "Twisted Fate") {
                 championsSorted.push(champions[a]);
             }
 
@@ -517,10 +779,11 @@ export default class Champions extends Component {
                     <div className="championsSortMenu">
                         {/* PRIMARY SORTING CRITERIA */}
                         <div className="championsSortPrimaryOptions">
-                            <div className="championsSortPrimaryText">Alphabetically</div>
+                            <div className="championsSortPrimaryText">Name</div>
                             <div className="championsSortPrimaryText">Role</div>
-                            <div className="championsSortPrimaryText">Ability Cost</div>
+                            <div className="championsSortPrimaryText">Spells</div>
                             <div className="championsSortPrimaryTextLarge">Stats</div>
+                            <div className="championsSortPrimaryTextMedium">Region</div>
                         </div>
                         {/* SECONDARY SORTING CRITERIA */}
                         <div className="championsSortSecondaryOptions">
@@ -597,6 +860,74 @@ export default class Champions extends Component {
                             <div className="championsSortSecondaryGroupLarge">
                                 {this.displayStatsCriteria()}
                             </div>
+                            {/* REGION */}
+                            <div className="championsSortSecondaryGroupMedium">
+                                <div className="championsSortSecondaryText"
+                                     onClick={() => this.setSearchCriteria("Bandle City")}
+                                     style={this.setCriteriaStyle("Bandle City")} >
+                                    Bandle City
+                                </div>
+                                <div className="championsSortSecondaryText"
+                                     onClick={() => this.setSearchCriteria("Bilgewater")}
+                                     style={this.setCriteriaStyle("Bilgewater")} >
+                                    Bilgewater
+                                </div>
+                                <div className="championsSortSecondaryText"
+                                     onClick={() => this.setSearchCriteria("Demacia")}
+                                     style={this.setCriteriaStyle("Demacia")} >
+                                    Demacia
+                                </div>
+                                <div className="championsSortSecondaryText"
+                                     onClick={() => this.setSearchCriteria("Freljord")}
+                                     style={this.setCriteriaStyle("Freljord")} >
+                                    Freljord
+                                </div>
+                                <div className="championsSortSecondaryText"
+                                     onClick={() => this.setSearchCriteria("Ionia")}
+                                     style={this.setCriteriaStyle("Ionia")} >
+                                    Ionia
+                                </div>
+                                <div className="championsSortSecondaryText"
+                                     onClick={() => this.setSearchCriteria("Mount Targon")}
+                                     style={this.setCriteriaStyle("Mount Targon")} >
+                                    Mount Targon
+                                </div>
+                                <div className="championsSortSecondaryText"
+                                     onClick={() => this.setSearchCriteria("Noxus")}
+                                     style={this.setCriteriaStyle("Noxus")} >
+                                    Noxus
+                                </div>
+                                <div className="championsSortSecondaryText"
+                                     onClick={() => this.setSearchCriteria("Piltover")}
+                                     style={this.setCriteriaStyle("Piltover")} >
+                                    Piltover
+                                </div>
+                                <div className="championsSortSecondaryText"
+                                     onClick={() => this.setSearchCriteria("Shurima")}
+                                     style={this.setCriteriaStyle("Shurima")} >
+                                    Shurima
+                                </div>
+                                <div className="championsSortSecondaryText"
+                                     onClick={() => this.setSearchCriteria("Shadow Isles")}
+                                     style={this.setCriteriaStyle("Shadow Isles")} >
+                                    Shadow Isles
+                                </div>
+                                <div className="championsSortSecondaryText"
+                                     onClick={() => this.setSearchCriteria("Runeterra")}
+                                     style={this.setCriteriaStyle("Runeterra")} >
+                                    Runeterra
+                                </div>
+                                <div className="championsSortSecondaryText"
+                                     onClick={() => this.setSearchCriteria("Void")}
+                                     style={this.setCriteriaStyle("Void")} >
+                                    Void
+                                </div>
+                                <div className="championsSortSecondaryText"
+                                     onClick={() => this.setSearchCriteria("Zaun")}
+                                     style={this.setCriteriaStyle("Zaun")} >
+                                    Zaun
+                                </div>
+                            </div>
                         </div>
                         {/* SEARCH BAR */}
                         <div className="championSearch">
@@ -609,17 +940,19 @@ export default class Champions extends Component {
                             />
                         </div>
                     </div>
-                    <div className="championsLabel">
-                        <h1>Champions</h1>
-                    </div>
-                    {/* CHAMPIONS */}
-                    <div className="championsGallery">
-                        {   this.state.champions.length > 0
-                            ?
-                            this.displayChampions(this.state.champions)
-                            :
-                            <div className="noChamps">No Champions Found</div>
-                        }
+                    <div className="championsGroup">
+                        <div className="championsLabel">
+                            <h1>Champions</h1>
+                        </div>
+                        {/* CHAMPIONS */}
+                        <div className="championsGallery">
+                            {   this.state.champions.length > 0
+                                ?
+                                this.displayChampions(this.state.champions)
+                                :
+                                <div className="noChamps">No Champions Found</div>
+                            }
+                        </div>
                     </div>
                 </div>
             );
