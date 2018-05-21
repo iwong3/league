@@ -67,6 +67,7 @@
     font-size: 14px;
     letter-spacing: 0.075em;
     color: #f1e6d2;
+    text-transform: uppercase;
     padding-bottom: 2px;
     width: 150px;
     cursor: pointer;
@@ -76,11 +77,16 @@
     color: #cd2626 !important;
 }
 
+.championSortBottomRow {
+    display: flex;
+}
+
 .championSearch {
     display: flex;
     justify-content: center;
     align-items: center;
     margin: 10px 0;
+    width: 300px;
 }
 
 .championSearch #searchBar {
@@ -105,13 +111,22 @@
     color: #ccbe91;
 }
 
+.championDisplayType {
+    display: flex;
+    align-items: flex-end;
+    padding-bottom: 10px;
+    width: 150px;
+}
+
 .championsGroup {
     display: flex;
     flex-direction: column;
     align-items: center;
     background: url(../images/runeterra_map.png) no-repeat;
-    background-position: 30% -3.5%;
-    background-size: auto 40%;
+    background-position: 0px -30px;
+    background-size: 960px 600px;
+    width: 1200px;
+    min-height: 500px;
 }
 
 .championsLabel {
@@ -140,12 +155,60 @@
 .championRow {
     display: flex;
     justify-content: center;
+    width: 1200px;
 }
 
-.championRow img {
+.championIcon {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    border: 1px solid #937341;
+    filter: brightness(0.9);
+    margin: 5px;
     width: 100px;
     height: 100px;
+    transition-property: transform, border, filter;
+    transition-timing-function: ease,linear,ease;
+    transition-duration: .2s,.2s,.2s;
 }
+
+.championIcon:hover {
+    transform: scale(1.2);
+    filter: brightness(1.1);
+}
+
+.championIconName {
+    display: none;
+}
+
+.championIcon:hover .championIconName {
+    display: flex;
+    justify-content: center;
+    background: linear-gradient(180deg,rgba(0,10,19,0) 50%,#000a13 100%,#000a13);
+    font-family: 'Tajawal', serif;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #f1e6d2;
+    text-shadow: 2px 2px #000000;
+    padding-top: 75%;
+    width: 100%;
+}
+
+/* .championRow img {
+    border: 1px solid #937341;
+    filter: brightness(0.9);
+    margin: 5px;
+    width: 100px;
+    height: 100px;
+    transition-property: transform, border, filter;
+    transition-timing-function: ease,linear,ease;
+    transition-duration: .2s,.2s,.2s;
+} */
+
+/* .championRow img:hover {
+    transform: scale(1.2);
+    filter: brightness(1.1);
+} */
 
 .noChamps {
     font-family: "Lusitana", sans-serif;

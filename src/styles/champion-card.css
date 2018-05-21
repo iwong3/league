@@ -1,0 +1,33 @@
+.ChampionCard {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #ccbe91;
+    margin: 10px;
+    width: 580px;
+    height: 380px;
+    transition-property: transform, border;
+    transition-timing-function: ease,linear,ease;
+    transition-duration: .4s,.4s,.4s;
+}
+
+.ChampionCard:hover {
+    transform: scale(1.05);
+    filter: brightness(1.2);
+}
+
+.championArt {
+    height: 100%;
+}
+
+.championName {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #0a0a0c;
+    font-family: "Tajawal", sans-serif;
+    font-size: 16px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #ccbe91;
+    height: 50px;
+}

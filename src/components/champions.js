@@ -5,6 +5,8 @@ import * as championsSort from '../utilities/champions-sort';
 import * as constant from '../utilities/constants';
 import * as utility from '../utilities/functions';
 
+import ChampionCard from './champion-card';
+
 import '../styles/champions.css';
 
 
@@ -28,14 +30,15 @@ export default class Champions extends Component {
                 stats: "none",
                 region: "none"
             },
-            search: ""
+            search: "",
+            displayCards: true
         };
     }
 
     //standardize format of champions for sorting, then run initial sort (alphabetical) for render
     componentDidMount = () => {
         this.setState ({
-            originalChampions: this.standardizeChampions(championsSort.championsSort.data)
+            originalChampions: utility.standardizeChampions(championsSort.championsSort.data)
         }, function() {
             this.sortChampions(this.state.originalChampions, this.state.sort, this.state.search);
         });
@@ -47,14 +50,14 @@ export default class Champions extends Component {
     //     axios.get(championsUrl)
     //         .then(res => {
     //             this.setState({
-    //                 originalChampions: this.standardizeChampions(res.data.data)
+    //                 originalChampions: utility.standardizeChampions(res.data.data)
     //             }, function() {
     //                 this.sortChampions(this.state.originalChampions, this.state.sort, this.state.search);
     //             });
     //         })
     //         .catch(error => {
     //             this.setState ({
-    //                 originalChampions: this.standardizeChampions(champions.champions.data),
+    //                 originalChampions: utility.standardizeChampions(champions.champions.data),
     //             }, function() {
     //                 this.sortChampions(this.state.originalChampions, this.state.sort, this.state.search);
     //             });
@@ -351,19 +354,31 @@ export default class Champions extends Component {
         });
     }
 
-    //Helper function to standardize format of champions
-    //Allows sorting functions to recieve and output in same format
-    standardizeChampions = (champions) => {
-        let standardizedChampions = [];
-        Object.keys(champions).map((champion) => standardizedChampions.push(champions[champion]));
-        return standardizedChampions;
+    //Displays champions with a row size
+    displayChampionsIcons = (champions) => {
+        let rowSize = 10;
+
+        var icons = Object.keys(champions).map((champion) => this.displayChampionsIconsHelper(champions[champion]))
+            //row stores icons with a size of rowSize
+            .reduce(function(row, icon, index) {
+                //if we hit rowSize, reset row
+                if (index % rowSize === 0) {
+                    row.push([]);
+                }
+                //push icon into row
+                row[row.length - 1].push(icon);
+                return row;
+            }, []).map(function(row, index) {
+                return <div className="championRow">{row}</div>;
+            });
+
+        return icons;
     }
 
-    //Displays champions with a row size
-    displayChampions = (champions) => {
-        let rowSize = 12;
+    displayChampionsCards = (champions) => {
+        let rowSize = 2;
 
-        var icons = Object.keys(champions).map((champion) => this.displayChampionsHelper(champions[champion]))
+        var icons = Object.keys(champions).map((champion) => this.displayChampionsCardsHelper(champions[champion]))
             //row stores icons with a size of rowSize
             .reduce(function(row, icon, index) {
                 //if we hit rowSize, reset row
@@ -381,10 +396,38 @@ export default class Champions extends Component {
     }
 
     //to change: return a ChampionCard Component instead
-    displayChampionsHelper = (champion) => {
+    // displayChampionsIconsHelper = (champion) => {
+    //     let championIconUrl = utility.getChampionIconUrl(champion.key);
+    //     return (
+    //         <div>
+    //             <img className="championIcon"
+    //                 src={championIconUrl}
+    //                 alt={champion.name}
+    //                 style={{"width": "100px"}} />
+    //         </div>
+    //     );
+    // }
+
+    displayChampionsIconsHelper = (champion) => {
         let championIconUrl = utility.getChampionIconUrl(champion.key);
+        let fontSize = "14px";
+        if (champion.name.length >= 10) {
+            fontSize = "10px";
+        }
         return (
-            <img src={championIconUrl} alt={champion.name} style={{"width": "100px"}} />
+            <div className="championIcon"
+                 style={{"background": "url(" + championIconUrl + ") center"}} >
+                <div className="championIconName"
+                     style={{"fontSize": fontSize}} >
+                    {champion.name}
+                </div>
+            </div>
+        );
+    }
+
+    displayChampionsCardsHelper = (champion) => {
+        return (
+            <ChampionCard champion={champion} />
         );
     }
 
@@ -765,6 +808,34 @@ export default class Champions extends Component {
         );
     }
 
+    setChampionDisplayCards = (display) => {
+        if (display) {
+            this.setState({
+                displayCards: true
+            });
+        } else {
+            this.setState({
+                displayCards: false
+            });
+        }
+    }
+
+    setActiveStyle = (display) => {
+        if (display === "cards" && this.state.displayCards) {
+            return ({
+                "color": "#cd2626"
+            });
+        }
+        if (display === "icons" && !this.state.displayCards) {
+            return ({
+                "color": "#cd2626"
+            });
+        }
+        return ({
+            "color": "#f1e6d2"
+        });
+    }
+
     //- on menu click, set state for that property to be sorted on to be true
     //- write a function that sorts champions based on all the state properties
     //  this will be called once at render
@@ -930,14 +1001,30 @@ export default class Champions extends Component {
                             </div>
                         </div>
                         {/* SEARCH BAR */}
-                        <div className="championSearch">
-                            <input id="searchBar"
-                                type="text"
-                                autoComplete="off"
-                                value={this.state.search}
-                                placeholder="Find A Champion..."
-                                onChange={this.handleSearchChange}
-                            />
+                        <div className="championSortBottomRow">
+                            <div className="championSearchSpacing" style={{"width": "450px"}}></div>
+                            <div className="championSearch">
+                                <input id="searchBar"
+                                    type="text"
+                                    autoComplete="off"
+                                    value={this.state.search}
+                                    placeholder="Find A Champion..."
+                                    onChange={this.handleSearchChange}
+                                />
+                            </div>
+                            <div className="championSearchSpacing" style={{"width": "300px"}}></div>
+                            <div className="championDisplayType">
+                                <div className="championsSortSecondaryText"
+                                     onClick={() => this.setChampionDisplayCards(true)}
+                                     style={this.setActiveStyle("cards")} >
+                                    Cards
+                                </div>
+                                <div className="championsSortSecondaryText"
+                                     onClick={() => this.setChampionDisplayCards(false)}
+                                     style={this.setActiveStyle("icons")} >
+                                    Icons
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div className="championsGroup">
@@ -946,11 +1033,17 @@ export default class Champions extends Component {
                         </div>
                         {/* CHAMPIONS */}
                         <div className="championsGallery">
-                            {   this.state.champions.length > 0
+                            {   this.state.displayCards
                                 ?
-                                this.displayChampions(this.state.champions)
+                                this.displayChampionsCards(this.state.champions)
                                 :
+                                this.displayChampionsIcons(this.state.champions)
+                            }
+                            {   this.state.champions.length === 0
+                                ?
                                 <div className="noChamps">No Champions Found</div>
+                                :
+                                <none/>
                             }
                         </div>
                     </div>

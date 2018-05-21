@@ -22,6 +22,14 @@ export function summonerSpellIdToName(id) {
     }
 }
 
+//Helper function to standardize format of champions
+//Allows sorting functions to recieve and output in same format
+export function standardizeChampions(champions) {
+    let standardizedChampions = [];
+    Object.keys(champions).map((champion) => standardizedChampions.push(champions[champion]));
+    return standardizedChampions;
+}
+
 export function getKDA(k, d, a) {
     if (d === 0 && (k > 0 || a > 0)) {
         return "∞";
