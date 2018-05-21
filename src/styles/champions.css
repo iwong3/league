@@ -111,7 +111,7 @@
     color: #ccbe91;
 }
 
-.championDisplayType {
+.championDisplayType, .championMenuReset {
     display: flex;
     align-items: flex-end;
     padding-bottom: 10px;
@@ -193,22 +193,6 @@
     padding-top: 75%;
     width: 100%;
 }
-
-/* .championRow img {
-    border: 1px solid #937341;
-    filter: brightness(0.9);
-    margin: 5px;
-    width: 100px;
-    height: 100px;
-    transition-property: transform, border, filter;
-    transition-timing-function: ease,linear,ease;
-    transition-duration: .2s,.2s,.2s;
-} */
-
-/* .championRow img:hover {
-    transform: scale(1.2);
-    filter: brightness(1.1);
-} */
 
 .noChamps {
     font-family: "Lusitana", sans-serif;

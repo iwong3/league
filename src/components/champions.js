@@ -836,6 +836,22 @@ export default class Champions extends Component {
         });
     }
 
+    resetSearchCriteria = () => {
+        this.setState({
+            sort: {
+                alphabetReverse: false,
+                roles: [false, false, false, false, false, false],
+                abilityCost: "all",
+                stats: "none",
+                region: "none"
+            },
+            search: ""
+        }, function() {
+            this.sortChampions(this.state.originalChampions, this.state.sort, this.state.search);
+        });
+
+    }
+
     //- on menu click, set state for that property to be sorted on to be true
     //- write a function that sorts champions based on all the state properties
     //  this will be called once at render
@@ -1002,17 +1018,6 @@ export default class Champions extends Component {
                         </div>
                         {/* SEARCH BAR */}
                         <div className="championSortBottomRow">
-                            <div className="championSearchSpacing" style={{"width": "450px"}}></div>
-                            <div className="championSearch">
-                                <input id="searchBar"
-                                    type="text"
-                                    autoComplete="off"
-                                    value={this.state.search}
-                                    placeholder="Find A Champion..."
-                                    onChange={this.handleSearchChange}
-                                />
-                            </div>
-                            <div className="championSearchSpacing" style={{"width": "300px"}}></div>
                             <div className="championDisplayType">
                                 <div className="championsSortSecondaryText"
                                      onClick={() => this.setChampionDisplayCards(true)}
@@ -1023,6 +1028,23 @@ export default class Champions extends Component {
                                      onClick={() => this.setChampionDisplayCards(false)}
                                      style={this.setActiveStyle("icons")} >
                                     Icons
+                                </div>
+                            </div>
+                            <div className="championSearchSpacing" style={{"width": "300px"}}></div>
+                            <div className="championSearch">
+                                <input id="searchBar"
+                                    type="text"
+                                    autoComplete="off"
+                                    value={this.state.search}
+                                    placeholder="Find A Champion..."
+                                    onChange={this.handleSearchChange}
+                                />
+                            </div>
+                            <div className="championSearchSpacing" style={{"width": "300px"}}></div>
+                            <div className="championMenuReset">
+                                <div className="championsSortSecondaryText"
+                                     onClick={() => this.resetSearchCriteria()} >
+                                    Reset
                                 </div>
                             </div>
                         </div>
