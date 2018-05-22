@@ -18,6 +18,15 @@ export default class ChampionCardContainer extends Component {
         this.handleClick = this.handleClick.bind(this);
     }
 
+    //If search/sort brings up different champ in current card container, close
+    componentWillReceiveProps = (newProps) => {
+        if (newProps.champion !== this.props.champion) {
+            this.setState(prevState => ({
+                isExpanded: false
+            }));
+        }
+    }
+
     handleClick = () => {
         this.setState({
             isExpanded: !this.state.isExpanded

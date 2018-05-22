@@ -3,9 +3,9 @@ import React, { Component } from 'react';
 import * as championsLore from '../utilities/champions-lore';
 import * as championsSkins from '../utilities/champions-skins';
 import * as utility from '../utilities/functions';
+import * as constant from '../utilities/constants';
 
 import '../styles/champion-card-expanded-details.css';
-import { getChampionLoadingUrl } from '../utilities/functions';
 
 
 export default class ChampionCardExpandedDetails extends Component {
@@ -46,7 +46,7 @@ export default class ChampionCardExpandedDetails extends Component {
             stats.push(
                 <div className="statLine">
                     <div className="statLabel">
-                        {statsKeys[i]}
+                        {constant.championSortStatsText[statsKeys[i]]}
                     </div>
                     <div className="stat">
                         {champion.stats[statsKeys[i]]}
