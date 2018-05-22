@@ -155,7 +155,7 @@
 .championRow {
     display: flex;
     justify-content: center;
-    width: 1200px;
+    min-width: 1200px;
 }
 
 .championIcon {

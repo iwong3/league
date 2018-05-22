@@ -31,8 +31,14 @@ export default class Champions extends Component {
                 region: "none"
             },
             search: "",
-            displayCards: true
+            displayCards: true,
+            width: window.innerWidth,
+            height: window.innerHeight
         };
+    }
+
+    componentWillMount = () => {
+        this.updateWindow();
     }
 
     //standardize format of champions for sorting, then run initial sort (alphabetical) for render
@@ -41,6 +47,19 @@ export default class Champions extends Component {
             originalChampions: utility.standardizeChampions(championsSort.championsSort.data)
         }, function() {
             this.sortChampions(this.state.originalChampions, this.state.sort, this.state.search);
+        });
+
+        window.addEventListener("resize", this.updateWindow);
+    }
+
+    componentWillUnmount = () => {
+        window.removeEventListener("resize", this.updateWindow);
+    }
+
+    updateWindow = () => {
+        this.setState({
+            width: window.innerWidth,
+            height: window.innerHeight
         });
     }
 
@@ -357,6 +376,9 @@ export default class Champions extends Component {
     //Displays champions with a row size
     displayChampionsIcons = (champions) => {
         let rowSize = 10;
+        if (window.innerWidth >= 2400) {
+            rowSize = 12;
+        }
 
         var icons = Object.keys(champions).map((champion) => this.displayChampionsIconsHelper(champions[champion]))
             //row stores icons with a size of rowSize
@@ -377,6 +399,9 @@ export default class Champions extends Component {
 
     displayChampionsCards = (champions) => {
         let rowSize = 2;
+        if (window.innerWidth >= 2400) {
+            rowSize = 3;
+        }
 
         var icons = Object.keys(champions).map((champion) => this.displayChampionsCardsHelper(champions[champion]))
             //row stores icons with a size of rowSize
@@ -394,19 +419,6 @@ export default class Champions extends Component {
 
         return icons;
     }
-
-    //to change: return a ChampionCard Component instead
-    // displayChampionsIconsHelper = (champion) => {
-    //     let championIconUrl = utility.getChampionIconUrl(champion.key);
-    //     return (
-    //         <div>
-    //             <img className="championIcon"
-    //                 src={championIconUrl}
-    //                 alt={champion.name}
-    //                 style={{"width": "100px"}} />
-    //         </div>
-    //     );
-    // }
 
     displayChampionsIconsHelper = (champion) => {
         let championIconUrl = utility.getChampionIconUrl(champion.key);
