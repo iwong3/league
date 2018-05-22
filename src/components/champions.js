@@ -397,29 +397,6 @@ export default class Champions extends Component {
         return icons;
     }
 
-    displayChampionsCards = (champions) => {
-        let rowSize = 2;
-        if (window.innerWidth >= 2400) {
-            rowSize = 3;
-        }
-
-        var icons = Object.keys(champions).map((champion) => this.displayChampionsCardsHelper(champions[champion]))
-            //row stores icons with a size of rowSize
-            .reduce(function(row, icon, index) {
-                //if we hit rowSize, reset row
-                if (index % rowSize === 0) {
-                    row.push([]);
-                }
-                //push icon into row
-                row[row.length - 1].push(icon);
-                return row;
-            }, []).map(function(row, index) {
-                return <div className="championRow">{row}</div>;
-            });
-
-        return icons;
-    }
-
     displayChampionsIconsHelper = (champion) => {
         let championIconUrl = utility.getChampionIconUrl(champion.key);
         let fontSize = "14px";
@@ -435,6 +412,29 @@ export default class Champions extends Component {
                 </div>
             </div>
         );
+    }
+
+    displayChampionsCards = (champions) => {
+        let rowSize = 2;
+        if (window.innerWidth >= 2400) {
+            rowSize = 3;
+        }
+
+        var cards = Object.keys(champions).map((champion) => this.displayChampionsCardsHelper(champions[champion]))
+            //row stores cards with a size of rowSize
+            .reduce(function(row, card, index) {
+                //if we hit rowSize, reset row
+                if (index % rowSize === 0) {
+                    row.push([]);
+                }
+                //push card into row
+                row[row.length - 1].push(card);
+                return row;
+            }, []).map(function(row, index) {
+                return <div className="championRow">{row}</div>;
+            });
+
+        return cards;
     }
 
     displayChampionsCardsHelper = (champion) => {

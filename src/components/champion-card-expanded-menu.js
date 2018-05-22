@@ -5,31 +5,20 @@ import '../styles/champion-card-expanded-menu.css';
 
 export default class ChampionCardExpandedMenu extends Component {
 
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            activeTab: "lore"
-        }
-    }
-
     handleTabClick = (tab) => {
-        this.setState(prevState => ({
-            activeTab: tab
-        }));
         this.props.setActiveTab(tab);
     }
 
     setTabStyle = (tab) => {
-        if (tab === "lore" && tab === this.state.activeTab) {
+        if (tab === "lore" && tab === this.props.activeTab) {
             return "leftMenuButton activeCardTab";
         } else if (tab === "lore") {
             return "leftMenuButton";
-        } else if (tab === "skins" && tab === this.state.activeTab) {
+        } else if (tab === "skins" && tab === this.props.activeTab) {
             return "rightMenuButton activeCardTab";
         } else if (tab === "skins") {
             return "rightMenuButton";
-        } else if (tab === this.state.activeTab) {
+        } else if (tab === this.props.activeTab) {
             return "activeCardTab";
         }
     }

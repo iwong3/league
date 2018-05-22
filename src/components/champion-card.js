@@ -12,16 +12,36 @@ export default class ChampionCard extends Component {
         let style = {"backgroundImage": "url(" + splashUrl + ")"};
         switch (champion.name) {
             case ("Aatrox"):
-                style["backgroundPosition"] = "88% 30%";
+                style["backgroundPosition"] = "88% 27%";
                 break;
             case ("Ahri"):
                 style["backgroundPosition"] = "71% 19%";
                 break;
+            case ("Akali"):
+                style["backgroundPosition"] = "61% 19%";
+                break;
             case ("Alistar"):
-                style["backgroundPosition"] = "77% 24%";
+                style["backgroundPosition"] = "85% 17%";
+                style["backgroundSize"] = "auto 150%";
+                break;
+            case ("Amumu"):
+                style["backgroundPosition"] = "82% 16%";
+                break;
+            case ("Anivia"):
+                style["backgroundPosition"] = "65% 16%";
+                style["backgroundSize"] = "auto 125%";
+                break;
+            case ("Annie"):
+                style["backgroundPosition"] = "100% 0%";
+                style["backgroundSize"] = "auto 128%";
                 break;
             case ("Ashe"):
-                style["backgroundPosition"] = "54% 20%";
+                style["backgroundPosition"] = "60% 9%";
+                style["backgroundSize"] = "auto 175%";
+                break;
+            case ("Aurelion Sol"):
+                style["backgroundPosition"] = "0% 0%";
+                style["backgroundSize"] = "auto 108%";
                 break;
             case ("Azir"):
                 style["backgroundPosition"] = "71% 17%";

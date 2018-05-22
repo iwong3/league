@@ -14,6 +14,14 @@ export default class ChampionCardExpanded extends Component {
         }
     }
 
+    componentWillReceiveProps = (newProps) => {
+        if (newProps.champion !== this.props.champion) {
+            this.setState(prevState => ({
+                activeTab: "lore"
+            }));
+        }
+    }
+
     setActiveTab = (tab) => {
         this.setState(prevState => ({
             activeTab: tab
@@ -23,7 +31,8 @@ export default class ChampionCardExpanded extends Component {
     render() {
         return (
             <div className={"ChampionCardExpanded " + this.props.className}>
-                <ChampionCardExpandedMenu setActiveTab={this.setActiveTab} />
+                <ChampionCardExpandedMenu activeTab={this.state.activeTab}
+                                          setActiveTab={this.setActiveTab} />
                 <ChampionCardExpandedDetails champion={this.props.champion}
                                              activeTab={this.state.activeTab} />
             </div>

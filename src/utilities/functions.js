@@ -57,6 +57,10 @@ export function getChampionSplashUrl(champion) {
     return "http://ddragon.leagueoflegends.com/cdn/img/champion/splash/" + champion + "_0.jpg";
 }
 
+export function getChampionSplashBySkinUrl(champion, skin) {
+    return "http://ddragon.leagueoflegends.com/cdn/img/champion/splash/" + champion + "_" + skin + ".jpg";
+}
+
 export function getChampionLoadingUrl(champion) {
     return "http://ddragon.leagueoflegends.com/cdn/img/champion/loading/" + champion + "_0.jpg";
 }

@@ -15,27 +15,66 @@ export default class ChampionCardExpandedDetails extends Component {
 
         this.state = {
             lore: "",
-            skins: null
+            skins: null,
+            currentSkinNum: 0,
+            currentSkinIndex: 0
         }
     }
 
     //Get lore and skins for champion
     componentDidMount = () => {
+        this.getLore(this.props.champion);
+        this.resetSkins(this.props.champion);
+    }
+
+    //Get lore and skins for new champion
+    componentWillReceiveProps = (newProps) => {
+        if (newProps.champion !== this.props.champion) {
+            this.getLore(newProps.champion);
+            this.resetSkins(newProps.champion);
+        }
+    }
+
+    getLore = (champion) => {
         let lores = utility.standardizeChampions(championsLore.championsLore.data);
-        let skins = utility.standardizeChampions(championsSkins.championsSkins.data);
 
         for (let i = 0; i < lores.length; i++) {
-            if (lores[i].key === this.props.champion.key) {
+            if (lores[i].key === champion.key) {
                 this.setState({
                     lore: lores[i].lore
                 });
             }
-            if (skins[i].key === this.props.champion.key) {
+        }
+    }
+
+    resetSkins = (champion) => {
+        let newSkins = utility.standardizeChampions(championsSkins.championsSkins.data);
+
+        for (let i = 0; i < newSkins.length; i++) {
+            if (newSkins[i].key === champion.key) {
                 this.setState({
-                    skins: skins[i].skins
+                    skins: newSkins[i].skins
+                }, function() {
+                    this.setState({
+                        currentSkinNum: championsSkins.championsSkins.data[champion.key].skins[0].num,
+                        currentSkinIndex: 0
+                    });
                 });
             }
         }
+    }
+
+    displayDetails = (tab) => {
+        if (tab === "lore") {
+            return (
+                <div className="lore">{this.state.lore}</div>
+            );
+        } else if (tab === "stats") {
+            return this.displayStats(this.props.champion);
+        } else if (tab === "skins") {
+            return this.displaySkins(this.props.champion, this.state.currentSkinNum);
+        }
+        return <none/>;
     }
 
     displayStats = (champion) => {
@@ -60,23 +99,65 @@ export default class ChampionCardExpandedDetails extends Component {
         );
     }
 
+    displaySkins = (champion, skin) => {
+        return (
+            <div className="skins">
+                <div className="skin">
+                    <img src={utility.getChampionSplashBySkinUrl(champion.key, skin)} />
+                </div>
+                <div className="skinMenuBar">
+                    <div className="switchSkin"
+                         onClick={() => this.switchSkin(-1)}
+                         style={this.setSwitchSkinStyle("prev")} >
+                        prev
+                    </div>
+                    <div className="skinName">
+                        {
+                            championsSkins.championsSkins.data[champion.key].skins[this.state.currentSkinIndex].name === "default"
+                            ?
+                            champion.name
+                            :
+                            championsSkins.championsSkins.data[champion.key].skins[this.state.currentSkinIndex].name
+                        }
+                    </div>
+                    <div className="switchSkin"
+                         onClick={() => this.switchSkin(1)}
+                         style={this.setSwitchSkinStyle("next")} >
+                        next
+                    </div>
+                </div>
+            </div>
+        );
+    }
+
+    switchSkin = (skin) => {
+        if (this.state.currentSkinIndex + skin >= 0 && this.state.currentSkinIndex + skin < this.state.skins.length) {
+            this.setState(prevState => ({
+                currentSkinNum: championsSkins.championsSkins.data[this.props.champion.name].skins[this.state.currentSkinIndex + skin].num,
+                currentSkinIndex: this.state.currentSkinIndex + skin
+            }));
+        }
+    }
+
+    setSwitchSkinStyle = (button) => {
+        if (button === "prev" && this.state.currentSkinIndex === 0) {
+            return ({
+                "filter": "brightness(0.5)",
+                "cursor": "default"
+            });
+        }
+        if (button === "next" && this.state.currentSkinIndex === this.state.skins.length - 1) {
+            return ({
+                "filter": "brightness(0.5)",
+                "cursor": "default"
+            });
+        }
+    }
+
     render() {
         return (
             <div className="ChampionCardExpandedDetails">
-                {
-                    this.props.activeTab === "lore"
-                    ?
-                    <div className="lore">{this.state.lore}</div>
-                    :
-                    <none/>
-                }
-                {
-                    this.props.activeTab === "stats"
-                    ?
-                    this.displayStats(this.props.champion)
-                    :
-                    <none/>
-                }
+                {this.displayDetails(this.props.activeTab)}
             </div>
         );
     }
