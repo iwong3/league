@@ -132,6 +132,11 @@
 .championsLabel {
     margin: 50px 0;
     background: transparent;
+    transition: filter 0.2s ease;
+}
+
+.championsLabel:hover {
+    filter: brightness(1.2);
 }
 
 .championsLabel h1 {

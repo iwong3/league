@@ -43,6 +43,11 @@
     background: -webkit-linear-gradient(#9f814a,#7e6234);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    transition: filter 0.2s ease;
+}
+
+.championRegion:hover {
+    filter: brightness(1.2);
 }
 
 .loreTitle {
@@ -103,6 +108,11 @@
     background: #ccbe91;
     /* width: 50%; */
     height: 100%;
+    transition: filter 0.2s ease;
+}
+
+.beginnerInfoRow:hover .beginnerInfoBarFill {
+    filter: brightness(1.5);
 }
 
 .statsSection {
@@ -120,6 +130,10 @@
 .statLine {
     display: flex;
     width: 50%;
+}
+
+.statLine:hover {
+    color: #cd2626;
 }
 
 .statLabel {
