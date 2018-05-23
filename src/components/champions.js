@@ -357,6 +357,9 @@ export default class Champions extends Component {
     //Displays champions with a row size
     displayChampionsIcons = (champions) => {
         let rowSize = 10;
+        if (window.innerWidth >= 2400) {
+            rowSize = 12;
+        }
 
         var icons = Object.keys(champions).map((champion) => this.displayChampionsIconsHelper(champions[champion]))
             //row stores icons with a size of rowSize
@@ -375,8 +378,28 @@ export default class Champions extends Component {
         return icons;
     }
 
+    displayChampionsIconsHelper = (champion) => {
+        let championIconUrl = utility.getChampionIconUrl(champion.key);
+        let fontSize = "14px";
+        if (champion.name.length >= 10) {
+            fontSize = "10px";
+        }
+        return (
+            <div className="championIcon"
+                 style={{"background": "url(" + championIconUrl + ") center"}} >
+                <div className="championIconName"
+                     style={{"fontSize": fontSize}} >
+                    {champion.name}
+                </div>
+            </div>
+        );
+    }
+
     displayChampionsCards = (champions) => {
         let rowSize = 2;
+        if (window.innerWidth >= 2400) {
+            rowSize = 3;
+        }
 
         var icons = Object.keys(champions).map((champion) => this.displayChampionsCardsHelper(champions[champion]))
             //row stores icons with a size of rowSize
@@ -393,36 +416,6 @@ export default class Champions extends Component {
             });
 
         return icons;
-    }
-
-    //to change: return a ChampionCard Component instead
-    // displayChampionsIconsHelper = (champion) => {
-    //     let championIconUrl = utility.getChampionIconUrl(champion.key);
-    //     return (
-    //         <div>
-    //             <img className="championIcon"
-    //                 src={championIconUrl}
-    //                 alt={champion.name}
-    //                 style={{"width": "100px"}} />
-    //         </div>
-    //     );
-    // }
-
-    displayChampionsIconsHelper = (champion) => {
-        let championIconUrl = utility.getChampionIconUrl(champion.key);
-        let fontSize = "14px";
-        if (champion.name.length >= 10) {
-            fontSize = "10px";
-        }
-        return (
-            <div className="championIcon"
-                 style={{"background": "url(" + championIconUrl + ") center"}} >
-                <div className="championIconName"
-                     style={{"fontSize": fontSize}} >
-                    {champion.name}
-                </div>
-            </div>
-        );
     }
 
     displayChampionsCardsHelper = (champion) => {
