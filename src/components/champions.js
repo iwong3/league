@@ -32,9 +32,12 @@ export default class Champions extends Component {
             },
             search: "",
             displayCards: true,
+            displayReturnToTop: false,
             width: window.innerWidth,
             height: window.innerHeight
         };
+
+        this.handleScroll = this.handleScroll.bind(this);
     }
 
     componentWillMount = () => {
@@ -50,10 +53,12 @@ export default class Champions extends Component {
         });
 
         window.addEventListener("resize", this.updateWindow);
+        window.addEventListener("scroll", this.handleScroll);
     }
 
     componentWillUnmount = () => {
         window.removeEventListener("resize", this.updateWindow);
+        window.removeEventListener("scroll", this.handleScroll);
     }
 
     updateWindow = () => {
@@ -61,6 +66,15 @@ export default class Champions extends Component {
             width: window.innerWidth,
             height: window.innerHeight
         });
+    }
+
+    handleScroll = () => {
+        let displayReturnToTop = (window.pageYOffset > 200);
+        if (this.state.displayReturnToTop !== displayReturnToTop) {
+            this.setState(prevState => ({
+                displayReturnToTop: displayReturnToTop
+            }));
+        }
     }
 
     //If we want to grab the data from the API
@@ -864,6 +878,21 @@ export default class Champions extends Component {
 
     }
 
+    returnToTop = () => {
+        window.scrollTo(0, 0);
+    }
+
+    showReturnToTop = () => {
+        if (this.state.displayReturnToTop) {
+            return ({
+                "display": "flex"
+            });
+        }
+        return ({
+            "display": "none"
+        });
+    }
+
     //- on menu click, set state for that property to be sorted on to be true
     //- write a function that sorts champions based on all the state properties
     //  this will be called once at render
@@ -1080,6 +1109,11 @@ export default class Champions extends Component {
                                 <none/>
                             }
                         </div>
+                    </div>
+                    <div className="returnToTopButton"
+                         onClick={this.returnToTop}
+                         style={this.showReturnToTop()} >
+                        Top
                     </div>
                 </div>
             );

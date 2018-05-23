@@ -202,3 +202,23 @@
     text-transform: uppercase;
     color: #ccbe91;
 }
+
+.returnToTopButton {
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    background: #ccbe91;
+    font-family: "Tajawal", sans-serif;
+    font-size: 20px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    bottom: 0px;
+    right: 0px;
+    width: 100%;
+    height: 60px;
+    z-index: 99;
+}
+
+.returnToTopButton:hover {
+    filter: brightness(1.2);
+}
