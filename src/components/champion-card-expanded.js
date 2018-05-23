@@ -10,14 +10,14 @@ export default class ChampionCardExpanded extends Component {
         super(props);
 
         this.state = {
-            activeTab: "lore"
+            activeTab: "about"
         }
     }
 
     componentWillReceiveProps = (newProps) => {
         if (newProps.champion !== this.props.champion) {
             this.setState(prevState => ({
-                activeTab: "lore"
+                activeTab: "about"
             }));
         }
     }

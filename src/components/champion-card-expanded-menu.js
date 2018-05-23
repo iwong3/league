@@ -10,9 +10,9 @@ export default class ChampionCardExpandedMenu extends Component {
     }
 
     setTabStyle = (tab) => {
-        if (tab === "lore" && tab === this.props.activeTab) {
+        if (tab === "about" && tab === this.props.activeTab) {
             return "leftMenuButton activeCardTab";
-        } else if (tab === "lore") {
+        } else if (tab === "about") {
             return "leftMenuButton";
         } else if (tab === "skins" && tab === this.props.activeTab) {
             return "rightMenuButton activeCardTab";
@@ -26,9 +26,9 @@ export default class ChampionCardExpandedMenu extends Component {
     render() {
         return (
             <div className="ChampionCardExpandedMenu">
-                <div className={"cardMenuButton " + this.setTabStyle("lore")}
-                     onClick={() => this.handleTabClick("lore")} >
-                    Lore
+                <div className={"cardMenuButton " + this.setTabStyle("about")}
+                     onClick={() => this.handleTabClick("about")} >
+                    About
                 </div>
                 <div className={"cardMenuButton " + this.setTabStyle("stats")}
                      onClick={() => this.handleTabClick("stats")} >

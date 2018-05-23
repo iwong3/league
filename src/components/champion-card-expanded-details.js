@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import * as championsLore from '../utilities/champions-lore';
+import * as championsInfo from '../utilities/champions-info';
 import * as championsSkins from '../utilities/champions-skins';
 import * as utility from '../utilities/functions';
 import * as constant from '../utilities/constants';
@@ -65,10 +66,8 @@ export default class ChampionCardExpandedDetails extends Component {
     }
 
     displayDetails = (tab) => {
-        if (tab === "lore") {
-            return (
-                <div className="lore">{this.state.lore}</div>
-            );
+        if (tab === "about") {
+            return this.displayAbout();
         } else if (tab === "stats") {
             return this.displayStats(this.props.champion);
         } else if (tab === "skins") {
@@ -77,12 +76,102 @@ export default class ChampionCardExpandedDetails extends Component {
         return <none/>;
     }
 
+    displayAbout = () => {
+        let about = [];
+
+        about.push(
+            <div className="regionLine">
+                <div className="regionLabel">Region</div>
+                <div className="championRegion">{utility.getChampionRegion(this.props.champion)}</div>
+            </div>
+        );
+
+        //lore
+        about.push(
+            <div className="loreGroup">
+                <div className="loreTitle">Lore</div>
+                <div className="lore">{this.state.lore}</div>
+            </div>
+        )
+
+        return (
+            <div className="about">{about}</div>
+        );
+    }
+
     displayStats = (champion) => {
         let stats = [];
         let statsKeys = Object.keys(champion.stats);
 
+        let attack = championsInfo.championsInfo.data[champion.key].info.attack;
+        let defense = championsInfo.championsInfo.data[champion.key].info.defense;
+        let magic = championsInfo.championsInfo.data[champion.key].info.magic;
+        let difficulty = championsInfo.championsInfo.data[champion.key].info.difficulty;
+
+        stats.push(
+            <div className="beginnerInfo">
+                <div className="beginnerInfoTitle">Overview</div>
+                <div className="beginnerInfoRow">
+                    <div className="beginnerInfoLabel">Attack</div>
+                    <div className="beinngerInfoValue">{attack}</div>
+                    <div className="beginnerInfoBar">
+                        <div className="beginnerInfoBarFill"
+                             style={{
+                                 "background": "#7f0000",
+                                 "width": attack + "0%"
+                             }}>
+                        </div>
+                    </div>
+                </div>
+                <div className="beginnerInfoRow">
+                    <div className="beginnerInfoLabel">Defense</div>
+                    <div className="beinngerInfoValue">{defense}</div>
+                    <div className="beginnerInfoBar">
+                        <div className="beginnerInfoBarFill"
+                             style={{
+                                 "background": "#004c00",
+                                 "width": defense + "0%"
+                             }}>
+                        </div>
+                    </div>
+                </div>
+                <div className="beginnerInfoRow">
+                    <div className="beginnerInfoLabel">Magic</div>
+                    <div className="beinngerInfoValue">{magic}</div>
+                    <div className="beginnerInfoBar">
+                        <div className="beginnerInfoBarFill"
+                             style={{
+                                 "background": "#000099",
+                                 "width": magic + "0%"
+                             }}>
+                        </div>
+                    </div>
+                </div>
+                <div className="beginnerInfoRow">
+                    <div className="beginnerInfoLabel">Difficulty</div>
+                    <div className="beinngerInfoValue">{difficulty}</div>
+                    <div className="beginnerInfoBar">
+                        <div className="beginnerInfoBarFill"
+                             style={{
+                                 "background": "#660066",
+                                 "width": difficulty + "0%"
+                             }}>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        );
+
+        let statsSection = [];
+
+        statsSection.push(
+            <div className="statsTitle">Stats</div>
+        );
+
+        let statsGroup = [];
+
         for (let i = 0; i < statsKeys.length; i++) {
-            stats.push(
+            statsGroup.push(
                 <div className="statLine">
                     <div className="statLabel">
                         {constant.championSortStatsText[statsKeys[i]]}
@@ -93,6 +182,14 @@ export default class ChampionCardExpandedDetails extends Component {
                 </div>
             )
         }
+
+        statsSection.push(
+            <div className="statsGroup">{statsGroup}</div>
+        );
+
+        stats.push(
+            <div className="statsSection">{statsSection}</div>
+        );
 
         return (
             <div className="stats">{stats}</div>

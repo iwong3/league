@@ -138,7 +138,7 @@
     font-family: "Lusitana", sans-serif;
     font-size: 50px;
     font-weight: 400;
-    letter-spacing: 15px;
+    letter-spacing: 0.3em;
     text-transform: uppercase;
     background: -webkit-linear-gradient(#9f814a,#7e6234);
     -webkit-background-clip: text;
