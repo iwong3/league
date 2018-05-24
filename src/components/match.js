@@ -67,7 +67,7 @@ export default class Match extends Component {
     }
 
     setBanner = (id) => {
-        let championName = utility.championIdToName(id);
+        let championName = utility.championIdToKey(id);
         let bannerUrl = utility.getChampionSplashUrl(championName);
         let style = {"backgroundImage": "url(" + bannerUrl + ")"};
         switch (championName) {

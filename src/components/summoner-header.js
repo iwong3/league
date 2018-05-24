@@ -54,7 +54,7 @@ export default class SummonerHeader extends Component {
     //have to set custom styling for each champion's banner
     setBanner = (id) => {
         if (id) {
-            let championName = utility.championIdToName(id);
+            let championName = utility.championIdToKey(id);
             let bannerUrl = utility.getChampionSplashUrl(championName);
             let style = {"backgroundImage": "url(" + bannerUrl + ")"};
             switch (championName) {
@@ -84,11 +84,11 @@ export default class SummonerHeader extends Component {
     }
 
     setMostPlayedChampionsHelper = (id) => {
-        let iconUrl = utility.getChampionIconUrl(utility.championIdToName(id));
+        let iconUrl = utility.getChampionIconUrl(utility.championIdToKey(id));
         return (
             <img key={id}
                  src={iconUrl}
-                 alt={utility.championIdToName(id)}
+                 alt={utility.championIdToKey(id)}
                  style={{"width": "50px"}} />
         );
     }

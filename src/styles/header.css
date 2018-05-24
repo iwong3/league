@@ -3,20 +3,18 @@
     justify-content: center;
     align-items: center;
     background: #000000;
+    border-bottom: 1px solid #ccbe91;
     width: 100%;
     height: 85px;
 }
 
 .Header a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     text-decoration: none;
-}
-
-.Header p {
-    font-family: "Lusitana", sans-serif;
-    font-size: 50px;
-    color: #f1e6d2;
-    width: 100%;
-    margin: 0;
+    width: 150px;
+    height: 100%;
 }
 
 .logo {
@@ -24,8 +22,21 @@
     width: 45px;
 }
 
-.line {
-    border: 1px solid #ccbe91;
-    margin: 0px 50px;
-    width: 100px;
+.menuOption {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Tajawal", sans-serif;
+    font-size: 18px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #ccbe91;
+    width: 150px;
+    height: 100%;
+    transition: all 0.2s ease;
+}
+
+.menuOption:hover {
+    background: #ccbe91;
+    color: #000000;
 }

@@ -3,12 +3,22 @@ import * as champions from './champions';
 import * as summonerSpells from './summoner-spells';
 
 
-export function championIdToName(id) {
+export function championIdToKey(id) {
     //get an array of data's "properties" (champs)
     let championProperties = Object.getOwnPropertyNames(champions.champions.data);
     for (let i = 0; i < championProperties.length; i++) {
         if (id === champions.champions.data[championProperties[i]].id) {
             return champions.champions.data[championProperties[i]].key;
+        }
+    }
+}
+
+export function championIdToName(id) {
+    //get an array of data's "properties" (champs)
+    let championProperties = Object.getOwnPropertyNames(champions.champions.data);
+    for (let i = 0; i < championProperties.length; i++) {
+        if (id === champions.champions.data[championProperties[i]].id) {
+            return champions.champions.data[championProperties[i]].name;
         }
     }
 }
@@ -67,6 +77,10 @@ export function getChampionLoadingUrl(champion) {
 
 export function getChampionsUrl() {
     return "https://na1.api.riotgames.com/lol/static-data/v3/champions?locale=en_US&dataById=false&api_key=" + process.env.REACT_APP_RIOT_API_KEY;
+}
+
+export function getFreeChampionsUrl() {
+    return "https://na1.api.riotgames.com/lol/platform/v3/champions?freeToPlay=true&api_key=" + process.env.REACT_APP_RIOT_API_KEY;
 }
 
 export function getMasteryUrl(summonerId) {

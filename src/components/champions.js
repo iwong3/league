@@ -42,11 +42,26 @@ export default class Champions extends Component {
 
     //standardize format of champions for sorting, then run initial sort (alphabetical) for render
     componentDidMount = () => {
-        this.setState ({
-            originalChampions: utility.standardizeChampions(championsSort.championsSort.data)
-        }, function() {
-            this.sortChampions(this.state.originalChampions, this.state.sort, this.state.search);
-        });
+        let championRedirect = "";
+        if (this.props.location.search.length > 8) {
+            championRedirect = decodeURI(this.props.location.search.substring(8));
+            
+        }
+
+        if (championRedirect === "") {
+            this.setState ({
+                originalChampions: utility.standardizeChampions(championsSort.championsSort.data)
+            }, function() {
+                this.sortChampions(this.state.originalChampions, this.state.sort, this.state.search);
+            });
+        } else {
+            this.setState ({
+                originalChampions: utility.standardizeChampions(championsSort.championsSort.data),
+                search: championRedirect
+            }, function() {
+                this.sortChampions(this.state.originalChampions, this.state.sort, this.state.search);
+            });
+        }
 
         window.addEventListener("resize", this.updateWindow);
         window.addEventListener("scroll", this.handleScroll);

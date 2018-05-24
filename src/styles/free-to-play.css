@@ -1,0 +1,61 @@
+.FreeToPlay {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.freeToPlayTitle {
+    font-family: "Tajawal", sans-serif;
+    font-size: 50px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    background: -webkit-linear-gradient(#9f814a,#7e6234);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin: 50px 0px 30px 0px;
+}
+
+.freeChampions {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.freeChampionBanner {
+    position: relative;
+    border: 1px solid #ccbe91;
+    margin: 20px;
+    transition: all 0.2s ease;
+}
+
+.freeChampionBanner img {
+    width: 200px;
+}
+
+.freeChampionBanner:hover {
+    transform: scale(1.15);
+    filter: brightness(1.2);
+    cursor: pointer;
+}
+
+.freeChampionName {
+    position: absolute;
+    background: linear-gradient(180deg,rgba(0,10,19,0) 50%,#000a13 100%,#000a13);
+    font-family: 'Tajawal', serif;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #f1e6d2;
+    text-shadow: 2px 2px #000000;
+    text-align: center;
+    width: 100%;
+    padding-top: 75%;
+    bottom: 10px;
+    visibility: hidden;
+}
+
+.freeChampionBanner:hover .freeChampionName {
+    visibility: visible;
+}

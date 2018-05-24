@@ -5,6 +5,7 @@ import Header from './header';
 import Navigation from './navigation';
 import SearchContainer from './search-container';
 import Champions from './champions';
+import FreeToPlay from './free-to-play';
 
 import '../styles/App.css';
 
@@ -18,7 +19,7 @@ export default class App extends Component {
           <Header />
           <div className="App_body">
             <Route exact path={"/"}
-                   component={Navigation} />
+                   component={FreeToPlay} />
             <Route path={"/summoner"}
                    component={SearchContainer} />
             <Route path={"/champions"}
