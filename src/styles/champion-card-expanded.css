@@ -3,7 +3,7 @@
     flex-direction: column;
     /* background: url(../images/champion_region_bg/Ionia.png); */
     margin: 0px 10px;
-    height: 575px;
+    height: 625px;
     transition-property: max-height, filter, border;
     transition-timing-function: linear, ease;
     transition-duration: .4s, .4s;

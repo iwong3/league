@@ -8,7 +8,7 @@
     color: #ccbe91;
     padding: 20px;
     width: 540px;
-    height: 625px;
+    height: 600px;
 }
 
 .about, .stats {
@@ -119,7 +119,7 @@
 .statsSection {
     display: flex;
     flex-direction: column;
-    height: 375px;
+    height: 300px;
 }
 
 .statsGroup {
