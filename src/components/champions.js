@@ -31,8 +31,13 @@ export default class Champions extends Component {
                 region: "none"
             },
             search: "",
-            displayCards: true
+            displayCards: true,
+            displayReturnToTop: false,
+            width: window.innerWidth,
+            height: window.innerHeight
         };
+
+        this.handleScroll = this.handleScroll.bind(this);
     }
 
     //standardize format of champions for sorting, then run initial sort (alphabetical) for render
@@ -42,6 +47,9 @@ export default class Champions extends Component {
         }, function() {
             this.sortChampions(this.state.originalChampions, this.state.sort, this.state.search);
         });
+
+        window.addEventListener("resize", this.updateWindow);
+        window.addEventListener("scroll", this.handleScroll);
     }
 
     //If we want to grab the data from the API
@@ -63,6 +71,27 @@ export default class Champions extends Component {
     //             });
     //         });
     // }
+
+    componentWillUnmount = () => {
+        window.removeEventListener("resize", this.updateWindow);
+        window.removeEventListener("scroll", this.handleScroll);
+    }
+
+    updateWindow = () => {
+        this.setState({
+            width: window.innerWidth,
+            height: window.innerHeight
+        });
+    }
+
+    handleScroll = () => {
+        let displayReturnToTop = (window.pageYOffset > 200);
+        if (this.state.displayReturnToTop !== displayReturnToTop) {
+            this.setState(prevState => ({
+                displayReturnToTop: displayReturnToTop
+            }));
+        }
+    }
 
     //updates this.state.sort properties
     setSearchCriteria = (criteria) => {
@@ -842,7 +871,21 @@ export default class Champions extends Component {
         }, function() {
             this.sortChampions(this.state.originalChampions, this.state.sort, this.state.search);
         });
+    }
 
+    returnToTop = () => {
+        window.scrollTo(0, 0);
+    }
+
+    showReturnToTop = () => {
+        if (this.state.displayReturnToTop) {
+            return ({
+                "display": "flex"
+            });
+        }
+        return ({
+            "display": "none"
+        });
     }
 
     //- on menu click, set state for that property to be sorted on to be true
@@ -1062,6 +1105,11 @@ export default class Champions extends Component {
                                 <none/>
                             }
                         </div>
+                    </div>
+                    <div className="returnToTopButton"
+                         onClick={this.returnToTop}
+                         style={this.showReturnToTop()} >
+                        Top
                     </div>
                 </div>
             );
