@@ -40,7 +40,7 @@ export default class FreeToPlay extends Component {
                 <div className="freeChampionBanner"
                      onClick={() => this.searchChampion(utility.championIdToName(champions[i].id))} >
                     <img src={championLoadingUrl}
-                        alt={currentChampionName} />
+                         alt={currentChampionName} />
                     <div className="freeChampionName">
                         {currentChampionName}
                     </div>

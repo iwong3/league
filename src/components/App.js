@@ -19,11 +19,13 @@ export default class App extends Component {
           <Header />
           <div className="App_body">
             <Route exact path={"/"}
-                   component={FreeToPlay} />
+                   component={Navigation} />
             <Route path={"/summoner"}
                    component={SearchContainer} />
             <Route path={"/champions"}
                    component={Champions} />
+            <Route exact path={"/game"}
+                   component={FreeToPlay} />
           </div>
           <div className="App_footer"></div>
         </div>
