@@ -81,36 +81,6 @@
     display: flex;
 }
 
-.championSearch {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 10px 0;
-    width: 300px;
-}
-
-.championSearch #searchBar {
-    background: #000000;
-    border: none;
-    font-family: "Tajawal", sans-serif;
-    font-size: 16px;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    color: #ccbe91;
-    text-align: center;
-    padding: 0px 20px;
-    height: 40px;
-    width: 400px;
-}
-
-.championSearch #searchBar:focus {
-    outline: none;
-}
-
-.championSearch #searchBar::placeholder {
-    color: #ccbe91;
-}
-
 .championDisplayType, .championMenuReset {
     display: flex;
     align-items: flex-end;
@@ -130,9 +100,38 @@
 }
 
 .championsLabel {
-    margin: 50px 0;
+    margin: 50px 0px 0px 0px;
     background: transparent;
     transition: filter 0.2s ease;
+}
+
+.championSearch {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0px 0px 20px 0px;
+    width: 300px;
+}
+
+.championSearch #searchBar {
+    background: none;
+    border: none;
+    font-family: "Tajawal", sans-serif;
+    font-size: 18px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #ccbe91;
+    text-align: center;
+    padding: 0px 20px;
+    height: 40px;
+}
+
+.championSearch #searchBar:focus {
+    outline: none;
+}
+
+.championSearch #searchBar::placeholder {
+    color: #ccbe91;
 }
 
 .championsLabel:hover {

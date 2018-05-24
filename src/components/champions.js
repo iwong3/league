@@ -1009,7 +1009,7 @@ export default class Champions extends Component {
                                 </div>
                             </div>
                         </div>
-                        {/* SEARCH BAR */}
+                        {/* CARDS & ICONS * RESET */}
                         <div className="championSortBottomRow">
                             <div className="championDisplayType">
                                 <div className="championsSortSecondaryText"
@@ -1023,17 +1023,8 @@ export default class Champions extends Component {
                                     Icons
                                 </div>
                             </div>
-                            <div className="championSearchSpacing" style={{"width": "300px"}}></div>
-                            <div className="championSearch">
-                                <input id="searchBar"
-                                    type="text"
-                                    autoComplete="off"
-                                    value={this.state.search}
-                                    placeholder="Find A Champion..."
-                                    onChange={this.handleSearchChange}
-                                />
-                            </div>
-                            <div className="championSearchSpacing" style={{"width": "300px"}}></div>
+                            <div className="championSearchSpacing" style={{"width": "900px"}}></div>
+                            {/* <div className="championSearchSpacing" style={{"width": "300px"}}></div> */}
                             <div className="championMenuReset">
                                 <div className="championsSortSecondaryText"
                                      onClick={() => this.resetSearchCriteria()} >
@@ -1045,6 +1036,16 @@ export default class Champions extends Component {
                     <div className="championsGroup">
                         <div className="championsLabel">
                             <h1>Champions</h1>
+                        </div>
+                        {/* SEARCH BAR */}
+                        <div className="championSearch">
+                            <input id="searchBar"
+                                type="text"
+                                autoComplete="off"
+                                value={this.state.search}
+                                placeholder="Find A Champion..."
+                                onChange={this.handleSearchChange}
+                            />
                         </div>
                         {/* CHAMPIONS */}
                         <div className="championsGallery">
