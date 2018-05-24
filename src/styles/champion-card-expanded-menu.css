@@ -28,6 +28,7 @@
 
 .cardMenuButton:hover {
     background: none;
+    cursor: pointer;
 }
 
 .activeCardTab {
