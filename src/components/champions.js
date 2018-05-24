@@ -396,10 +396,10 @@ export default class Champions extends Component {
     }
 
     displayChampionsCards = (champions) => {
-        let rowSize = 2;
-        if (window.innerWidth >= 2400) {
-            rowSize = 3;
-        }
+        let rowSize = 3;
+        // if (window.innerWidth >= 2400) {
+        //     rowSize = 3;
+        // }
 
         var icons = Object.keys(champions).map((champion) => this.displayChampionsCardsHelper(champions[champion]))
             //row stores icons with a size of rowSize
