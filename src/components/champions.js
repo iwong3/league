@@ -31,17 +31,8 @@ export default class Champions extends Component {
                 region: "none"
             },
             search: "",
-            displayCards: true,
-            displayReturnToTop: false,
-            width: window.innerWidth,
-            height: window.innerHeight
+            displayCards: true
         };
-
-        this.handleScroll = this.handleScroll.bind(this);
-    }
-
-    componentWillMount = () => {
-        this.updateWindow();
     }
 
     //standardize format of champions for sorting, then run initial sort (alphabetical) for render
@@ -51,30 +42,6 @@ export default class Champions extends Component {
         }, function() {
             this.sortChampions(this.state.originalChampions, this.state.sort, this.state.search);
         });
-
-        window.addEventListener("resize", this.updateWindow);
-        window.addEventListener("scroll", this.handleScroll);
-    }
-
-    componentWillUnmount = () => {
-        window.removeEventListener("resize", this.updateWindow);
-        window.removeEventListener("scroll", this.handleScroll);
-    }
-
-    updateWindow = () => {
-        this.setState({
-            width: window.innerWidth,
-            height: window.innerHeight
-        });
-    }
-
-    handleScroll = () => {
-        let displayReturnToTop = (window.pageYOffset > 200);
-        if (this.state.displayReturnToTop !== displayReturnToTop) {
-            this.setState(prevState => ({
-                displayReturnToTop: displayReturnToTop
-            }));
-        }
     }
 
     //If we want to grab the data from the API
@@ -390,9 +357,6 @@ export default class Champions extends Component {
     //Displays champions with a row size
     displayChampionsIcons = (champions) => {
         let rowSize = 10;
-        if (window.innerWidth >= 2400) {
-            rowSize = 12;
-        }
 
         var icons = Object.keys(champions).map((champion) => this.displayChampionsIconsHelper(champions[champion]))
             //row stores icons with a size of rowSize
@@ -411,6 +375,39 @@ export default class Champions extends Component {
         return icons;
     }
 
+    displayChampionsCards = (champions) => {
+        let rowSize = 2;
+
+        var icons = Object.keys(champions).map((champion) => this.displayChampionsCardsHelper(champions[champion]))
+            //row stores icons with a size of rowSize
+            .reduce(function(row, icon, index) {
+                //if we hit rowSize, reset row
+                if (index % rowSize === 0) {
+                    row.push([]);
+                }
+                //push icon into row
+                row[row.length - 1].push(icon);
+                return row;
+            }, []).map(function(row, index) {
+                return <div className="championRow">{row}</div>;
+            });
+
+        return icons;
+    }
+
+    //to change: return a ChampionCard Component instead
+    // displayChampionsIconsHelper = (champion) => {
+    //     let championIconUrl = utility.getChampionIconUrl(champion.key);
+    //     return (
+    //         <div>
+    //             <img className="championIcon"
+    //                 src={championIconUrl}
+    //                 alt={champion.name}
+    //                 style={{"width": "100px"}} />
+    //         </div>
+    //     );
+    // }
+
     displayChampionsIconsHelper = (champion) => {
         let championIconUrl = utility.getChampionIconUrl(champion.key);
         let fontSize = "14px";
@@ -426,29 +423,6 @@ export default class Champions extends Component {
                 </div>
             </div>
         );
-    }
-
-    displayChampionsCards = (champions) => {
-        let rowSize = 2;
-        if (window.innerWidth >= 2400) {
-            rowSize = 3;
-        }
-
-        var cards = Object.keys(champions).map((champion) => this.displayChampionsCardsHelper(champions[champion]))
-            //row stores cards with a size of rowSize
-            .reduce(function(row, card, index) {
-                //if we hit rowSize, reset row
-                if (index % rowSize === 0) {
-                    row.push([]);
-                }
-                //push card into row
-                row[row.length - 1].push(card);
-                return row;
-            }, []).map(function(row, index) {
-                return <div className="championRow">{row}</div>;
-            });
-
-        return cards;
     }
 
     displayChampionsCardsHelper = (champion) => {
@@ -878,21 +852,6 @@ export default class Champions extends Component {
 
     }
 
-    returnToTop = () => {
-        window.scrollTo(0, 0);
-    }
-
-    showReturnToTop = () => {
-        if (this.state.displayReturnToTop) {
-            return ({
-                "display": "flex"
-            });
-        }
-        return ({
-            "display": "none"
-        });
-    }
-
     //- on menu click, set state for that property to be sorted on to be true
     //- write a function that sorts champions based on all the state properties
     //  this will be called once at render
@@ -1109,11 +1068,6 @@ export default class Champions extends Component {
                                 <none/>
                             }
                         </div>
-                    </div>
-                    <div className="returnToTopButton"
-                         onClick={this.returnToTop}
-                         style={this.showReturnToTop()} >
-                        Top
                     </div>
                 </div>
             );

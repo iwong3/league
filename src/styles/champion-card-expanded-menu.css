@@ -9,7 +9,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background: #1d282c;
+    background: #000000;
     border: 1px solid #ccbe91;
     border-top: none;
     font-family: "Tajawal", sans-serif;
@@ -18,6 +18,7 @@
     text-transform: uppercase;
     color: #ccbe91;
     width: 50%;
+    transition: background 0.2s ease;
 }
 
 .leftMenuButton, .rightMenuButton {
@@ -26,11 +27,12 @@
 }
 
 .cardMenuButton:hover {
-    background: #000000;
+    background: none;
 }
 
 .activeCardTab {
-    background: #000000;
+    /* background: #000000; */
+    background: none;
     border-bottom: none;
     color: #ccbe91;
 }

@@ -1,6 +1,7 @@
 .ChampionCardExpanded {
     display: flex;
     flex-direction: column;
+    /* background: url(../images/champion_region_bg/Ionia.png); */
     margin: 0px 10px;
     height: 575px;
     transition-property: max-height, filter, border;

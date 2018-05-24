@@ -4,10 +4,11 @@
     font-size: 18px;
     /* letter-spacing: 0.1em; */
     /* text-transform: uppercase; */
+    /* background: url(../images/champion_region_bg/Ionia.png); */
     color: #ccbe91;
-    margin: 20px;
+    padding: 20px;
     width: 540px;
-    height: 575px;
+    height: 625px;
 }
 
 .about, .stats {
@@ -118,7 +119,7 @@
 .statsSection {
     display: flex;
     flex-direction: column;
-    height: 315px;
+    height: 375px;
 }
 
 .statsGroup {

@@ -230,7 +230,7 @@ export default class ChampionCardExpandedDetails extends Component {
     switchSkin = (skin) => {
         if (this.state.currentSkinIndex + skin >= 0 && this.state.currentSkinIndex + skin < this.state.skins.length) {
             this.setState(prevState => ({
-                currentSkinNum: championsSkins.championsSkins.data[this.props.champion.name].skins[this.state.currentSkinIndex + skin].num,
+                currentSkinNum: championsSkins.championsSkins.data[this.props.champion.key].skins[this.state.currentSkinIndex + skin].num,
                 currentSkinIndex: this.state.currentSkinIndex + skin
             }));
         }
