@@ -6,6 +6,6 @@ body {
   background-color: #000;
 }
 
-/* ::-webkit-scrollbar { 
+::-webkit-scrollbar { 
   display: none; 
-} */
+}
