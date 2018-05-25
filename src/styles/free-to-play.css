@@ -11,10 +11,15 @@
     font-size: 50px;
     letter-spacing: 0.2em;
     text-transform: uppercase;
-    background: -webkit-linear-gradient(#9f814a,#7e6234);
+    background: -webkit-linear-gradient(#ccbe91,#9f814a);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     margin: 50px 0px 30px 0px;
+    transition: filter 0.2s ease;
+}
+
+.freeToPlayTitle:hover {
+    filter: brightness(1.2);
 }
 
 .freeChampions {
