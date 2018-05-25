@@ -108,6 +108,13 @@ export function getScoreboardIcons(icon) {
     return "http://ddragon.leagueoflegends.com/cdn/5.5.1/img/ui/" + icon + ".png";
 }
 
+export function getNumGamesByElo(elo) {
+    if (elo === "PLATINUM+") {
+        return "http://api.champion.gg/v2/general?api_key=" + process.env.REACT_APP_CHAMPION_GG_API_KEY;
+    }
+    return "http://api.champion.gg/v2/general?elo=" + elo + "&api_key=" + process.env.REACT_APP_CHAMPION_GG_API_KEY;
+}
+
 export function getMonthString(month) {
     let months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
     

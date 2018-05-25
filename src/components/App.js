@@ -6,6 +6,7 @@ import Navigation from './navigation';
 import SearchContainer from './search-container';
 import Champions from './champions';
 import FreeToPlay from './free-to-play';
+import GamesByElo from './games-by-elo';
 
 import '../styles/App.css';
 
@@ -20,12 +21,14 @@ export default class App extends Component {
           <div className="App_body">
             <Route exact path={"/"}
                    component={Navigation} />
+            <Route exact path={"/game"}
+                   component={FreeToPlay} />
             <Route path={"/summoner"}
                    component={SearchContainer} />
             <Route path={"/champions"}
                    component={Champions} />
-            <Route exact path={"/game"}
-                   component={FreeToPlay} />
+            <Route path={"/items"}
+                   component={GamesByElo} />
           </div>
           <div className="App_footer"></div>
         </div>

@@ -1,0 +1,131 @@
+.GamesByElo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin: 50px 0px;
+}
+
+.gamesByPatch {
+    display: flex;
+    flex-direction: column;
+}
+
+.gamesByPatchTitle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Tajawal", sans-serif;
+    font-size: 30px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #ccbe91;
+    margin-bottom: 20px;
+}
+
+.gamesByPatchContent {
+    display: flex;
+    /* justify-content: center; */
+}
+
+.patchSelector {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #ccbe91;
+    border-right: none;
+    width: 75px;
+}
+
+.patchSelector_patches {
+    height: 300px;
+    overflow-x: scroll;
+}
+
+.patchSelector_patch {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Tajawal", sans-serif;
+    font-size:16px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #ccbe91;
+    padding: 5px;
+    transition: all 0.2s ease;
+}
+
+.patchSelector_patch:hover {
+    background: #ccbe91;
+    color: #000000;
+}
+
+.patchSelectorTitle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-top: 1px solid #ccbe91;
+    font-family: "Tajawal", sans-serif;
+    font-size:16px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #ccbe91;
+    height: 25px;
+    padding: 10px 0px;
+}
+.gamesByPatchGraph {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #ccbe91;
+}
+
+.gamesColumns {
+    display: flex;
+    color: #ccbe91;
+    height: 300px;
+}
+
+.gamesColumn {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    width: 150px;
+}
+
+.gamesColumnFill {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    background: #937341;
+    width: 75px;
+    transition: all 0.2s ease;
+}
+
+.gamesColumnFill:hover {
+    filter: brightness(1.2);
+}
+
+.gamesLabels {
+    display: flex;
+    border-top: 1px solid #ccbe91;
+    color: #ccbe91;
+    height: 25px;
+    padding: 10px 0px;
+}
+
+.gamesLabel {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: "Tajawal", sans-serif;
+    font-size: 16px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    width: 150px;
+}
+
+.gamesColumnChampionCount {
+    text-align: center;
+    margin-bottom: 10px;
+}
