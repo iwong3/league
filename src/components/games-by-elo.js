@@ -143,7 +143,7 @@ export default class GamesByElo extends Component {
         let gamesByPatch = [];
 
         gamesByPatch.push(
-            <div className="gamesByPatchTitle">Number of Games by Patch</div>
+            <div className="gamesByPatchTitle">Games by Patch</div>
         );
 
         let gamesByPatchContent = [];
@@ -174,6 +174,10 @@ export default class GamesByElo extends Component {
 
         let gamesByPatchGraph = [];
 
+        gamesByPatchGraph.push(
+            <div className="totalGamesPlayed">{this.state.totalChampionCount / 10} total games</div>
+        );
+
         let gamesColumns = [];
         for (let i = 0; i < this.state.championCount.length; i++) {
             gamesColumns.push(
@@ -183,8 +187,11 @@ export default class GamesByElo extends Component {
                     </div>
                     <div className="gamesColumnFill"
                          style={{
-                           "height": Math.round((this.state.championCount[i] / this.state.totalChampionCount * 200)) + "%"
+                           "height": Math.round(this.state.championCount[i] / this.state.totalChampionCount * 200) + "%"
                          }}>
+                        <div className="gamesPlayedPercent">
+                            {Math.round(this.state.championCount[i] / this.state.totalChampionCount * 100)}%
+                         </div>
                     </div>
                 </div>
             );
