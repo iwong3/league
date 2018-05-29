@@ -143,7 +143,7 @@ export default class GamesByElo extends Component {
         let gamesByPatch = [];
 
         gamesByPatch.push(
-            <div className="gamesByPatchTitle">Games by Patch</div>
+            <div className="gamesByPatchTitle">Games by Rank</div>
         );
 
         let gamesByPatchContent = [];
@@ -175,7 +175,7 @@ export default class GamesByElo extends Component {
         let gamesByPatchGraph = [];
 
         gamesByPatchGraph.push(
-            <div className="totalGamesPlayed">{this.state.totalChampionCount / 10} total games</div>
+            <div className="totalGamesPlayed">{(this.state.totalChampionCount / 10).toLocaleString()} total games</div>
         );
 
         let gamesColumns = [];
@@ -205,9 +205,6 @@ export default class GamesByElo extends Component {
         for (let i = 0; i < this.state.championCountLabels.length; i++) {
             gamesLabels.push(
                 <div className="gamesLabel">
-                    {/* <div className="gamesColumnChampionCount">
-                        {(this.state.championCount[i] / 10).toLocaleString()} Games
-                    </div> */}
                     {this.state.championCountLabels[i]}
                 </div>
             );

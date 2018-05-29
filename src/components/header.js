@@ -7,27 +7,51 @@ import logo from '../images/logo.png';
 
 export default class Header extends Component {
 
+    setMenuOptionStyle = (menuOption) => {
+        console.log(window.location.pathname);
+        if (window.location.pathname === menuOption) {
+            return ({
+                "color": "#ffffff"
+            });
+        }
+    }
+
     render() {
         return (
             <div className="Header">
-                {/* <div className="line"></div> */}
+                <Link to="/" className="leftMenuOption">
+                        <img src={logo} alt="Logo" className="logo" />
+                </Link>
                 <Link to="/game">
-                    <div className="menuOption">Game</div>
+                    <div className="menuOption"
+                         style={this.setMenuOptionStyle("/game")} >
+                        Game
+                    </div>
                 </Link>
                 <Link to="/summoner">
-                    <div className="menuOption">Summoners</div>
+                    <div className="menuOption"
+                         style={this.setMenuOptionStyle("/summoner")} >
+                        Summoners
+                    </div>
                 </Link>
-                <Link to="/">
-                    {/* <div className="logo"></div> */}
-                    <img src={logo} alt="Logo" className="logo" />
+                <Link to="/statistics">
+                    <div className="menuOption"
+                         style={this.setMenuOptionStyle("/statistics")} >
+                        Statistics
+                    </div>
                 </Link>
                 <Link to="/champions">
-                    <div className="menuOption">Champions</div>
+                    <div className="menuOption"
+                         style={this.setMenuOptionStyle("/champions")} >
+                        Champions
+                    </div>
                 </Link>
                 <Link to="/items">
-                    <div className="menuOption">Items</div>
+                    <div className="menuOption"
+                         style={this.setMenuOptionStyle("/items")} >
+                        Items
+                    </div>
                 </Link>
-                {/* <div className="line"></div> */}
             </div>
         )
     }

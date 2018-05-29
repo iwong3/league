@@ -6,7 +6,7 @@ import Navigation from './navigation';
 import SearchContainer from './search-container';
 import Champions from './champions';
 import FreeToPlay from './free-to-play';
-import GamesByElo from './games-by-elo';
+import Statistics from './statistics';
 
 import '../styles/App.css';
 
@@ -27,8 +27,9 @@ export default class App extends Component {
                    component={SearchContainer} />
             <Route path={"/champions"}
                    component={Champions} />
-            <Route path={"/items"}
-                   component={GamesByElo} />
+            <Route path={"/items"} />
+            <Route path={"/statistics"}
+                   component={Statistics} />
           </div>
           <div className="App_footer"></div>
         </div>

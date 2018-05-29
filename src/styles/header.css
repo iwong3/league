@@ -17,6 +17,13 @@
     height: 100%;
 }
 
+.leftMenuOption {
+    position: absolute;
+    left: 20px;
+    height: 85px !important;
+    width: 45px !important;
+}
+
 .logo {
     height: 45px;
     width: 45px;
@@ -37,6 +44,5 @@
 }
 
 .menuOption:hover {
-    background: #ccbe91;
-    color: #000000;
+    color: #ffffff;
 }
