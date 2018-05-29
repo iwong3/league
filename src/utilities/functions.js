@@ -108,11 +108,18 @@ export function getScoreboardIcons(icon) {
     return "http://ddragon.leagueoflegends.com/cdn/5.5.1/img/ui/" + icon + ".png";
 }
 
-export function getNumGamesByElo(elo) {
+export function getNumGamesByEloUrl(elo) {
     if (elo === "PLATINUM+") {
         return "http://api.champion.gg/v2/general?api_key=" + process.env.REACT_APP_CHAMPION_GG_API_KEY;
     }
     return "http://api.champion.gg/v2/general?elo=" + elo + "&api_key=" + process.env.REACT_APP_CHAMPION_GG_API_KEY;
+}
+
+export function getChampionWinRateByEloUrl(id, elo) {
+    if (elo === "PLATINUM+") {
+        return "http://api.champion.gg/v2/champions/" + id + "?champData=kda,damage,averageGames,minions,goldEarned&api_key=" + process.env.REACT_APP_CHAMPION_GG_API_KEY;
+    }
+    return "api.champion.gg/v2/champions/" + id + "/?elo=" + elo + "&champData=kda,damage,averageGames,minions,goldEarned&api_key=" + process.env.REACT_APP_CHAMPION_GG_API_KEY;
 }
 
 export function getMonthString(month) {

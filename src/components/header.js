@@ -8,7 +8,6 @@ import logo from '../images/logo.png';
 export default class Header extends Component {
 
     setMenuOptionStyle = (menuOption) => {
-        console.log(window.location.pathname);
         if (window.location.pathname === menuOption) {
             return ({
                 "color": "#ffffff"

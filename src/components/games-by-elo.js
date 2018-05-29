@@ -30,7 +30,7 @@ export default class GamesByElo extends Component {
     }
 
     componentDidMount = () => {
-        let gamesUrl = utility.getNumGamesByElo("PLATINUM+");
+        let gamesUrl = utility.getNumGamesByEloUrl("PLATINUM+");
         let platPlusData = [];
         let platPlusChampionCount = 0;
         let platData = [];
@@ -45,22 +45,22 @@ export default class GamesByElo extends Component {
         axios.get(gamesUrl).then(res => {
             platPlusData = res.data;
             platPlusChampionCount = res.data[0].championCount;
-            gamesUrl = utility.getNumGamesByElo("PLATINUM");
+            gamesUrl = utility.getNumGamesByEloUrl("PLATINUM");
             return axios.get(gamesUrl);
         }).then(res => {
             platData = res.data;
             platChampionCount = res.data[0].championCount;
-            gamesUrl = utility.getNumGamesByElo("GOLD");
+            gamesUrl = utility.getNumGamesByEloUrl("GOLD");
             return axios.get(gamesUrl);
         }).then(res => {
             goldData = res.data;
             goldChampionCount = res.data[0].championCount;
-            gamesUrl = utility.getNumGamesByElo("SILVER");
+            gamesUrl = utility.getNumGamesByEloUrl("SILVER");
             return axios.get(gamesUrl);
         }).then(res => {
             silverData = res.data;
             silverChampionCount = res.data[0].championCount;
-            gamesUrl = utility.getNumGamesByElo("BRONZE");
+            gamesUrl = utility.getNumGamesByEloUrl("BRONZE");
             return axios.get(gamesUrl);
         }).then(res => {
             bronzeData = res.data;
