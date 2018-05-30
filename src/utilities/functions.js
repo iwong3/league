@@ -115,6 +115,13 @@ export function getNumGamesByEloUrl(elo) {
     return "http://api.champion.gg/v2/general?elo=" + elo + "&api_key=" + process.env.REACT_APP_CHAMPION_GG_API_KEY;
 }
 
+export function getAllChampionWinRatesByElo(elo) {
+    if (elo === "PLATINUM+") {
+        return "http://api.champion.gg/v2/champions?limit=1000&champData=kda,damage,averageGames,minions,goldEarned&sort=championId-asce&api_key=" + process.env.REACT_APP_CHAMPION_GG_API_KEY;
+    }
+    return "http://api.champion.gg/v2/champions?elo=" + elo + "&limit=1000&champData=kda,damage,averageGames,minions,goldEarned&sort=championId-asce&api_key=" + process.env.REACT_APP_CHAMPION_GG_API_KEY;
+}
+
 export function getChampionWinRateByEloUrl(id, elo) {
     if (elo === "PLATINUM+") {
         return "http://api.champion.gg/v2/champions/" + id + "?champData=kda,damage,averageGames,minions,goldEarned&api_key=" + process.env.REACT_APP_CHAMPION_GG_API_KEY;

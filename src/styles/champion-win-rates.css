@@ -1,0 +1,184 @@
+.ChampionWinRates {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Tajawal", sans-serif;
+    color: #ccbe91;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    width: 100%;
+    margin-top: 50px;
+}
+
+.championWinRates {
+    display: flex;
+    flex-direction: column;
+}
+
+.championWinRatesTitle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Lusitana", sans-serif;
+    font-size: 35px;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    background: -webkit-linear-gradient(#ccbe91,#9f814a);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 20px;
+    transition: all 0.2s ease;
+}
+
+.championWinRatesTitle:hover {
+    filter: brightness(1.2);
+}
+
+.leagueSelector {
+    border: 1px solid #937341;
+    border-right: none;
+}
+
+.leagueSelector_title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid #937341;
+    height: 50px;
+}
+
+.leagueSelector_leagues {
+    display: flex;
+    flex-direction: column;
+}
+
+.leagueSelector_league {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 145px;
+    margin: 0px 10px;
+    transition: all 0.2s ease;
+}
+
+.leagueSelector_league:hover {
+    color: #ffffff;
+    cursor: pointer;
+}
+
+.championWinRatesContent {
+    display: flex;
+}
+
+.championWinRateRows_header {
+    display: flex;
+    border-bottom: 1px solid #937341;
+    height: 50px;
+}
+
+.championWinRateRows_headerOption {
+    display: flex;
+    align-items: center;
+}
+
+.championWinRateRows_headerOption#rank {
+    justify-content: center;
+}
+
+.championWinRateRowsContent {
+    border: 1px solid #937341;
+}
+
+.championWinRateRows {
+    overflow-y: scroll;
+    height: 750px;
+}
+
+.championWinRateRows::-webkit-scrollbar { 
+    display: block;
+    width: 10px;
+}
+
+.championWinRateRows::-webkit-scrollbar-thumb { 
+    background: #ccbe91;
+    /* border-radius: 1px; */
+}
+
+.championWinRateRow {
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+    font-size: 18px;
+    height: 40px;
+    padding: 5px 0px;
+    transition: all 0.2s ease;
+}
+
+.championWinRateRow:hover {
+    background: #937341;
+    color: #000000;
+    filter: brightness(1.2);
+}
+
+.championWinRateRow_rank {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 75px;
+}
+
+.championWinRateRow_champion {
+    display: flex;
+    width: 200px;
+}
+
+.championWinRateRow_icon {
+    border: 1px solid #ccbe91;
+    width: 35px;
+    height: 35px;
+}
+
+.championWinRateRow_name {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    letter-spacing: 0.075em;
+    margin-left: 10px;
+}
+
+.championWinRateRow_winRate {
+    width: 100px;
+}
+
+.championWinRateRow_playRate {
+    width: 100px;
+}
+
+.championWinRateRow_banRate {
+    width: 100px;
+}
+
+.championWinRateRow_avgGames {
+    width: 100px;
+}
+
+.championWinRateRow_kills {
+    width: 100px;
+}
+
+.championWinRateRow_deaths {
+    width: 100px;
+}
+
+.championWinRateRow_assists {
+    width: 100px;
+}
+
+.championWinRateRow_cs {
+    width: 100px;
+}
+
+.championWinRateRow_gold {
+    width: 100px;
+}
