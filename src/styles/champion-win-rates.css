@@ -13,6 +13,7 @@
 .championWinRates {
     display: flex;
     flex-direction: column;
+    width: 1400px;
 }
 
 .championWinRatesTitle {
@@ -35,7 +36,34 @@
     filter: brightness(1.2);
 }
 
+.championWinRatesDescription {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+    margin-bottom: 20px;
+}
+
+.championWinRatesDescription a {
+    text-decoration: none;
+    color: #ccbe91;
+    transition: all 0.2s ease;
+}
+
+.championWinRatesDescription a:hover {
+    color: #ffffff
+}
+
+.championSearch#championWinRatesSearch {
+    width: 100%;
+    margin: 0;
+    padding: 10px 0px 10px 0px;
+    border-top: 1px solid #937341;
+}
+
 .leagueSelector {
+    display: flex;
+    flex-direction: column;
     border: 1px solid #937341;
     border-right: none;
 }
@@ -51,6 +79,7 @@
 .leagueSelector_leagues {
     display: flex;
     flex-direction: column;
+    width: 125px;
 }
 
 .leagueSelector_league {
@@ -58,6 +87,7 @@
     justify-content: center;
     align-items: center;
     height: 145px;
+    width: 105px;
     margin: 0px 10px;
     transition: all 0.2s ease;
 }
@@ -80,6 +110,12 @@
 .championWinRateRows_headerOption {
     display: flex;
     align-items: center;
+    line-height: 1em;
+    transition: all 0.2s ease;
+}
+
+.championWinRateRows_headerOption:hover {
+    color: #ffffff;
 }
 
 .championWinRateRows_headerOption#rank {
@@ -102,17 +138,16 @@
 
 .championWinRateRows::-webkit-scrollbar-thumb { 
     background: #ccbe91;
-    /* border-radius: 1px; */
 }
 
 .championWinRateRow {
     display: flex;
-    /* justify-content: center; */
     align-items: center;
     font-size: 18px;
     height: 40px;
     padding: 5px 0px;
     transition: all 0.2s ease;
+    width: 1275px;
 }
 
 .championWinRateRow:hover {
@@ -121,14 +156,14 @@
     filter: brightness(1.2);
 }
 
-.championWinRateRow_rank {
+.championWinRateRow_small {
     display: flex;
     justify-content: center;
     align-items: center;
     width: 75px;
 }
 
-.championWinRateRow_champion {
+.championWinRateRow_large {
     display: flex;
     width: 200px;
 }
@@ -147,38 +182,6 @@
     margin-left: 10px;
 }
 
-.championWinRateRow_winRate {
-    width: 100px;
-}
-
-.championWinRateRow_playRate {
-    width: 100px;
-}
-
-.championWinRateRow_banRate {
-    width: 100px;
-}
-
-.championWinRateRow_avgGames {
-    width: 100px;
-}
-
-.championWinRateRow_kills {
-    width: 100px;
-}
-
-.championWinRateRow_deaths {
-    width: 100px;
-}
-
-.championWinRateRow_assists {
-    width: 100px;
-}
-
-.championWinRateRow_cs {
-    width: 100px;
-}
-
-.championWinRateRow_gold {
+.championWinRateRow_med {
     width: 100px;
 }

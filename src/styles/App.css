@@ -15,3 +15,18 @@
 .App_footer {
   height: 85px;
 }
+
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Lusitana", sans-serif;
+  font-size: 50px;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  background: -webkit-linear-gradient(#ccbe91,#9f814a);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-top: 10%;
+}

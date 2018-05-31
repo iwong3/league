@@ -812,9 +812,6 @@ export default class Champions extends Component {
             if (champions[a].name.toLowerCase().includes(search.toLowerCase())) {
                 championsSorted.push(champions[a]);
             }
-            // if (search.toLowerCase() === champions[a].name.substring(0, search.length).toLowerCase()) {
-            //     championsSorted.push(champions[a]);
-            // }
         }
 
         return championsSorted;

@@ -8,16 +8,6 @@ import '../styles/champion-win-rates.css';
 
 export default class ChampionWinRates extends Component {
 
-    //TO-DO
-    //make an state array for currently displayed data
-    //that array will change based on elo selected
-    //also be able to sort the data in that array based on what the user selects
-    //winrate/damage/games played/etc
-    //
-    //styling - add more fields, add header with data labels that can be clicked to sort
-    //styling - spacing for each field should be static
-    //styling - highlighting
-
     constructor(props) {
         super(props);
 
@@ -40,7 +30,8 @@ export default class ChampionWinRates extends Component {
             averagedBronzeData: [],
             leagues: ["Platinum+", "Platinum", "Gold", "Silver", "Bronze"],
             activeLeague: "Platinum+",
-            sort: "winRate"
+            sort: "winRate",
+            search: ""
         }
     }
 
@@ -265,7 +256,7 @@ export default class ChampionWinRates extends Component {
                 activeLeague: league,
                 sort: "winRate"
             }), function() {
-                this.sortChampions(newLeague);
+                this.sortChampions(newLeague, this.state.search);
             });
         }
     }
@@ -278,9 +269,15 @@ export default class ChampionWinRates extends Component {
         }
     }
 
-    sortChampions = (champions) => {
+    sortChampions = (champions, search) => {
         let championsCopy = champions;
 
+        if (this.state.sort === "champion") {
+            championsCopy = this.sortByChampion(championsCopy);
+        }
+        if (this.state.sort === "championDesc") {
+            championsCopy = this.sortByChampionDesc(championsCopy);
+        }
         if (this.state.sort === "winRate") {
             championsCopy = this.sortByWinRate(championsCopy);
         }
@@ -300,9 +297,105 @@ export default class ChampionWinRates extends Component {
             championsCopy = this.sortByBanRateDesc(championsCopy);
         }
 
+        if (search) {
+            championsCopy = this.sortBySearch(championsCopy, search);
+        }
+
         this.setState(prevState => ({
             activeData: championsCopy
         }));
+    }
+
+    //todo: add nicknames, maybe sort by region?
+    sortBySearch = (champions, search) => {
+        let championsSorted = [];
+
+        for (let a = 0; a < champions.length; a++) {
+            let championName = utility.championIdToName(champions[a].championId);
+            //Nicknames
+            if (search.toLowerCase() === "cow" && championName === "Alistar") {
+                championsSorted.push(champions[a]);
+            }
+            //ABBREVIATIONS
+            if ((search.toLowerCase() === "j4" || search.toLowerCase() === "jiv") && championName === "Jarvan IV") {
+                championsSorted.push(champions[a]);
+            }
+            if ((search.toLowerCase() === "mf") && championName === "Miss Fortune") {
+                championsSorted.push(champions[a]);
+            }
+            if ((search.toLowerCase() === "tf") && championName === "Twisted Fate") {
+                championsSorted.push(champions[a]);
+            }
+
+            //If search is greater than champion name, continue
+            if (search.length > championName.length) {
+                continue;
+            }
+            if (championName.toLowerCase().includes(search.toLowerCase())) {
+                championsSorted.push(champions[a]);
+            }
+        }
+
+        return championsSorted;
+    }
+
+    handleSearchChange = (event) => {
+        this.setState({
+            search: event.target.value
+        }, function() {
+            let data = [];
+            if (this.state.activeLeague === "Platinum+") {
+                data = this.state.averagedPlatPlusData;
+            } else if (this.state.activeLeague === "Platinum") {
+                data = this.state.averagedPlatData;
+            } else if (this.state.activeLeague === "Gold") {
+                data = this.state.averagedGoldData;
+            } else if (this.state.activeLeague === "Silver") {
+                data = this.state.averagedSilverData;
+            } else if (this.state.activeLeague === "Bronze") {
+                data = this.state.averagedBronzeData;
+            }
+
+            this.sortChampions(data, this.state.search);
+        });
+    }
+
+    sortByChampion = (champions) => {
+        let championsSorted = champions;
+
+        championsSorted.sort(function(champA, champB) {
+            let champAName = utility.championIdToName(champA.championId);
+            let champBName = utility.championIdToName(champB.championId);
+
+            if (champAName.toLowerCase() < champBName.toLowerCase()) {
+                return -1;
+            }
+            if (champAName.toLowerCase() > champBName.toLowerCase()) {
+                return 1;
+            }
+            return 0;
+        });
+
+        return championsSorted;
+    }
+
+    sortByChampionDesc = (champions) => {
+        let championsSorted = champions;
+
+        championsSorted.sort(function(champA, champB) {
+            let champAName = utility.championIdToName(champA.championId);
+            let champBName = utility.championIdToName(champB.championId);
+
+            if (champAName.toLowerCase() < champBName.toLowerCase()) {
+                return 1;
+            }
+            if (champAName.toLowerCase() > champBName.toLowerCase()) {
+                return -1;
+            }
+            return 0;
+        });
+
+        return championsSorted;
     }
 
     sortByWinRate = (champions) => {
@@ -408,6 +501,16 @@ export default class ChampionWinRates extends Component {
     updateSort = (sort) => {
         let newSort = "";
 
+        if (sort === "champion") {
+            if (this.state.sort !== "champion" && this.state.sort !== "championDesc") {
+                newSort = "champion";
+            } else if (this.state.sort === "champion") {
+                newSort = "championDesc";
+            } else {
+                newSort = "champion";
+            }
+        }
+
         if (sort === "winRate") {
             if (this.state.sort !== "winRate" && this.state.sort !== "winRateDesc") {
                 newSort = "winRate";
@@ -450,6 +553,12 @@ export default class ChampionWinRates extends Component {
             "width": "100px"
         };
 
+        if (sort.includes("champion")) {
+            style["width"] = "200px";
+        }
+        if (sort.includes("champion") || sort.includes("winRate") || sort.includes("playRate") || sort.includes("banRate")) {
+            style["cursor"] = "pointer";
+        }
         if (this.state.sort.includes(sort)) {
             style["color"] = "#ffffff";
         }
@@ -462,6 +571,22 @@ export default class ChampionWinRates extends Component {
         let championWinRates = [];
         championWinRates.push(
             <div className="championWinRatesTitle">Champion Win Rates</div>
+        );
+
+        championWinRates.push(
+            <div className="championWinRatesDescription">Champion must have at least 1000 games or 11% playrate in the role. Data is provided by <a href="https://www.champion.gg">&nbsp;champion.gg</a></div>
+        );
+
+        championWinRates.push(
+            <div className="championSearch" id="championWinRatesSearch">
+                <input id="searchBar"
+                    type="text"
+                    autoComplete="off"
+                    value={this.state.search}
+                    placeholder="Find A Champion..."
+                    onChange={this.handleSearchChange}
+                />
+            </div>
         );
 
         let championWinRatesContent = [];
@@ -494,22 +619,27 @@ export default class ChampionWinRates extends Component {
         championWinRateRowsContent.push(
             <div className="championWinRateRows_header">
                 <div className="championWinRateRows_headerOption" id="rank" style={{"width": "75px"}}>Rank</div>
-                <div className="championWinRateRows_headerOption" style={{"width": "200px"}}>Champion</div>
+                <div className="championWinRateRows_headerOption"
+                     onClick={() => this.updateSort("champion")}
+                     style={this.setHeaderOptionStyle("champion")} >
+                    {this.state.sort === "champion" ? "Champion ↓" : this.state.sort === "championDesc" ? "Champion ↑" : "Champion"}
+                </div>
                 <div className="championWinRateRows_headerOption"
                      onClick={() => this.updateSort("winRate")}
                      style={this.setHeaderOptionStyle("winRate")} >
-                    Win %
+                    {this.state.sort === "winRate" ? "Win % ↓" : this.state.sort === "winRateDesc" ? "Win % ↑" : "Win %"}
                 </div>
                 <div className="championWinRateRows_headerOption"
                      onClick={() => this.updateSort("playRate")}
                      style={this.setHeaderOptionStyle("playRate")} >
-                    Play %
+                    {this.state.sort === "playRate" ? "Play % ↓" : this.state.sort === "playRateDesc" ? "Play % ↑" : "Play %"}
                 </div>
                 <div className="championWinRateRows_headerOption"
                      onClick={() => this.updateSort("banRate")}
                      style={this.setHeaderOptionStyle("banRate")} >
-                    Ban %
-                </div>                <div className="championWinRateRows_headerOption" style={{"width": "100px"}}>Avg Games</div>
+                    {this.state.sort === "banRate" ? "Ban % ↓" : this.state.sort === "banRateDesc" ? "Ban % ↑" : "Ban %"}
+                </div>
+                <div className="championWinRateRows_headerOption" style={{"width": "100px"}}>Avg Games</div>
                 <div className="championWinRateRows_headerOption" style={{"width": "100px"}}>Kills</div>
                 <div className="championWinRateRows_headerOption" style={{"width": "100px"}}>Deaths</div>
                 <div className="championWinRateRows_headerOption" style={{"width": "100px"}}>Assists</div>
@@ -576,41 +706,41 @@ export default class ChampionWinRates extends Component {
     displayWinRatesHelper = (champion) => {
         return (
             <div className="championWinRateRow">
-                <div className="championWinRateRow_rank">{champion.rank}</div>
-                <div className="championWinRateRow_champion">
+                <div className="championWinRateRow_small">{champion.rank}</div>
+                <div className="championWinRateRow_large">
                     <img className="championWinRateRow_icon" src={utility.getChampionIconUrl(utility.championIdToKey(champion.championId))} />
                     <div className="championWinRateRow_name">
                         {utility.championIdToName(champion.championId)}
                     </div>
                 </div>
-                <div className="championWinRateRow_winRate">
+                <div className="championWinRateRow_med">
                     {(champion.winRate * 100).toFixed(2)}%
                 </div>
-                <div className="championWinRateRow_playRate">
+                <div className="championWinRateRow_med">
                     {(champion.playRate * 100).toFixed(2)}%
                 </div>
-                <div className="championWinRateRow_banRate">
+                <div className="championWinRateRow_med">
                     {(champion.banRate * 100).toFixed(2)}%
                 </div>
-                <div className="championWinRateRow_avgGames">
+                <div className="championWinRateRow_med">
                     {champion.averageGames ? champion.averageGames.toFixed(2) : "NaN"}
                 </div>
-                <div className="championWinRateRow_kills">
+                <div className="championWinRateRow_med">
                     {champion.kills.toFixed(2)}
                 </div>
-                <div className="championWinRateRow_deaths">
+                <div className="championWinRateRow_med">
                     {champion.deaths.toFixed(2)}
                 </div>
-                <div className="championWinRateRow_assists">
+                <div className="championWinRateRow_med">
                     {champion.assists.toFixed(2)}
                 </div>
-                <div className="championWinRateRow_cs">
+                <div className="championWinRateRow_med">
                     {champion.cs.toFixed(2)}
                 </div>
-                <div className="championWinRateRow_gold">
+                <div className="championWinRateRow_med">
                     {Math.round(champion.gold)}
                 </div>
-                <div className="championWinRateRow_gold">
+                <div className="championWinRateRow_med">
                     {this.displayRoles(champion.roles)}
                 </div>
             </div>

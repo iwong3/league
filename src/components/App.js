@@ -30,7 +30,7 @@ export default class App extends Component {
             <Route path={"/champions"}
                    component={Champions} />
             <Route path={"/items"}
-                   component={ChampionWinRates} />
+                   />
             <Route path={"/statistics"}
                    component={Statistics} />
           </div>
