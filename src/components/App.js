@@ -31,8 +31,10 @@ export default class App extends Component {
                    component={Champions} />
             <Route path={"/items"}
                    />
-            <Route path={"/statistics"}
-                   component={Statistics} />
+            <Route path={"/statistics/champion-win-rates"}
+                   component={() => <Statistics activePage="championWinRates"/>} />
+            <Route path={"/statistics/ranked-games-played"}
+                   component={() => <Statistics activePage="gamesByElo"/>} />
           </div>
           <div className="App_footer"></div>
         </div>

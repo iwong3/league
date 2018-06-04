@@ -146,6 +146,10 @@ export default class GamesByElo extends Component {
             <div className="gamesByPatchTitle">Ranked Games Played</div>
         );
 
+        gamesByPatch.push(
+            <div className="gamesByPatchDescription">Total Ranked Games Played by Rank per Patch. Data is provided by <a href="https://www.champion.gg">&nbsp;champion.gg</a></div>
+        );
+
         let gamesByPatchContent = [];
 
         let patchSelector = [];

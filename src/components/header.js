@@ -8,7 +8,8 @@ import logo from '../images/logo.png';
 export default class Header extends Component {
 
     setMenuOptionStyle = (menuOption) => {
-        if (window.location.pathname === menuOption) {
+        let pathnameSplit = window.location.pathname.split("/");
+        if (pathnameSplit[1] === menuOption) {
             return ({
                 "color": "#ffffff"
             });
@@ -23,31 +24,31 @@ export default class Header extends Component {
                 </Link>
                 <Link to="/game">
                     <div className="menuOption"
-                         style={this.setMenuOptionStyle("/game")} >
+                         style={this.setMenuOptionStyle("game")} >
                         Game
                     </div>
                 </Link>
                 <Link to="/summoner">
                     <div className="menuOption"
-                         style={this.setMenuOptionStyle("/summoner")} >
+                         style={this.setMenuOptionStyle("summoner")} >
                         Summoners
                     </div>
                 </Link>
-                <Link to="/statistics">
+                <Link to="/statistics/champion-win-rates">
                     <div className="menuOption"
-                         style={this.setMenuOptionStyle("/statistics")} >
+                         style={this.setMenuOptionStyle("statistics")} >
                         Statistics
                     </div>
                 </Link>
                 <Link to="/champions">
                     <div className="menuOption"
-                         style={this.setMenuOptionStyle("/champions")} >
+                         style={this.setMenuOptionStyle("champions")} >
                         Champions
                     </div>
                 </Link>
                 <Link to="/items">
                     <div className="menuOption"
-                         style={this.setMenuOptionStyle("/items")} >
+                         style={this.setMenuOptionStyle("items")} >
                         Items
                     </div>
                 </Link>

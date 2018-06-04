@@ -3,7 +3,9 @@
     justify-content: center;
     align-items: center;
     font-family: "Tajawal", sans-serif;
+    color: #ccbe91;
     text-transform: uppercase;
+    letter-spacing: 0.1em;
     width: 100%;
     margin: 50px 0px;
 }
@@ -31,6 +33,24 @@
 
 .gamesByPatchTitle:hover {
     filter: brightness(1.2);
+}
+
+.gamesByPatchDescription {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+    margin-bottom: 20px;
+}
+
+.gamesByPatchDescription a {
+    text-decoration: none;
+    color: #ccbe91;
+    transition: all 0.2s ease;
+}
+
+.gamesByPatchDescription a:hover {
+    color: #ffffff
 }
 
 .gamesByPatchContent {

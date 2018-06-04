@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from "react-router-dom";
 
 import GamesByElo from './games-by-elo';
 import ChampionWinRates from './champion-win-rates';
@@ -14,6 +15,12 @@ export default class Statistics extends Component {
         this.state = {
             activePage: "championWinRates"
         }
+    }
+
+    componentDidMount = () => {
+        this.setState({
+            activePage: this.props.activePage
+        })
     }
 
     setActivePage = (page) => {
@@ -49,16 +56,20 @@ export default class Statistics extends Component {
         return (
             <div className="Statistics">
                 <div className="statisticsMenu">
-                    <div className="statisticsMenuOption"
-                         onClick={() => this.setActivePage("championWinRates")}
-                         style={this.setMenuOptionStyle("championWinRates")} >
-                        Champion Win Rates
-                    </div>
-                    <div className="statisticsMenuOption"
-                         onClick={() => this.setActivePage("gamesByElo")}
-                         style={this.setMenuOptionStyle("gamesByElo")} >
-                        Ranked Games Played
-                    </div>
+                    <Link to="/statistics/champion-win-rates">
+                        <div className="statisticsMenuOption"
+                            onClick={() => this.setActivePage("championWinRates")}
+                            style={this.setMenuOptionStyle("championWinRates")} >
+                            Champion Win Rates
+                        </div>
+                    </Link>
+                    <Link to="/statistics/ranked-games-played">
+                        <div className="statisticsMenuOption"
+                            onClick={() => this.setActivePage("gamesByElo")}
+                            style={this.setMenuOptionStyle("gamesByElo")} >
+                            Ranked Games Played
+                        </div>
+                    </Link>
                 </div>
                 {this.displayActivePage()}
             </div>
