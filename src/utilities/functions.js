@@ -152,6 +152,7 @@ export function getChampionRegion(champion) {
         champion.name === "Illaoi" ||
         champion.name === "Miss Fortune" ||
         champion.name === "Nautilus" ||
+        champion.name === "Pyke" ||
         champion.name === "Twisted Fate") {
             return "Bilgewater";
     }

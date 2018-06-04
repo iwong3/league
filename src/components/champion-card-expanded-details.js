@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 
-import * as championsLore from '../utilities/champions-lore';
-import * as championsInfo from '../utilities/champions-info';
-import * as championsSkins from '../utilities/champions-skins';
+import * as championsSort from '../utilities/champions-sort';
 import * as utility from '../utilities/functions';
 import * as constant from '../utilities/constants';
 
@@ -18,14 +16,19 @@ export default class ChampionCardExpandedDetails extends Component {
             lore: "",
             skins: null,
             currentSkinNum: 0,
-            currentSkinIndex: 0
+            currentSkinIndex: 0,
+            standardizedChampions: null
         }
     }
 
     //Get lore and skins for champion
     componentDidMount = () => {
-        this.getLore(this.props.champion);
-        this.resetSkins(this.props.champion);
+        this.setState({
+            standardizedChampions: utility.standardizeChampions(championsSort.championsSort.data)
+        }, function() {
+            this.getLore(this.props.champion);
+            this.resetSkins(this.props.champion);
+        });
     }
 
     //Get lore and skins for new champion
@@ -37,7 +40,7 @@ export default class ChampionCardExpandedDetails extends Component {
     }
 
     getLore = (champion) => {
-        let lores = utility.standardizeChampions(championsLore.championsLore.data);
+        let lores = this.state.standardizedChampions;
 
         for (let i = 0; i < lores.length; i++) {
             if (lores[i].key === champion.key) {
@@ -49,7 +52,7 @@ export default class ChampionCardExpandedDetails extends Component {
     }
 
     resetSkins = (champion) => {
-        let newSkins = utility.standardizeChampions(championsSkins.championsSkins.data);
+        let newSkins = this.state.standardizedChampions;
 
         for (let i = 0; i < newSkins.length; i++) {
             if (newSkins[i].key === champion.key) {
@@ -57,7 +60,7 @@ export default class ChampionCardExpandedDetails extends Component {
                     skins: newSkins[i].skins
                 }, function() {
                     this.setState({
-                        currentSkinNum: championsSkins.championsSkins.data[champion.key].skins[0].num,
+                        currentSkinNum: championsSort.championsSort.data[champion.key].skins[0].num,
                         currentSkinIndex: 0
                     });
                 });
@@ -103,10 +106,10 @@ export default class ChampionCardExpandedDetails extends Component {
         let stats = [];
         let statsKeys = Object.keys(champion.stats);
 
-        let attack = championsInfo.championsInfo.data[champion.key].info.attack;
-        let defense = championsInfo.championsInfo.data[champion.key].info.defense;
-        let magic = championsInfo.championsInfo.data[champion.key].info.magic;
-        let difficulty = championsInfo.championsInfo.data[champion.key].info.difficulty;
+        let attack = championsSort.championsSort.data[champion.key].info.attack;
+        let defense = championsSort.championsSort.data[champion.key].info.defense;
+        let magic = championsSort.championsSort.data[champion.key].info.magic;
+        let difficulty = championsSort.championsSort.data[champion.key].info.difficulty;
 
         stats.push(
             <div className="beginnerInfo">
@@ -210,11 +213,11 @@ export default class ChampionCardExpandedDetails extends Component {
                     </div>
                     <div className="skinName">
                         {
-                            championsSkins.championsSkins.data[champion.key].skins[this.state.currentSkinIndex].name === "default"
+                            championsSort.championsSort.data[champion.key].skins[this.state.currentSkinIndex].name === "default"
                             ?
                             champion.name
                             :
-                            championsSkins.championsSkins.data[champion.key].skins[this.state.currentSkinIndex].name
+                            championsSort.championsSort.data[champion.key].skins[this.state.currentSkinIndex].name
                         }
                     </div>
                     <div className="switchSkin"
@@ -230,7 +233,7 @@ export default class ChampionCardExpandedDetails extends Component {
     switchSkin = (skin) => {
         if (this.state.currentSkinIndex + skin >= 0 && this.state.currentSkinIndex + skin < this.state.skins.length) {
             this.setState(prevState => ({
-                currentSkinNum: championsSkins.championsSkins.data[this.props.champion.key].skins[this.state.currentSkinIndex + skin].num,
+                currentSkinNum: championsSort.championsSort.data[this.props.champion.key].skins[this.state.currentSkinIndex + skin].num,
                 currentSkinIndex: this.state.currentSkinIndex + skin
             }));
         }

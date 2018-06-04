@@ -21,8 +21,8 @@ export default class GamesByElo extends Component {
             totalChampionCount: null,
             championCountLabels: ["Platinum+", "Platinum", "Gold", "Silver", "Bronze"],
             elo: "PLATINUM+",
-            activePatch: "8.10",
-            patches: ["8.10", "8.9", "8.8", "8.7", "8.6", "8.5", "8.4", "8.3", "8.2", "8.1",
+            activePatch: "8.11",
+            patches: ["8.11", "8.10", "8.9", "8.8", "8.7", "8.6", "8.5", "8.4", "8.3", "8.2", "8.1",
                       "7.24", "7.23", "7.22", "7.21", "7.20",
                       "7.19", "7.18", "7.17", "7.16", "7.15", "7.14", "7.13", "7.12", "7.11", "7.10",
                       "7.9", "7.8", "7.7", "7.6", "7.5", "7.4", "7.3", "7.2", "7.1"]
