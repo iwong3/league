@@ -99,6 +99,11 @@
 
 .championWinRatesContent {
     display: flex;
+    /* background: white; */
+    /* background: url(http://www.lol-wallpapers.com/wp-content/uploads/2017/01/Summoners-Rift-Overview-League-of-Legends-Artwork-Wallpaper-lol.jpg); */
+    background: url(../images/champion_win_rates_bg.png);
+    background-position: 0% 40%;
+    background-size: auto 125%;
 }
 
 .championWinRateRows_header {
