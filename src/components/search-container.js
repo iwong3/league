@@ -29,10 +29,20 @@ export default class SearchContainer extends Component {
         });
     }
 
+    componentWillReceiveProps = (newProp) => {
+        let urlSummonerName = "";
+        if (newProp.location.pathname.length > 10) {
+            urlSummonerName = newProp.location.pathname.substring(10);
+        }
+        this.setState({
+            summonerName: urlSummonerName
+        });
+    }
+
     //If there is a summoner name to search, just show the Search bar
     //Otherwise, show the flashy background and styling
     setStyle = () => {
-        if (this.state.summonerName) {
+        if (this.state.summonerName !== "") {
             return ({
                 "background": "none"
             });
@@ -52,7 +62,7 @@ export default class SearchContainer extends Component {
             <div className="SearchContainer"
                  style={this.setStyle()} >
                 <Search />
-                <SummonerContainer summonerName={this.state.summonerName}/>
+                {this.state.summonerName ? <SummonerContainer summonerName={this.state.summonerName}/> : <none/>}
             </div>
         );
     }

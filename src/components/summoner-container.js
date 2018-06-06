@@ -39,6 +39,7 @@ export default class SummonerContainer extends Component {
                     version: constant.version
                 });
             });
+        this.getSummonerData(this.props.summonerName);
     }
 
     componentWillReceiveProps = (newProp) => {
@@ -71,7 +72,7 @@ export default class SummonerContainer extends Component {
                 <SummonerHeader summonerData={this.state.summonerData}
                                 version={this.state.version} />
                 <MatchHistory matchHistory={this.state.matchHistory}
-                              accountId={this.state.accountId} />
+                                accountId={this.state.accountId} />
             </div>
         )
     }

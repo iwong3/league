@@ -26,7 +26,8 @@ export default class App extends Component {
             <Route exact path={"/game"}
                    component={FreeToPlay} />
             <Route path={"/summoner"}
-                   component={SearchContainer} />
+                  //  component={() => <SearchContainer summonerName=""/>} />
+                  component={SearchContainer} />
             <Route path={"/champions"}
                    component={Champions} />
             <Route path={"/items"}
