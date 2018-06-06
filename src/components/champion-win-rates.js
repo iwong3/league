@@ -173,7 +173,13 @@ export default class ChampionWinRates extends Component {
                 totalWins += data[i][j].winRate * data[i][j].gamesPlayed;
                 totalGames += data[i][j].gamesPlayed;
                 playRate += data[i][j].playRate;
-                totalGamesOnChamp += data[i][j].averageGames * data[i][j].gamesPlayed;
+
+                //certain champions don't have an averageGames field yet
+                if (data[i][j].averageGames) {
+                    totalGamesOnChamp += data[i][j].averageGames * data[i][j].gamesPlayed;
+                } else {
+                    totalGamesOnChamp = 0;
+                }
 
                 totalKills += data[i][j].kills * data[i][j].gamesPlayed;
                 totalDeaths += data[i][j].deaths * data[i][j].gamesPlayed;
@@ -295,6 +301,12 @@ export default class ChampionWinRates extends Component {
         }
         if (this.state.sort === "banRateDesc") {
             championsCopy = this.sortByBanRateDesc(championsCopy);
+        }
+        if (this.state.sort === "games") {
+            championsCopy = this.sortByGames(championsCopy);
+        }
+        if (this.state.sort === "gamesDesc") {
+            championsCopy = this.sortByGamesDesc(championsCopy);
         }
 
         if (search) {
@@ -498,6 +510,38 @@ export default class ChampionWinRates extends Component {
         return championsSorted;
     }
 
+    sortByGames = (champions) => {
+        let championsSorted = champions;
+
+        championsSorted.sort(function(champA, champB) {
+            if (champA.averageGames > champB.averageGames) {
+                return -1;
+            }
+            if (champA.averageGames < champB.averageGames) {
+                return 1;
+            }
+            return 0;
+        });
+
+        return championsSorted;
+    }
+
+    sortByGamesDesc = (champions) => {
+        let championsSorted = champions;
+
+        championsSorted.sort(function(champA, champB) {
+            if (champA.averageGames > champB.averageGames) {
+                return 1;
+            }
+            if (champA.averageGames < champB.averageGames) {
+                return -1;
+            }
+            return 0;
+        });
+
+        return championsSorted;
+    }
+
     updateSort = (sort) => {
         let newSort = "";
 
@@ -540,6 +584,16 @@ export default class ChampionWinRates extends Component {
                 newSort = "banRate";
             }
         }
+
+        if (sort === "games") {
+            if (this.state.sort !== "games" && this.state.sort !== "gamesDesc") {
+                newSort = "games";
+            } else if (this.state.sort === "games") {
+                newSort = "gamesDesc";
+            } else {
+                newSort = "games";
+            }
+        }
         
         this.setState(prevState => ({
             sort: newSort
@@ -556,7 +610,7 @@ export default class ChampionWinRates extends Component {
         if (sort.includes("champion")) {
             style["width"] = "200px";
         }
-        if (sort.includes("champion") || sort.includes("winRate") || sort.includes("playRate") || sort.includes("banRate")) {
+        if (sort.includes("champion") || sort.includes("winRate") || sort.includes("playRate") || sort.includes("banRate") || sort.includes("games")) {
             style["cursor"] = "pointer";
         }
         if (this.state.sort.includes(sort)) {
@@ -564,7 +618,6 @@ export default class ChampionWinRates extends Component {
         }
 
         return style;
-
     }
 
     displayWinRates = (data) => {
@@ -639,7 +692,11 @@ export default class ChampionWinRates extends Component {
                      style={this.setHeaderOptionStyle("banRate")} >
                     {this.state.sort === "banRate" ? "Ban % ↓" : this.state.sort === "banRateDesc" ? "Ban % ↑" : "Ban %"}
                 </div>
-                <div className="championWinRateRows_headerOption" style={{"width": "100px"}}>Avg Games</div>
+                <div className="championWinRateRows_headerOption"
+                     onClick={() => this.updateSort("games")}
+                     style={this.setHeaderOptionStyle("games")} >
+                    {this.state.sort === "games" ? "Games ↓" : this.state.sort === "gamesDesc" ? "Games ↑" : "Games"}
+                </div>
                 <div className="championWinRateRows_headerOption" style={{"width": "100px"}}>Kills</div>
                 <div className="championWinRateRows_headerOption" style={{"width": "100px"}}>Deaths</div>
                 <div className="championWinRateRows_headerOption" style={{"width": "100px"}}>Assists</div>
