@@ -1,0 +1,6 @@
+TO DO:
+
+- Look into cleaning up url routing in summoner match history
+    - Think about what should be kept rendering and what should re-render based on url
+
+- Display error message if rate limited (summoner match history)
