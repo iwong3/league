@@ -308,6 +308,36 @@ export default class ChampionWinRates extends Component {
         if (this.state.sort === "gamesDesc") {
             championsCopy = this.sortByGamesDesc(championsCopy);
         }
+        if (this.state.sort === "kills") {
+            championsCopy = this.sortByKills(championsCopy);
+        }
+        if (this.state.sort === "killsDesc") {
+            championsCopy = this.sortByKillsDesc(championsCopy);
+        }
+        if (this.state.sort === "deaths") {
+            championsCopy = this.sortByDeaths(championsCopy);
+        }
+        if (this.state.sort === "deathsDesc") {
+            championsCopy = this.sortByDeathsDesc(championsCopy);
+        }
+        if (this.state.sort === "assists") {
+            championsCopy = this.sortByAssists(championsCopy);
+        }
+        if (this.state.sort === "assistsDesc") {
+            championsCopy = this.sortByAssistsDesc(championsCopy);
+        }
+        if (this.state.sort === "cs") {
+            championsCopy = this.sortByCS(championsCopy);
+        }
+        if (this.state.sort === "csDesc") {
+            championsCopy = this.sortByCSDesc(championsCopy);
+        }
+        if (this.state.sort === "gold") {
+            championsCopy = this.sortByGold(championsCopy);
+        }
+        if (this.state.sort === "goldDesc") {
+            championsCopy = this.sortByGoldDesc(championsCopy);
+        }
 
         if (search) {
             championsCopy = this.sortBySearch(championsCopy, search);
@@ -542,6 +572,166 @@ export default class ChampionWinRates extends Component {
         return championsSorted;
     }
 
+    sortByKills = (champions) => {
+        let championsSorted = champions;
+
+        championsSorted.sort(function(champA, champB) {
+            if (champA.kills > champB.kills) {
+                return -1;
+            }
+            if (champA.kills < champB.kills) {
+                return 1;
+            }
+            return 0;
+        });
+
+        return championsSorted;
+    }
+
+    sortByKillsDesc = (champions) => {
+        let championsSorted = champions;
+
+        championsSorted.sort(function(champA, champB) {
+            if (champA.kills > champB.kills) {
+                return 1;
+            }
+            if (champA.kills < champB.kills) {
+                return -1;
+            }
+            return 0;
+        });
+
+        return championsSorted;
+    }
+
+    sortByDeaths = (champions) => {
+        let championsSorted = champions;
+
+        championsSorted.sort(function(champA, champB) {
+            if (champA.deaths > champB.deaths) {
+                return -1;
+            }
+            if (champA.deaths < champB.deaths) {
+                return 1;
+            }
+            return 0;
+        });
+
+        return championsSorted;
+    }
+
+    sortByDeathsDesc = (champions) => {
+        let championsSorted = champions;
+
+        championsSorted.sort(function(champA, champB) {
+            if (champA.deaths > champB.deaths) {
+                return 1;
+            }
+            if (champA.deaths < champB.deaths) {
+                return -1;
+            }
+            return 0;
+        });
+
+        return championsSorted;
+    }
+
+    sortByAssists = (champions) => {
+        let championsSorted = champions;
+
+        championsSorted.sort(function(champA, champB) {
+            if (champA.assists > champB.assists) {
+                return -1;
+            }
+            if (champA.assists < champB.assists) {
+                return 1;
+            }
+            return 0;
+        });
+
+        return championsSorted;
+    }
+
+    sortByAssistsDesc = (champions) => {
+        let championsSorted = champions;
+
+        championsSorted.sort(function(champA, champB) {
+            if (champA.assists > champB.assists) {
+                return 1;
+            }
+            if (champA.assists < champB.assists) {
+                return -1;
+            }
+            return 0;
+        });
+
+        return championsSorted;
+    }
+
+    sortByCS = (champions) => {
+        let championsSorted = champions;
+
+        championsSorted.sort(function(champA, champB) {
+            if (champA.cs > champB.cs) {
+                return -1;
+            }
+            if (champA.cs < champB.cs) {
+                return 1;
+            }
+            return 0;
+        });
+
+        return championsSorted;
+    }
+
+    sortByCSDesc = (champions) => {
+        let championsSorted = champions;
+
+        championsSorted.sort(function(champA, champB) {
+            if (champA.cs > champB.cs) {
+                return 1;
+            }
+            if (champA.cs < champB.cs) {
+                return -1;
+            }
+            return 0;
+        });
+
+        return championsSorted;
+    }
+
+    sortByGold = (champions) => {
+        let championsSorted = champions;
+
+        championsSorted.sort(function(champA, champB) {
+            if (champA.gold > champB.gold) {
+                return -1;
+            }
+            if (champA.gold < champB.gold) {
+                return 1;
+            }
+            return 0;
+        });
+
+        return championsSorted;
+    }
+
+    sortByGoldDesc = (champions) => {
+        let championsSorted = champions;
+
+        championsSorted.sort(function(champA, champB) {
+            if (champA.gold > champB.gold) {
+                return 1;
+            }
+            if (champA.gold < champB.gold) {
+                return -1;
+            }
+            return 0;
+        });
+
+        return championsSorted;
+    }
+
     updateSort = (sort) => {
         let newSort = "";
 
@@ -594,6 +784,56 @@ export default class ChampionWinRates extends Component {
                 newSort = "games";
             }
         }
+
+        if (sort === "kills") {
+            if (this.state.sort !== "kills" && this.state.sort !== "killsDesc") {
+                newSort = "kills";
+            } else if (this.state.sort === "kills") {
+                newSort = "killsDesc";
+            } else {
+                newSort = "kills";
+            }
+        }
+
+        if (sort === "deaths") {
+            if (this.state.sort !== "deaths" && this.state.sort !== "deathsDesc") {
+                newSort = "deaths";
+            } else if (this.state.sort === "deaths") {
+                newSort = "deathsDesc";
+            } else {
+                newSort = "deaths";
+            }
+        }
+
+        if (sort === "assists") {
+            if (this.state.sort !== "assists" && this.state.sort !== "assistsDesc") {
+                newSort = "assists";
+            } else if (this.state.sort === "assists") {
+                newSort = "assistsDesc";
+            } else {
+                newSort = "assists";
+            }
+        }
+
+        if (sort === "cs") {
+            if (this.state.sort !== "cs" && this.state.sort !== "csDesc") {
+                newSort = "cs";
+            } else if (this.state.sort === "cs") {
+                newSort = "csDesc";
+            } else {
+                newSort = "cs";
+            }
+        }
+
+        if (sort === "gold") {
+            if (this.state.sort !== "gold" && this.state.sort !== "goldDesc") {
+                newSort = "gold";
+            } else if (this.state.sort === "gold") {
+                newSort = "goldDesc";
+            } else {
+                newSort = "gold";
+            }
+        }
         
         this.setState(prevState => ({
             sort: newSort
@@ -610,7 +850,8 @@ export default class ChampionWinRates extends Component {
         if (sort.includes("champion")) {
             style["width"] = "200px";
         }
-        if (sort.includes("champion") || sort.includes("winRate") || sort.includes("playRate") || sort.includes("banRate") || sort.includes("games")) {
+        if (sort.includes("champion") || sort.includes("winRate") || sort.includes("playRate") || sort.includes("banRate") || sort.includes("games") ||
+            sort.includes("kills") || sort.includes("deaths") || sort.includes("assists") || sort.includes("cs") || sort.includes("gold")) {
             style["cursor"] = "pointer";
         }
         if (this.state.sort.includes(sort)) {
@@ -697,11 +938,31 @@ export default class ChampionWinRates extends Component {
                      style={this.setHeaderOptionStyle("games")} >
                     {this.state.sort === "games" ? "Games ↓" : this.state.sort === "gamesDesc" ? "Games ↑" : "Games"}
                 </div>
-                <div className="championWinRateRows_headerOption" style={{"width": "100px"}}>Kills</div>
-                <div className="championWinRateRows_headerOption" style={{"width": "100px"}}>Deaths</div>
-                <div className="championWinRateRows_headerOption" style={{"width": "100px"}}>Assists</div>
-                <div className="championWinRateRows_headerOption" style={{"width": "100px"}}>CS</div>
-                <div className="championWinRateRows_headerOption" style={{"width": "100px"}}>Gold</div>
+                <div className="championWinRateRows_headerOption"
+                     onClick={() => this.updateSort("kills")}
+                     style={this.setHeaderOptionStyle("kills")} >
+                    {this.state.sort === "kills" ? "Kills ↓" : this.state.sort === "killsDesc" ? "Kills ↑" : "Kills"}
+                </div>
+                <div className="championWinRateRows_headerOption"
+                     onClick={() => this.updateSort("deaths")}
+                     style={this.setHeaderOptionStyle("deaths")} >
+                    {this.state.sort === "deaths" ? "Deaths ↓" : this.state.sort === "deathsDesc" ? "Deaths ↑" : "Deaths"}
+                </div>
+                <div className="championWinRateRows_headerOption"
+                     onClick={() => this.updateSort("assists")}
+                     style={this.setHeaderOptionStyle("assists")} >
+                    {this.state.sort === "assists" ? "Assists ↓" : this.state.sort === "assistsDesc" ? "Assists ↑" : "Assists"}
+                </div>
+                <div className="championWinRateRows_headerOption"
+                     onClick={() => this.updateSort("cs")}
+                     style={this.setHeaderOptionStyle("cs")} >
+                    {this.state.sort === "cs" ? "CS ↓" : this.state.sort === "csDesc" ? "CS ↑" : "CS"}
+                </div>
+                <div className="championWinRateRows_headerOption"
+                     onClick={() => this.updateSort("gold")}
+                     style={this.setHeaderOptionStyle("gold")} >
+                    {this.state.sort === "gold" ? "Gold ↓" : this.state.sort === "goldDesc" ? "Gold ↑" : "Gold"}
+                </div>
                 <div className="championWinRateRows_headerOption" style={{"width": "100px"}}>Roles</div>
             </div>
         )
@@ -809,8 +1070,6 @@ export default class ChampionWinRates extends Component {
             return (
                 <div className="ChampionWinRates">
                     {this.displayWinRates(this.state.activeData)}
-                    {/* {this.averageOutWinRates(this.state.platPlusData)} */}
-                    {/* {console.log(this.state.platPlusData)} */}
                 </div>
             );
         } else {
