@@ -45,7 +45,6 @@ export default class Champions extends Component {
         let championRedirect = "";
         if (this.props.location.search.length > 8) {
             championRedirect = decodeURI(this.props.location.search.substring(8));
-            
         }
 
         if (championRedirect === "") {
@@ -65,6 +64,30 @@ export default class Champions extends Component {
 
         window.addEventListener("resize", this.updateWindow);
         window.addEventListener("scroll", this.handleScroll);
+    }
+
+    //if we come in from a redirect with a search, then we click on champions in the header to reset, this function will handle that
+    componentWillReceiveProps = (newProp) => {
+        let championRedirect = "";
+        if (newProp.location.search.length > 8) {
+            championRedirect = decodeURI(newProp.location.search.substring(8));
+        }
+
+        if (championRedirect === "") {
+            this.setState ({
+                originalChampions: utility.standardizeChampions(championsSort.championsSort.data),
+                search: championRedirect
+            }, function() {
+                this.sortChampions(this.state.originalChampions, this.state.sort, this.state.search);
+            });
+        } else {
+            this.setState ({
+                originalChampions: utility.standardizeChampions(championsSort.championsSort.data),
+                search: championRedirect
+            }, function() {
+                this.sortChampions(this.state.originalChampions, this.state.sort, this.state.search);
+            });
+        }
     }
 
     //If we want to grab the data from the API

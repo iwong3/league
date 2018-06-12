@@ -39,6 +39,7 @@ export default class SummonerContainer extends Component {
                     version: constant.version
                 });
             });
+            
         this.getSummonerData(this.props.summonerName);
     }
 

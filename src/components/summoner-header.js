@@ -99,19 +99,19 @@ export default class SummonerHeader extends Component {
                 // <div className="SummonerHeader" style={{"backgroundColor": "#222222"}} >
                 <div className="SummonerHeader" style={this.setBanner(this.state.bannerChampionId)} >
                     <div className="summonerName">
-                        <img id="profileIcon"
+                        {/* <img id="profileIcon"
                              alt="Profile Icon"
                              src={this.state.profileIconUrl}
-                        />
+                        /> */}
                         {
                             this.props.summonerData.name.length >= 8
                             ?
-                            <h4 style={{"fontSize": "25px"}}>{this.props.summonerData.name}</h4>
+                            <h4 style={{"fontSize": "75px"}}>{this.props.summonerData.name}</h4>
                             :
                             <h4>{this.props.summonerData.name}</h4>
                         }
                     </div>
-                    {
+                    {/* {
                         this.state.mostPlayedChampionIds.length > 0
                         ?
                         <div className="mostPlayedChampions">
@@ -119,7 +119,7 @@ export default class SummonerHeader extends Component {
                         </div>
                         :
                         <none/>
-                    }
+                    } */}
                 </div>
             );
         }

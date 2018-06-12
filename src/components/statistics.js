@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 
 import GamesByElo from './games-by-elo';
+import ChampionMatchups from './champion-matchups';
 import ChampionWinRates from './champion-win-rates';
 
 import '../styles/statistics.css';
@@ -37,6 +38,11 @@ export default class Statistics extends Component {
                 <ChampionWinRates />
             );
         }
+        if (this.state.activePage === "championMatchups") {
+            return (
+                <ChampionMatchups />
+            );
+        }
         if (this.state.activePage === "gamesByElo") {
             return (
                 <GamesByElo />
@@ -61,6 +67,13 @@ export default class Statistics extends Component {
                             onClick={() => this.setActivePage("championWinRates")}
                             style={this.setMenuOptionStyle("championWinRates")} >
                             Champion Win Rates
+                        </div>
+                    </Link>
+                    <Link to="/statistics/champion-matchups">
+                        <div className="statisticsMenuOption"
+                            onClick={() => this.setActivePage("championMatchups")}
+                            style={this.setMenuOptionStyle("championMatchups")} >
+                            Champion Matchups
                         </div>
                     </Link>
                     <Link to="/statistics/ranked-games-played">

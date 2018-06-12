@@ -445,7 +445,7 @@ export default class Match extends Component {
                             </div>  
                         </div>
                     </div>
-                    <div className="verticalLine" style={this.setVerticalLineColor(this.props.matchStats.win)}></div>
+                    {/* <div className="verticalLine" style={this.setVerticalLineColor(this.props.matchStats.win)}></div> */}
                     <div className="statGroup">
                         <div className="statRow2">
                             <div className="kda">

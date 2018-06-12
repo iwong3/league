@@ -2,7 +2,7 @@
     display: flex;
     align-items: center;
     background: #1d282c;
-    font-family: "Lato", sans-serif;
+    font-family: "Tajawal", sans-serif;
     padding: 1px;
     height: 100px;
     width: 100%;
@@ -25,7 +25,9 @@
 }
 
 .matchResult {
-    font-size: 32px;
+    font-size: 42px;
+    letter-spacing: 0.1em;
+    margin-top: 20px;
     transition: filter 0.2s linear;
 }
 
@@ -87,6 +89,8 @@
 
 .kda {
     font-size: 32px;
+    letter-spacing: 0.1em;
+    color: #ccbe91;
 }
 
 .kda2 img {

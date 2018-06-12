@@ -34,6 +34,8 @@ export default class App extends Component {
                    />
             <Route path={"/statistics/champion-win-rates"}
                    component={() => <Statistics activePage="championWinRates"/>} />
+            <Route path={"/statistics/champion-matchups"}
+                   component={() => <Statistics activePage="championMatchups"/>} />
             <Route path={"/statistics/ranked-games-played"}
                    component={() => <Statistics activePage="gamesByElo"/>} />
           </div>

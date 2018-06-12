@@ -1,0 +1,46 @@
+.ChampionMatchups {
+    /* display: flex; */
+    font-family: "Tajawal", sans-serif;
+    font-size: 12px;
+    color: #ccbe91;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    width: 1400px;
+}
+
+.championMatchupsIcons {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.championMatchupsIconsRow {
+    display: flex;
+}
+
+.championMatchupsIconGroup {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    height: 100px;
+    margin: 5px 0px;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.championMatchupsIconGroup:hover {
+    filter: brightness(1.5);
+    transform: scale(1.2);
+}
+
+.championMatchupsIcon {
+    border: 1px solid #ccbe91;
+    width: 50px;
+}
+
+.championMatchupsIconName {
+    margin-top: 10px;
+}

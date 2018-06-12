@@ -4,3 +4,5 @@ TO DO:
     - Think about what should be kept rendering and what should re-render based on url
 
 - Display error message if rate limited (summoner match history)
+
+- Matchup graph

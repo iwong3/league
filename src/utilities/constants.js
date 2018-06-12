@@ -1,6 +1,6 @@
-export const version = "8.10.1";
+export const version = "8.12.1";
 
-export const patch = "8.10";
+export const patch = "8.12";
 
 export const championStats = [
     "armor",
