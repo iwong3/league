@@ -6,3 +6,13 @@ TO DO:
 - Display error message if rate limited (summoner match history)
 
 - Matchup graph
+    - Active champion indicator in champion select
+    - Format active champion
+        - Portrait/Splash for active champion
+        - Highest win rates opponents
+        - Lowest win rate opponents
+        - Set champion as default or skeleton loader?
+        - See more matchups?
+            - reset num matchups on new active champion
+        - Sort by elo
+            - reset this on new active champion
