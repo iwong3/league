@@ -8,11 +8,76 @@
     width: 1400px;
 }
 
+/* active champion matchups */
+
+.matchups {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    border-bottom: 1px solid #937341;
+    padding: 50px 0px;
+}
+
+.championMatchup_activeChampionGroup {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.championMatchup_activeChampionBanner {
+    border: 1px solid #937341;
+    width: 274px;
+    height: 499px;
+    transform: scale(0.75);
+    /* margin: -25px 0px -25px 0px; */
+    /* filter: grayscale(100%); */
+}
+
+.championMatchup_activeChampionName {
+    font-family: "Lusitana", sans-serif;
+    font-size: 40px;
+    font-weight: 400;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    background: -webkit-linear-gradient(#9f814a,#7e6234);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    transition: filter 0.2s ease;
+}
+
+.championMatchup_activeChampionName:hover {
+    filter: brightness(1.2);
+}
+
+.championMatchupsColumn {
+    display: flex;
+    flex-direction: column;
+}
+
+.championMatchupsGroup {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px 0px;
+}
+
+.championMatchupsInfoGroup {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: left;
+    margin-left: 10px;
+}
+
+/* champion matchup icons */
+
 .championMatchupsIcons {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin-top: 50px;
 }
 
 .championMatchupsIconsRow {
@@ -42,5 +107,5 @@
 }
 
 .championMatchupsIconName {
-    margin-top: 10px;
+    margin-top: 7.5px;
 }

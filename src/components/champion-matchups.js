@@ -21,6 +21,7 @@ export default class ChampionMatchups extends Component {
         }
     }
 
+    //will have to standardize data (1000+ count only, combine similar roles (ADCSUPPORT, DUO_SUPPORT, SYNERGY))
     componentDidMount = () => {
         this.setState({
             champions: this.sortChampionsAlphabetically(utility.standardizeChampions(champions.champions.data))
@@ -35,11 +36,14 @@ export default class ChampionMatchups extends Component {
                 this.setState({
                     activeChampionId: id,
                     activeChampionMatchupData: this.sortMatchupsByCount(res.data)
+                }, function() {
+                    console.log(this.state.activeChampionMatchupData);
                 });
             });
         }
     }
 
+    //handle logic to get data for matchup info (winrates, kda?) and assign to variables before rendering
     displayChampionMatchups = (id) => {
         if (id === null) {
             return (
@@ -47,29 +51,58 @@ export default class ChampionMatchups extends Component {
             );
         }
 
+        let matchups = [];
         let matchupIcons = [];
         let championIconUrl = "";
         let matchupId = "";
+        let matchupWinRate = null;
+        let matchupGames = null;
+
+        let championBannerUrl = utility.getChampionLoadingUrl(utility.championIdToKey(id));
+
+        matchups.push(
+            <div className="championMatchup_activeChampionGroup">
+                <div className="championMatchup_activeChampionBanner" style={{"background": "url(" + championBannerUrl + ") center"}} ></div>
+                <div className="championMatchup_activeChampionName">{utility.championIdToName(id)}</div>
+            </div>
+        );
 
         for (let i = 0; i < this.state.numMatchups; i++) {
-            matchupId = this.state.activeChampionMatchupData[i].champ2_id;
+
+            matchupGames = this.state.activeChampionMatchupData[i].count;
             if (this.state.activeChampionMatchupData[i].champ2_id === id) {
                 matchupId = this.state.activeChampionMatchupData[i].champ1_id;
+                matchupWinRate = this.state.activeChampionMatchupData[i].champ1.winrate;
+            } else {
+                matchupId = this.state.activeChampionMatchupData[i].champ2_id;
+                matchupWinRate = this.state.activeChampionMatchupData[i].champ2.winrate;
             }
 
             championIconUrl = utility.getChampionIconUrl(utility.championIdToKey(matchupId));
             matchupIcons.push(
-                <div className="championMatchupsIconGroup">
+                <div className="championMatchupsGroup">
                     <img src={championIconUrl} className="championMatchupsIcon" />
-                    <div className="championMatchupsIconName">
-                        {utility.championIdToName(matchupId)}
+                    <div className="championMatchupsInfoGroup">
+                        <div className="championMatchupsRow" style={{"fontSize": "16px", "marginTop": "10px"}} >
+                            {utility.championIdToName(matchupId)}
+                        </div>
+                        <div className="championMatchupsRow">
+                            Win Rate Against: {(100 - (matchupWinRate * 100)).toFixed(2)}%
+                        </div>
+                        <div className="championMatchupsRow">
+                            Games: {matchupGames}
+                        </div>
                     </div>
                 </div>
             );
         }
 
+        matchups.push(
+            <div className="championMatchupsColumn">{matchupIcons}</div>
+        );
+
         return (
-            <div className="matchups">{matchupIcons}</div>
+            <div className="matchups">{matchups}</div>
         );
     }
 
@@ -142,6 +175,52 @@ export default class ChampionMatchups extends Component {
             }
             if (champA.count < champB.count) {
                 return 1;
+            }
+            return 0;
+        });
+
+        return matchupsSorted;
+    }
+
+    sortMatchupsByWinRate = (matchups, id) => {
+        let matchupsSorted = matchups;
+
+        matchupsSorted.sort(function(champA, champB) {
+            if (champA.champ1_id === id && champB.champ1_id === id) {
+                if (champA.champ1.winrate > champB.champ1.winrate) {
+                    return -1;
+                }
+                if (champA.champ1.winrate < champB.champ1.winrate) {
+                    return 1;
+                }
+                return 0;
+            }
+            if (champA.champ2_id === id && champB.champ1_id === id) {
+                if (champA.champ2.winrate > champB.champ1.winrate) {
+                    return -1;
+                }
+                if (champA.champ2.winrate < champB.champ1.winrate) {
+                    return 1;
+                }
+                return 0;
+            }
+            if (champA.champ2_id === id && champB.champ2_id === id) {
+                if (champA.champ2.winrate > champB.champ2.winrate) {
+                    return -1;
+                }
+                if (champA.champ2.winrate < champB.champ2.winrate) {
+                    return 1;
+                }
+                return 0;
+            }
+            if (champA.champ1_id === id && champB.champ2_id === id) {
+                if (champA.champ1.winrate > champB.champ2.winrate) {
+                    return -1;
+                }
+                if (champA.champ1.winrate < champB.champ2.winrate) {
+                    return 1;
+                }
+                return 0;
             }
             return 0;
         });
