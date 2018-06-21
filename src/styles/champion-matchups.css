@@ -8,11 +8,31 @@
     width: 1400px;
 }
 
-/* active champion matchups */
+.championMatchups_default {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: #937341 1px solid;
+    height: 340px;
+}
 
+.championMatchups_defaultTitle {
+    font-family: "Lusitana", sans-serif;
+    font-size: 84px;
+    font-weight: 400;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    background: -webkit-linear-gradient(#9f814a,#7e6234);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin: 50px 0px;
+}
+
+/* active champion matchups */
 .matchups {
     display: flex;
-    justify-content: space-evenly;
+    flex-direction: column;
+    /* justify-content: space-evenly; */
     align-items: center;
     border-bottom: 1px solid #937341;
     padding: 50px 0px;
@@ -32,39 +52,53 @@
 
 .championMatchup_activeChampionBanner {
     border: 1px solid #ccbe91;
-    width: 274px;
-    height: 499px;
-    transform: scale(0.75);
+    width: 120px;
+    height: 120px;
+    /* transform: scale(0.75); */
 }
 
 .championMatchup_activeChampionName {
     font-family: "Lusitana", sans-serif;
-    font-size: 40px;
+    font-size: 84px;
     font-weight: 400;
     letter-spacing: 0.3em;
     text-transform: uppercase;
     background: -webkit-linear-gradient(#9f814a,#7e6234);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    margin: 50px 0px;
+}
+
+.matchupColumns {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 900px;
+    padding: 0px 75px;
 }
 
 .championMatchupsColumn {
     display: flex;
     flex-direction: column;
     align-items: left;
-    width: 250px;
+    width: 330px;
 }
 
 .championMatchupsColumnTitle {
     font-size: 26px;
     letter-spacing: 0.15em;
-    margin-bottom: 10px;
+    margin: 0px 10px 10px 10px;
 }
 
 .championMatchupsGroup {
     display: flex;
     align-items: center;
-    margin: 10px 0px;
+    padding: 10px 10px;
+}
+
+.championMatchupsGroup:hover {
+    background: #ccbe91;
+    color: #000000;
 }
 
 .championMatchupsInfoGroup {
