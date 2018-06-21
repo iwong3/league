@@ -170,7 +170,7 @@
     margin: 5px;
     width: 100px;
     height: 100px;
-    transition-property: transform, border, filter;
+    transition: transform, border, filter;
     transition-timing-function: ease,linear,ease;
     transition-duration: .2s,.2s,.2s;
 }

@@ -286,6 +286,7 @@ export default class ChampionCard extends Component {
             case ("Malzahar"):
                 style["backgroundPosition"] = "100% 0%";
                 style["backgroundSize"] = "auto 120%";
+                break;
             case ("Maokai"):
                 style["backgroundPosition"] = "100% 30%";
                 style["backgroundSize"] = "auto 115%";

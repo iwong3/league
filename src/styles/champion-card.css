@@ -5,7 +5,7 @@
     margin: 20px 10px 0px 10px;
     width: 580px;
     height: 380px;
-    transition-property: filter, border;
+    transition: filter, border;
     transition-timing-function: ease,linear,ease;
     transition-duration: .4s,.4s,.4s;
 }

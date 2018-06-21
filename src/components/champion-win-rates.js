@@ -142,7 +142,6 @@ export default class ChampionWinRates extends Component {
     averageOutWinRates = (data) => {
         let averagedData = [];
         let champion = {};
-        let numRoles = 0;
         let roles = [];
 
         //Helper variables for calculations
@@ -1026,7 +1025,7 @@ export default class ChampionWinRates extends Component {
             <div className="championWinRateRow">
                 <div className="championWinRateRow_small">{champion.rank}</div>
                 <div className="championWinRateRow_large">
-                    <img className="championWinRateRow_icon" src={utility.getChampionIconUrl(utility.championIdToKey(champion.championId))} />
+                    <img className="championWinRateRow_icon" src={utility.getChampionIconUrl(utility.championIdToKey(champion.championId))} alt={utility.championIdToName(champion.championId)} />
                     <div className="championWinRateRow_name">
                         {utility.championIdToName(champion.championId)}
                     </div>

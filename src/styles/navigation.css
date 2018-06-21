@@ -20,7 +20,7 @@
     background: #1d282c;
     filter: brightness(0.9);
     border: 1px solid #000000;
-    transition-property: transform;
+    transition: transform;
     transition-timing-function: ease,linear,ease;
     transition-duration: .2s, .2s, .2s;
     padding: 1px;

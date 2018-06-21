@@ -23,15 +23,18 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    transition: filter 0.2s ease;
+}
+
+.championMatchup_activeChampionGroup:hover {
+    filter: brightness(1.2);
 }
 
 .championMatchup_activeChampionBanner {
-    border: 1px solid #937341;
+    border: 1px solid #ccbe91;
     width: 274px;
     height: 499px;
     transform: scale(0.75);
-    /* margin: -25px 0px -25px 0px; */
-    /* filter: grayscale(100%); */
 }
 
 .championMatchup_activeChampionName {
@@ -43,21 +46,23 @@
     background: -webkit-linear-gradient(#9f814a,#7e6234);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    transition: filter 0.2s ease;
-}
-
-.championMatchup_activeChampionName:hover {
-    filter: brightness(1.2);
 }
 
 .championMatchupsColumn {
     display: flex;
     flex-direction: column;
+    align-items: left;
+    width: 250px;
+}
+
+.championMatchupsColumnTitle {
+    font-size: 26px;
+    letter-spacing: 0.15em;
+    margin-bottom: 10px;
 }
 
 .championMatchupsGroup {
     display: flex;
-    justify-content: center;
     align-items: center;
     margin: 10px 0px;
 }

@@ -8,8 +8,6 @@ import Champions from './champions';
 import FreeToPlay from './free-to-play';
 import Statistics from './statistics';
 
-import ChampionWinRates from './champion-win-rates';
-
 import '../styles/App.css';
 
 

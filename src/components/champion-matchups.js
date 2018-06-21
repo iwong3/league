@@ -1,3 +1,4 @@
+
 import React, { Component} from 'react';
 import axios from 'axios';
 
@@ -15,7 +16,8 @@ export default class ChampionMatchups extends Component {
         this.state = {
             champions: [],
             activeChampionId: null,
-            activeChampionMatchupData: [],
+            mostCommonMatchupsData: [],
+            highestWinRateMatchupsData: [],
             activeElo: "PLATINUM+",
             numMatchups: 5
         }
@@ -35,9 +37,7 @@ export default class ChampionMatchups extends Component {
             axios.get(championMatchupUrl).then(res => {
                 this.setState({
                     activeChampionId: id,
-                    activeChampionMatchupData: this.sortMatchupsByCount(res.data)
-                }, function() {
-                    console.log(this.state.activeChampionMatchupData);
+                    mostCommonMatchupsData: this.sortMatchupsByCount(res.data)
                 });
             });
         }
@@ -67,15 +67,16 @@ export default class ChampionMatchups extends Component {
             </div>
         );
 
+        //most common matchups
         for (let i = 0; i < this.state.numMatchups; i++) {
 
-            matchupGames = this.state.activeChampionMatchupData[i].count;
-            if (this.state.activeChampionMatchupData[i].champ2_id === id) {
-                matchupId = this.state.activeChampionMatchupData[i].champ1_id;
-                matchupWinRate = this.state.activeChampionMatchupData[i].champ1.winrate;
+            matchupGames = this.state.mostCommonMatchupsData[i].count;
+            if (this.state.mostCommonMatchupsData[i].champ2_id === id) {
+                matchupId = this.state.mostCommonMatchupsData[i].champ1_id;
+                matchupWinRate = this.state.mostCommonMatchupsData[i].champ1.winrate;
             } else {
-                matchupId = this.state.activeChampionMatchupData[i].champ2_id;
-                matchupWinRate = this.state.activeChampionMatchupData[i].champ2.winrate;
+                matchupId = this.state.mostCommonMatchupsData[i].champ2_id;
+                matchupWinRate = this.state.mostCommonMatchupsData[i].champ2.winrate;
             }
 
             championIconUrl = utility.getChampionIconUrl(utility.championIdToKey(matchupId));
@@ -98,7 +99,10 @@ export default class ChampionMatchups extends Component {
         }
 
         matchups.push(
-            <div className="championMatchupsColumn">{matchupIcons}</div>
+            <div className="championMatchupsColumn">
+                <div className="championMatchupsColumnTitle">Most Common</div>
+                {matchupIcons}
+            </div>
         );
 
         return (
@@ -169,11 +173,11 @@ export default class ChampionMatchups extends Component {
     sortMatchupsByCount = (matchups) => {
         let matchupsSorted = matchups;
 
-        matchupsSorted.sort(function(champA, champB) {
-            if (champA.count > champB.count) {
+        matchupsSorted.sort(function(matchupA, matchupB) {
+            if (matchupA.count > matchupB.count) {
                 return -1;
             }
-            if (champA.count < champB.count) {
+            if (matchupA.count < matchupB.count) {
                 return 1;
             }
             return 0;

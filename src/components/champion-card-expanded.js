@@ -113,6 +113,8 @@ export default class ChampionCardExpanded extends Component {
                 style["backgroundPosition"] = "60% 0%";
                 style["backgroundSize"] = "auto 100%";
                 break;
+            default:
+                break;
         }
 
         return style;

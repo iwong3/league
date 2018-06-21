@@ -203,7 +203,14 @@ export default class ChampionCardExpandedDetails extends Component {
         return (
             <div className="skins">
                 <div className="skin">
-                    <img src={utility.getChampionSplashBySkinUrl(champion.key, skin)} />
+                    <img src={utility.getChampionSplashBySkinUrl(champion.key, skin)}
+                         alt={
+                            championsSort.championsSort.data[champion.key].skins[this.state.currentSkinIndex].name === "default"
+                            ?
+                            champion.name
+                            :
+                            championsSort.championsSort.data[champion.key].skins[this.state.currentSkinIndex].name
+                        } />
                 </div>
                 <div className="skinMenuBar">
                     <div className="switchSkin"
