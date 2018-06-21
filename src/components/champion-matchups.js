@@ -89,7 +89,7 @@ export default class ChampionMatchups extends Component {
             championIconUrl = utility.getChampionIconUrl(utility.championIdToKey(matchupId));
             matchupIcons.push(
                 <div className="championMatchupsGroup">
-                    <img src={championIconUrl} className="championMatchupsIcon" />
+                    <img src={championIconUrl} className="championMatchupsIcon" alt={utility.championIdToName(matchupId)} />
                     <div className="championMatchupsInfoGroup">
                         <div className="championMatchupsRow" style={{"fontSize": "16px", "marginTop": "10px"}} >
                             {utility.championIdToName(matchupId)}
@@ -129,7 +129,7 @@ export default class ChampionMatchups extends Component {
             championIconUrl = utility.getChampionIconUrl(utility.championIdToKey(matchupId));
             matchupIcons.push(
                 <div className="championMatchupsGroup">
-                    <img src={championIconUrl} className="championMatchupsIcon" />
+                    <img src={championIconUrl} className="championMatchupsIcon" alt={utility.championIdToName(matchupId)} />
                     <div className="championMatchupsInfoGroup">
                         <div className="championMatchupsRow" style={{"fontSize": "16px", "marginTop": "10px"}} >
                             {utility.championIdToName(matchupId)}
@@ -169,7 +169,7 @@ export default class ChampionMatchups extends Component {
             championIconUrl = utility.getChampionIconUrl(utility.championIdToKey(matchupId));
             matchupIcons.push(
                 <div className="championMatchupsGroup">
-                    <img src={championIconUrl} className="championMatchupsIcon" />
+                    <img src={championIconUrl} className="championMatchupsIcon" alt={utility.championIdToName(matchupId)} />
                     <div className="championMatchupsInfoGroup">
                         <div className="championMatchupsRow" style={{"fontSize": "16px", "marginTop": "10px"}} >
                             {utility.championIdToName(matchupId)}
@@ -207,14 +207,9 @@ export default class ChampionMatchups extends Component {
         let rowSize = 12;
 
         let championIconUrl = "";
-        let fontSize = "";
 
         for (let i = 0; i < champions.length; i++) {
             championIconUrl = utility.getChampionIconUrl(champions[i].key);
-            fontSize = "14px";
-            if (champions[i].name.length >= 10) {
-                fontSize = "10px";
-            }
 
             //reset row if we hit our row size
             if (i !== 0 && i % rowSize === 0) {
@@ -226,7 +221,7 @@ export default class ChampionMatchups extends Component {
             championIconsRow.push(
                 <div className="championMatchupsIconGroup"
                      onClick={() => this.setActiveChampion(champions[i].id)} >
-                    <img src={championIconUrl} className="championMatchupsIcon" />
+                    <img src={championIconUrl} className="championMatchupsIcon" alt={utility.championIdToName(champions[i].id)}/>
                     <div className="championMatchupsIconName">
                         {champions[i].name}
                     </div>
@@ -290,7 +285,7 @@ export default class ChampionMatchups extends Component {
         
         //only include matchups with a minimum game count of 100
         for (let i = 0; i < matchups.length; i++) {
-            if (matchups[i].count >= 100 && matchups[i].role !== "SYNERGY" && matchups[i].role !== "ADCSUPPORT") {
+            if (matchups[i].count >= minCount && matchups[i].role !== "SYNERGY" && matchups[i].role !== "ADCSUPPORT") {
                 matchupsSorted.push(matchups[i]);
             }
         }
@@ -344,7 +339,7 @@ export default class ChampionMatchups extends Component {
         
         //only include matchups with a minimum game count of 100
         for (let i = 0; i < matchups.length; i++) {
-            if (matchups[i].count >= 100 && matchups[i].role !== "SYNERGY" && matchups[i].role !== "ADCSUPPORT") {
+            if (matchups[i].count >= minCount && matchups[i].role !== "SYNERGY" && matchups[i].role !== "ADCSUPPORT") {
                 matchupsSorted.push(matchups[i]);
             }
         }
