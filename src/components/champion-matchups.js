@@ -14,23 +14,28 @@ export default class ChampionMatchups extends Component {
         super(props);
 
         this.state = {
+            originalChampions: [],
             champions: [],
             activeChampionId: null,
             mostCommonMatchupsData: [],
             highestWinRateMatchupsData: [],
             lowestWinRateMatchupsData: [],
             activeElo: "PLATINUM+",
-            numMatchups: 5
+            numMatchups: 5,
+            minCount: 100,
+            search: ""
         }
     }
 
-    //will have to standardize data (1000+ count only, combine similar roles (ADCSUPPORT, DUO_SUPPORT, SYNERGY))
     componentDidMount = () => {
         this.setState({
-            champions: this.sortChampionsAlphabetically(utility.standardizeChampions(champions.champions.data))
+            originalChampions: this.sortChampionsAlphabetically(utility.standardizeChampions(champions.champions.data))
+        }, function() {
+            this.sortChampions(this.state.originalChampions, this.state.search);
         });
     }
 
+    //set active champion and get matchup data
     setActiveChampion = (id) => {
         if (this.state.activeChampion !== id) {
             let championMatchupUrl = utility.getChampionMatchupsByEloUrl(id, this.state.activeElo);
@@ -51,7 +56,7 @@ export default class ChampionMatchups extends Component {
         if (id === null) {
             return (
                 <div className="championMatchups_default">
-                    <div className="championMatchups_defaultTitle">Select a Champion</div>
+                    <div className="championMatchups_defaultTitle">Champion Matchups</div>
                 </div>
             );
         }
@@ -63,20 +68,45 @@ export default class ChampionMatchups extends Component {
         let matchupWinRate = null;
         let matchupGames = null;
 
-        championIconUrl = utility.getChampionIconUrl(utility.championIdToKey(id));
+        championIconUrl = utility.getChampionSplashUrl(utility.championIdToKey(id));
 
+        //display active champion
         matchups.push(
             <div className="championMatchup_activeChampionGroup">
-                <div className="championMatchup_activeChampionBanner" style={{"background": "url(" + championIconUrl + ") center"}} ></div>
-                <div className="championMatchup_activeChampionName">{utility.championIdToName(id)}</div>
+                <div className="championMatchup_activeChampionBanner" style={{"background": "url(" + championIconUrl + ") no-repeat center"}} >
+                    <div className="championMatchup_activeChampionNameBG">
+                        <div className="championMatchup_activeChampionName">{utility.championIdToName(id)}</div>
+                    </div>
+                </div>
             </div>
         );
+
+        matchups.push(
+            <div className="championMatchup_filters">
+                <div className="championMatchup_filterGroup">
+                    <div className="championMatchup_filterTitle">ELO</div>
+                    <div className="championMatchup_filterValue">
+                        {this.state.activeElo}
+                        <div className="championMatchup_filterDropdown">
+                            <div className="championMatchup_filterOption">Platinum+</div>
+                            <div className="championMatchup_filterOption">Platinum</div>
+                            <div className="championMatchup_filterOption">Gold</div>
+                            <div className="championMatchup_filterOption">Silver</div>
+                            <div className="championMatchup_filterOption">Bronze</div>
+                        </div>
+                    </div>
+                </div>
+                <div className="championMatchup_filterGroup">
+                    <div className="championMatchup_filterTitle">Min Games</div>
+                    <div className="championMatchup_filterValue"></div>
+                </div>
+            </div>
+        )
 
         let matchupColumns = [];
 
         //highest win rate matchups
         for (let i = 0; i < this.state.numMatchups; i++) {
-
             matchupGames = this.state.highestWinRateMatchupsData[i].count;
             if (this.state.highestWinRateMatchupsData[i].champ2_id === id) {
                 matchupId = this.state.highestWinRateMatchupsData[i].champ1_id;
@@ -86,22 +116,8 @@ export default class ChampionMatchups extends Component {
                 matchupWinRate = this.state.highestWinRateMatchupsData[i].champ2.winrate;
             }
 
-            championIconUrl = utility.getChampionIconUrl(utility.championIdToKey(matchupId));
             matchupIcons.push(
-                <div className="championMatchupsGroup">
-                    <img src={championIconUrl} className="championMatchupsIcon" alt={utility.championIdToName(matchupId)} />
-                    <div className="championMatchupsInfoGroup">
-                        <div className="championMatchupsRow" style={{"fontSize": "16px", "marginTop": "10px"}} >
-                            {utility.championIdToName(matchupId)}
-                        </div>
-                        <div className="championMatchupsRow">
-                            Win Rate Against: {(100 - (matchupWinRate * 100)).toFixed(2)}%
-                        </div>
-                        <div className="championMatchupsRow">
-                            Games: {matchupGames}
-                        </div>
-                    </div>
-                </div>
+                this.displayChampionMatchupCard(matchupId, matchupWinRate, matchupGames)
             );
         }
 
@@ -116,7 +132,6 @@ export default class ChampionMatchups extends Component {
 
         //lowest win rate matchups
         for (let i = 0; i < this.state.numMatchups; i++) {
-
             matchupGames = this.state.lowestWinRateMatchupsData[i].count;
             if (this.state.lowestWinRateMatchupsData[i].champ2_id === id) {
                 matchupId = this.state.lowestWinRateMatchupsData[i].champ1_id;
@@ -126,22 +141,8 @@ export default class ChampionMatchups extends Component {
                 matchupWinRate = this.state.lowestWinRateMatchupsData[i].champ2.winrate;
             }
 
-            championIconUrl = utility.getChampionIconUrl(utility.championIdToKey(matchupId));
             matchupIcons.push(
-                <div className="championMatchupsGroup">
-                    <img src={championIconUrl} className="championMatchupsIcon" alt={utility.championIdToName(matchupId)} />
-                    <div className="championMatchupsInfoGroup">
-                        <div className="championMatchupsRow" style={{"fontSize": "16px", "marginTop": "10px"}} >
-                            {utility.championIdToName(matchupId)}
-                        </div>
-                        <div className="championMatchupsRow">
-                            Win Rate Against: {(100 - (matchupWinRate * 100)).toFixed(2)}%
-                        </div>
-                        <div className="championMatchupsRow">
-                            Games: {matchupGames}
-                        </div>
-                    </div>
-                </div>
+                this.displayChampionMatchupCard(matchupId, matchupWinRate, matchupGames)
             );
         }
 
@@ -156,7 +157,6 @@ export default class ChampionMatchups extends Component {
 
         //most common matchups
         for (let i = 0; i < this.state.numMatchups; i++) {
-
             matchupGames = this.state.mostCommonMatchupsData[i].count;
             if (this.state.mostCommonMatchupsData[i].champ2_id === id) {
                 matchupId = this.state.mostCommonMatchupsData[i].champ1_id;
@@ -166,22 +166,8 @@ export default class ChampionMatchups extends Component {
                 matchupWinRate = this.state.mostCommonMatchupsData[i].champ2.winrate;
             }
 
-            championIconUrl = utility.getChampionIconUrl(utility.championIdToKey(matchupId));
             matchupIcons.push(
-                <div className="championMatchupsGroup">
-                    <img src={championIconUrl} className="championMatchupsIcon" alt={utility.championIdToName(matchupId)} />
-                    <div className="championMatchupsInfoGroup">
-                        <div className="championMatchupsRow" style={{"fontSize": "16px", "marginTop": "10px"}} >
-                            {utility.championIdToName(matchupId)}
-                        </div>
-                        <div className="championMatchupsRow">
-                            Win Rate Against: {(100 - (matchupWinRate * 100)).toFixed(2)}%
-                        </div>
-                        <div className="championMatchupsRow">
-                            Games: {matchupGames}
-                        </div>
-                    </div>
-                </div>
+                this.displayChampionMatchupCard(matchupId, matchupWinRate, matchupGames)
             );
         }
 
@@ -192,12 +178,33 @@ export default class ChampionMatchups extends Component {
             </div>
         );
 
+        //group matchup columns together
         matchups.push(
             <div className="matchupColumns">{matchupColumns}</div>
         );
 
         return (
             <div className="matchups">{matchups}</div>
+        );
+    }
+
+    displayChampionMatchupCard = (id, winRate, games) => {
+        let championIconUrl = utility.getChampionIconUrl(utility.championIdToKey(id));
+        return (
+            <div className="championMatchupsGroup">
+                <img src={championIconUrl} className="championMatchupsIcon" alt={utility.championIdToName(id)} onClick={() => this.setActiveChampion(id)} />
+                <div className="championMatchupsInfoGroup">
+                    <div className="championMatchupsRow" style={{"fontSize": "16px", "marginTop": "10px"}} >
+                        {utility.championIdToName(id)}
+                    </div>
+                    <div className="championMatchupsRow">
+                        Win Rate Against: {(100 - (winRate * 100)).toFixed(2)}%
+                    </div>
+                    <div className="championMatchupsRow">
+                        Games: {games}
+                    </div>
+                </div>
+            </div>
         );
     }
 
@@ -238,6 +245,22 @@ export default class ChampionMatchups extends Component {
         return (
             <div className="championMatchupsIcons">{championIcons}</div>
         );
+    }
+
+    //sorts champions based on search
+    sortChampions = (champions, search) => {
+        //will be the array of champions we return after all sorting/seraching
+        let championsCopy = champions;
+
+        //update championsCopy by search criteria
+        if (search) {
+            championsCopy = this.sortChampionsSearch(championsCopy, search);
+        }
+
+        //update the champions we will display
+        this.setState({
+            champions: championsCopy
+        });
     }
 
     sortChampionsAlphabetically = (champions) => {
@@ -281,11 +304,10 @@ export default class ChampionMatchups extends Component {
 
     sortMatchupsByWinRate = (matchups, id) => {
         let matchupsSorted = [];
-        let minCount = 100;
         
         //only include matchups with a minimum game count of 100
         for (let i = 0; i < matchups.length; i++) {
-            if (matchups[i].count >= minCount && matchups[i].role !== "SYNERGY" && matchups[i].role !== "ADCSUPPORT") {
+            if (matchups[i].count >= this.state.minCount && matchups[i].role !== "SYNERGY" && matchups[i].role !== "ADCSUPPORT") {
                 matchupsSorted.push(matchups[i]);
             }
         }
@@ -335,11 +357,10 @@ export default class ChampionMatchups extends Component {
 
     sortMatchupsByWinRateDesc = (matchups, id) => {
         let matchupsSorted = [];
-        let minCount = 100;
         
         //only include matchups with a minimum game count of 100
         for (let i = 0; i < matchups.length; i++) {
-            if (matchups[i].count >= minCount && matchups[i].role !== "SYNERGY" && matchups[i].role !== "ADCSUPPORT") {
+            if (matchups[i].count >= this.state.minCount && matchups[i].role !== "SYNERGY" && matchups[i].role !== "ADCSUPPORT") {
                 matchupsSorted.push(matchups[i]);
             }
         }
@@ -388,11 +409,61 @@ export default class ChampionMatchups extends Component {
         return matchupsSorted;
     }
 
+    sortChampionsSearch = (champions, search) => {
+        let championsSorted = [];
+
+        for (let a = 0; a < champions.length; a++) {
+            //Nicknames
+            if (search.toLowerCase() === "cow" && champions[a].name === "Alistar") {
+                championsSorted.push(champions[a]);
+            }
+            //ABBREVIATIONS
+            if ((search.toLowerCase() === "j4" || search.toLowerCase() === "jiv") && champions[a].name === "Jarvan IV") {
+                championsSorted.push(champions[a]);
+            }
+            if ((search.toLowerCase() === "mf") && champions[a].name === "Miss Fortune") {
+                championsSorted.push(champions[a]);
+            }
+            if ((search.toLowerCase() === "tf") && champions[a].name === "Twisted Fate") {
+                championsSorted.push(champions[a]);
+            }
+
+            //If search is greater than champion name, continue
+            if (search.length > champions[a].name.length) {
+                continue;
+            }
+            if (champions[a].name.toLowerCase().includes(search.toLowerCase())) {
+                championsSorted.push(champions[a]);
+            }
+        }
+
+        return championsSorted;
+    }
+
+    //update search state as user types
+    handleSearchChange = (event) => {
+        this.setState({
+            search: event.target.value
+        }, function() {
+            this.sortChampions(this.state.originalChampions, this.state.search);
+        });
+    }
+
     render() {
+        console.log(this.state.search);
         if (this.state.champions) {
             return (
                 <div className="ChampionMatchups">
                     {this.displayChampionMatchups(this.state.activeChampionId)}
+                    <div className="championSearch" id="championSearch_matchups" >
+                            <input id="searchBar"
+                                type="text"
+                                autoComplete="off"
+                                value={this.state.search}
+                                placeholder="Find A Champion..."
+                                onChange={this.handleSearchChange}
+                            />
+                    </div>
                     {this.displayChampionIcons(this.state.champions)}
                 </div>
             ); 
