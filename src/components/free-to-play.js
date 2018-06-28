@@ -12,7 +12,10 @@ export default class FreeToPlay extends Component {
         super(props);
 
         this.state = {
-            freeChampions: []
+            freeChampions: [],
+            freeChampionsSplashUrls: [],
+            activeChampionId: null,
+            activeChampionIndex: 0
         }
     }
 
@@ -20,10 +23,32 @@ export default class FreeToPlay extends Component {
         let freeToPlayUrl = utility.getFreeChampionsUrl();
         axios.get(freeToPlayUrl)
              .then(res => {
+                 console.log(res.data.champions);
                  this.setState({
-                     freeChampions: res.data.champions
+                     freeChampions: res.data.champions,
+                     activeChampionId: res.data.champions[0].id,
+                     activeChampionIndex: 0
+                 }, function() {
+                     let splashUrls = [];
+                     for (let i = 0; i < this.state.freeChampions.length; i++) {
+                        splashUrls[i] = utility.getChampionSplashUrl(utility.championIdToKey(this.state.freeChampions[i].id));
+                     }
+                     this.setState({
+                         freeChampionsSplashUrls: splashUrls
+                     });
                  });
              });
+    }
+
+    displayActiveChampion = (id) => {
+        return (
+            <div className="freeChampion_activeChampion">
+                <img className="freeChampion_activeChampionSplash"
+                     src={this.state.freeChampionsSplashUrls[this.state.activeChampionIndex]}
+                     onClick={() => this.searchChampion(utility.championIdToName(id))} />
+                <div className="freeChampion_activeChampionName">{utility.championIdToName(id)}</div>
+            </div>
+        )
     }
 
     displayFreeChampions = (champions) => {
@@ -35,12 +60,15 @@ export default class FreeToPlay extends Component {
         for (let i = 0; i < champions.length; i++) {
             currentChampionKey = utility.championIdToKey(champions[i].id);
             currentChampionName = utility.championIdToName(champions[i].id);
-            championLoadingUrl = utility.getChampionLoadingUrl(currentChampionKey);
+            championLoadingUrl = utility.getChampionIconUrl(currentChampionKey);
             freeChampions.push(
                 <div className="freeChampionBanner"
-                     onClick={() => this.searchChampion(utility.championIdToName(champions[i].id))} >
-                    <img src={championLoadingUrl}
-                         alt={currentChampionName} />
+                     onMouseOver={() => this.setActiveChampion(champions[i].id, i)} >
+                    <div className="freeChampionCardBorder">
+                        <img src={championLoadingUrl}
+                             alt={currentChampionName}
+                             style={this.checkActiveChampionIconStyle(champions[i].id)} />
+                    </div>
                     <div className="freeChampionName">
                         {currentChampionName}
                     </div>
@@ -57,11 +85,31 @@ export default class FreeToPlay extends Component {
         window.location = "/champions?search=" + name;
     }
 
+    setActiveChampion = (id, index) => {
+        if (id !== this.state.activeChampionId) {
+            this.setState(prevState => ({
+                activeChampionId: id,
+                activeChampionIndex: index
+            }));
+        }
+    }
+
+    checkActiveChampionIconStyle = (id) => {
+        if (id === this.state.activeChampionId) {
+            return (
+                {
+                    "filter": "grayscale(0%)"
+                }
+            );
+        }
+    }
+
     render() {
         if (this.state.freeChampions) {
             return (
                 <div className="FreeToPlay">
                     <div className="freeToPlayTitle">Free Champion Rotation</div>
+                    {this.displayActiveChampion(this.state.activeChampionId)}
                     {this.displayFreeChampions(this.state.freeChampions)}
                 </div>
             ); 

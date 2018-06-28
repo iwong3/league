@@ -47,6 +47,10 @@ export function getKDA(k, d, a) {
     return ((k + a) / d).toFixed(2);
 }
 
+export function getStatusUrl() {
+    return "https://na1.api.riotgames.com/lol/status/v3/shard-data&api_key=" + process.env.REACT_APP_RIOT_API_KEY;
+}
+
 export function getVersionUrl() {
     return "https://na1.api.riotgames.com/lol/static-data/v3/versions/?api_key=" + process.env.REACT_APP_RIOT_API_KEY;
 }

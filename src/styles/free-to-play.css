@@ -3,22 +3,60 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    font-family: "Tajawal", sans-serif;
+    color: #ccbe91;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
     width: 100%;
 }
 
 .freeToPlayTitle {
     font-family: "Tajawal", sans-serif;
-    font-size: 50px;
+    font-size: 26px;
     letter-spacing: 0.2em;
     text-transform: uppercase;
     background: -webkit-linear-gradient(#ccbe91,#9f814a);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    margin: 50px 0px 30px 0px;
+    margin: 50px 0px 0px 0px;
     transition: filter 0.2s ease;
 }
 
 .freeToPlayTitle:hover {
+    filter: brightness(1.2);
+}
+
+.freeChampion_activeChampion {
+    margin: 50px 0px;
+}
+
+.freeChampion_activeChampionSplash {
+    border: 1px solid #937341;
+    width: 750px;
+    transition: all 0.2s ease;
+}
+
+.freeChampion_activeChampionSplash:hover {
+    filter: brightness(1.2);
+    cursor: pointer;
+}
+
+.freeChampion_activeChampionName {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Lusitana", sans-serif;
+    font-size: 64px;
+    font-weight: 400;
+    color: #937341;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    width: 100%;
+    margin-top: 20px;
+    margin-bottom: -25px;
+}
+
+.freeChampion_activeChampion:hover .freeChampion_activeChampionName {
     filter: brightness(1.2);
 }
 
@@ -27,40 +65,44 @@
     flex-flow: row wrap;
     justify-content: center;
     align-items: center;
+    border-top: 1px solid #937341;
+    border-bottom: 1px solid #937341;
+    width: 100%;
+    margin: 10px 0px;
+    padding: 25px 0px 15px 0px;
 }
 
 .freeChampionBanner {
-    position: relative;
-    border: 1px solid #ccbe91;
-    margin: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100px;
+    margin: 0px 12.5px;
     transition: all 0.2s ease;
 }
 
-.freeChampionBanner img {
-    width: 200px;
+.freeChampionCardBorder {
+    border: 1px solid #937341;
+    width: 75px;
+    height: 75px;
+    filter: brightness(1.2);
 }
 
-.freeChampionBanner:hover {
-    transform: scale(1.15);
-    filter: brightness(1.2);
-    cursor: pointer;
+.freeChampionBanner img {
+    /* border: 1px solid #937341; */
+    width: 75px;
+    height: 75px;
+    filter: grayscale(100%);
+    transition: all 0.2s ease;
+}
+
+.freeChampionBanner:hover img {
+    filter: grayscale(0%);
 }
 
 .freeChampionName {
-    position: absolute;
-    background: linear-gradient(180deg,rgba(0,10,19,0) 50%,#000a13 100%,#000a13);
-    font-family: 'Tajawal', serif;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: #f1e6d2;
-    text-shadow: 2px 2px #000000;
-    text-align: center;
-    width: 100%;
-    padding-top: 75%;
-    bottom: 10px;
-    visibility: hidden;
-}
-
-.freeChampionBanner:hover .freeChampionName {
-    visibility: visible;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
 }
