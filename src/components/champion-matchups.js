@@ -520,6 +520,7 @@ export default class ChampionMatchups extends Component {
             return (
                 <div className="ChampionMatchups">
                     {this.displayChampionMatchups(this.state.activeChampionId)}
+                    <div className="championMatchupsDescription">Matchup data by rank and number of games. Data is provided by <a href="https://www.champion.gg">&nbsp;champion.gg</a></div>
                     <div className="championSearch" id="championSearch_matchups" >
                             <input id="searchBar"
                                 type="text"

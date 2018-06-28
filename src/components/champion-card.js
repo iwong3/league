@@ -12,8 +12,8 @@ export default class ChampionCard extends Component {
         let style = {"backgroundImage": "url(" + splashUrl + ")"};
         switch (champion.key) {
             case ("Aatrox"):
-                style["backgroundPosition"] = "100% 27%";
-                style["backgroundSize"] = "auto 160%";
+                style["backgroundPosition"] = "100% 0%";
+                style["backgroundSize"] = "auto 115%";
                 break;
             case ("Ahri"):
                 style["backgroundPosition"] = "100% 15%";
