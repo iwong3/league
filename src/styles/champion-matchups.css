@@ -26,6 +26,7 @@
     letter-spacing: 0.15em;
     text-transform: uppercase;
     background: -webkit-linear-gradient(#9f814a,#7e6234);
+    /* border-bottom: 1px solid #937341; */
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     transition: filter 0.2s ease;
@@ -51,7 +52,8 @@
     justify-content: center;
     align-items: center;
     width: 100%;
-    transform: scale(0.75);
+    margin: -100px 0px;
+    transform: scale(0.5);
     transition: filter 0.2s ease;
 }
 
@@ -99,7 +101,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    font-size: 18px;
+    font-size: 16px;
     height: 50px;
 }
 
@@ -111,17 +113,15 @@
 .championMatchup_filterValue {
     border: 1px solid #ccbe91;
     width: 140px;
-    padding: 10px 10px;
-}
-
-.championMatchup_filterValue:hover {
+    padding: 10px 10px 5px 10px;
 }
 
 .championMatchup_filterDropdown {
     display: none;
     position: absolute;
-    background: #ccbe91;
-    color: #000000;
+    background: #000000;
+    border: 1px solid #ccbe91;
+    color: #ccbe91;
     width: 140px;
     margin-left: -11px;
     padding: 0px 10px;
@@ -130,8 +130,8 @@
 .championMatchup_filterValue:hover .championMatchup_filterDropdown {
     display: flex;
     flex-direction: column;
-    margin-top: 11px;
-    padding: 0px 11px;
+    margin-top: 5px;
+
 }
 
 .championMatchup_filterOption {
@@ -140,44 +140,75 @@
     font-size: 16px;
     width: 100%;
     height: 25px;
-    padding: 10px 0px;
+    margin-left: -10px;
+    padding: 10px 10px;
+    transition: all 0.2s ease;
 }
 
 .championMatchup_filterOption:hover {
-    background: #000000;
-    color: #ccbe91;
+    background: #ccbe91;
+    color: #000000;
+    cursor: pointer;
 }
 
 .matchupColumns {
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-    width: 900px;
+    width: 1000px;
     margin-bottom: 50px;
-    padding: 0px 75px;
+    padding: 0px 25px;
 }
 
 .championMatchupsColumn {
     display: flex;
     flex-direction: column;
     align-items: left;
-    width: 330px;
+    width: 300px;
 }
 
 .championMatchupsColumnTitle {
+    border-bottom: 1px solid #ccbe91;
     font-size: 26px;
     letter-spacing: 0.15em;
     margin: 0px 10px 10px 10px;
 }
 
+.championMatchupsColumnDivider {
+    /* border-right: 1px solid #937341; */
+    width: 2px;
+    height: 426px;
+    margin: 0px 24px;
+}
+
 .championMatchupsGroup {
+    height: 385px;
+    overflow-y: scroll;
+    transition: all 0.2 ease;
+}
+
+.championMatchupsGroup::-webkit-scrollbar {
+    display: block;
+    width: 10px;
+}
+
+.championMatchupsGroup:hover::-webkit-scrollbar-thumb {
+    background: #937341;
+    border-radius: 15px;
+}
+
+.championMatchupsGroup::-webkit-scrollbar-track-piece {
+    height: 50px;
+}
+
+.championMatchupsCard {
     display: flex;
     align-items: center;
     padding: 10px 10px;
     transition: all 0.2s ease;
 }
 
-.championMatchupsGroup:hover {
+.championMatchupsCard:hover {
     background: #ccbe91;
     color: #000000;
 }
