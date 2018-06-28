@@ -9,25 +9,26 @@
     text-transform: uppercase;
     letter-spacing: 0.1em;
     width: 1400px;
+    margin-top: 50px;
 }
 
 .championMatchups_default {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 250px;
 }
 
 .championMatchups_defaultTitle {
     font-family: "Lusitana", sans-serif;
-    font-size: 84px;
+    font-size: 35px;
     font-weight: 400;
-    letter-spacing: 0.15em;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
-    background: -webkit-linear-gradient(#9f814a,#7e6234);
+    background: -webkit-linear-gradient(#ccbe91,#9f814a);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    transition: filter 0.2s ease;
+    margin-bottom: 20px;
+    transition: all 0.2s ease;
 }
 
 .championMatchups_defaultTitle:hover {
@@ -47,7 +48,7 @@
     justify-content: center;
     align-items: center;
     width: 100%;
-    margin: -100px 0px;
+    margin: -150px 0px -100px 0px;
     transform: scale(0.5);
     transition: filter 0.2s ease;
 }
