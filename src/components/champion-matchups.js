@@ -56,7 +56,13 @@ export default class ChampionMatchups extends Component {
             this.setState(prevState => ({
                 activeElo: elo
             }), function() {
-              this.setActiveChampion(this.state.activeChampionId);  
+              this.setActiveChampion(this.state.activeChampionId);
+              let e = document.getElementById("bestMatchupsColumn");
+              e.scrollTop = 0;
+              e = document.getElementById("worstMatchupsColumn");
+              e.scrollTop = 0;
+              e = document.getElementById("mostCommonMatchupsColumn");
+              e.scrollTop = 0;
             });
         }
     }
@@ -67,6 +73,12 @@ export default class ChampionMatchups extends Component {
                 minCount: minCount
             }), function() {
                 this.setActiveChampion(this.state.activeChampionId);
+                let e = document.getElementById("bestMatchupsColumn");
+                e.scrollTop = 0;
+                e = document.getElementById("worstMatchupsColumn");
+                e.scrollTop = 0;
+                e = document.getElementById("mostCommonMatchupsColumn");
+                e.scrollTop = 0;
             });
         }
     }
@@ -156,7 +168,7 @@ export default class ChampionMatchups extends Component {
             );
         }
 
-        matchupsGroup.push(<div className="championMatchupsGroup">{matchupIcons}</div>);
+        matchupsGroup.push(<div className="championMatchupsGroup" id="bestMatchupsColumn" >{matchupIcons}</div>);
 
         matchupColumns.push(
             <div className="championMatchupsColumn">
@@ -189,7 +201,7 @@ export default class ChampionMatchups extends Component {
             );
         }
 
-        matchupsGroup.push(<div className="championMatchupsGroup">{matchupIcons}</div>);
+        matchupsGroup.push(<div className="championMatchupsGroup" id="worstMatchupsColumn" >{matchupIcons}</div>);
 
         matchupColumns.push(
             <div className="championMatchupsColumn">
@@ -222,7 +234,7 @@ export default class ChampionMatchups extends Component {
             );
         }
 
-        matchupsGroup.push(<div className="championMatchupsGroup">{matchupIcons}</div>);
+        matchupsGroup.push(<div className="championMatchupsGroup" id="mostCommonMatchupsColumn" >{matchupIcons}</div>);
 
         matchupColumns.push(
             <div className="championMatchupsColumn">
