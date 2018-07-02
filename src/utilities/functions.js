@@ -47,8 +47,8 @@ export function getKDA(k, d, a) {
     return ((k + a) / d).toFixed(2);
 }
 
-export function getStatusUrl() {
-    return "https://na1.api.riotgames.com/lol/status/v3/shard-data&api_key=" + process.env.REACT_APP_RIOT_API_KEY;
+export function getStatusUrl(region) {
+    return "https://" + region + ".api.riotgames.com/lol/status/v3/shard-data?api_key=" + process.env.REACT_APP_RIOT_API_KEY;
 }
 
 export function getVersionUrl() {
@@ -328,5 +328,33 @@ export function getChampionRegion(champion) {
         champion.name === "Zac" ||
         champion.name === "Ziggs") {
             return "Zaun";
+    }
+}
+
+export function getRegionName(region) {
+    if (region === "ru") {
+        return "Russia";
+    } else if (region === "kr") {
+        return "Korea";
+    } else if (region === "pbe1") {
+        return "Public Beta Environment";
+    } else if (region === "br1") {
+        return "Brazil";
+    } else if (region === "oc1") {
+        return "Oceania";
+    } else if (region === "jp1") {
+        return "Japan";
+    } else if (region === "na1") {
+        return "North America";
+    } else if (region === "eun1") {
+        return "Europe Nordic & East";
+    } else if (region === "euw1") {
+        return "Europe West";
+    } else if (region === "tr1") {
+        return "Turkey";
+    } else if (region === "la1") {
+        return "Latin America North";
+    } else if (region === "la2") {
+        return "Latin America South";
     }
 }

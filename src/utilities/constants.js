@@ -66,3 +66,54 @@ export const championSortStatsText = {
     "spellblock": "Magic Resist",
     "spellblockperlevel": "Magic Resist Per Level"
 }
+
+export const regions = [
+    {
+        "abbreviation": "ru",
+        "name": "Russia"
+    },
+    {
+        "abbreviation": "kr",
+        "name": "Korea"
+    },
+    {
+        "abbreviation": "pbe1",
+        "name": "Public Beta Environment"
+    },
+    {
+        "abbreviation": "br1",
+        "name": "Brazil"
+    },
+    {
+        "abbreviation": "oc1",
+        "name": "Oceania"
+    },
+    {
+        "abbreviation": "jp1",
+        "name": "Japan"
+    },
+    {
+        "abbreviation": "na1",
+        "name": "North America"
+    },
+    {
+        "abbreviation": "eun1",
+        "name": "Europe Nordic & East"
+    },
+    {
+        "abbreviation": "euw1",
+        "name": "Europe West"
+    },
+    {
+        "abbreviation": "tr1",
+        "name": "Turkey"
+    },
+    {
+        "abbreviation": "la1",
+        "name": "Latin America North"
+    },
+    {
+        "abbreviation": "la2",
+        "name": "Latin America South"
+    }
+]

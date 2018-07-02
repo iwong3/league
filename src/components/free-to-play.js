@@ -23,7 +23,6 @@ export default class FreeToPlay extends Component {
         let freeToPlayUrl = utility.getFreeChampionsUrl();
         axios.get(freeToPlayUrl)
              .then(res => {
-                 console.log(res.data.champions);
                  this.setState({
                      freeChampions: res.data.champions,
                      activeChampionId: res.data.champions[0].id,

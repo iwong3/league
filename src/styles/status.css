@@ -1,0 +1,133 @@
+.Status {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: "Tajawal", sans-serif;
+    font-size: 18px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #ccbe91;
+    width: 100%;
+    margin-bottom: 100px;
+}
+
+.statusTitle {
+    font-family: "Tajawal", sans-serif;
+    font-size: 26px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    background: -webkit-linear-gradient(#ccbe91,#9f814a);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin: 50px 0px 50px 0px;
+    transition: filter 0.2s ease;
+}
+
+.statusTitle:hover {
+    filter: brightness(1.2);
+}
+
+.statusBody {
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
+    width: 1200px;
+}
+
+.statusHeaderRow {
+    display: flex;
+    margin-bottom: 25px;
+}
+
+.statusRegionTitle {
+    font-size: 32px;
+    letter-spacing: 0.15em;
+    width: 300px;
+    margin-left: 150px;
+    transition: all 0.2s ease;
+}
+
+.statusRegionTitle:hover {
+    filter: brightness(1.2);
+}
+
+.statusCurrentRegionTitle {
+    display: flex;
+    font-size: 32px;
+    letter-spacing: 0.15em;
+    width: 600px;
+    margin-left: 150px;
+    transition: all 0.2s ease;
+}
+
+.statusCurrentRegionTitle:hover {
+    filter: brightness(1.2);
+}
+
+.statusRegionSelector {
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    width: 300px;
+    margin-left: 150px;
+}
+
+.statusRegion {
+    margin: 2px 0px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.statusRegion:hover {
+    color: #ffffff;
+}
+
+.statusContent {
+    display: flex;
+}
+
+.statuses {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 600px;
+    margin: 10px 0px;
+    margin-left: 150px;
+}
+
+.serviceRow {
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+    height: 100px;
+    /* border: 1px solid #ccbe91; */
+}
+
+.serviceGroup {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    width: 300px;
+    transition: all 0.2s ease;
+}
+
+.serviceGroup:hover {
+    filter: brightness(1.2);
+}
+
+.serviceName {
+    font-size: 32px;
+    letter-spacing: 0.15em;
+}
+
+.serviceStatus {
+    width: 25px;
+    height: 25px;
+    background: #004c00;
+    /* border: 1px solid #ccbe91; */
+    border-radius: 50px;
+    margin-bottom: 10px;
+    margin-right: 25px;
+}
