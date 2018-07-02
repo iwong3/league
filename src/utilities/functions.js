@@ -52,7 +52,7 @@ export function getStatusUrl(region) {
 }
 
 export function getVersionUrl() {
-    return "https://na1.api.riotgames.com/lol/static-data/v3/versions/?api_key=" + process.env.REACT_APP_RIOT_API_KEY;
+    return "https://ddragon.leagueoflegends.com/api/versions.json";
 }
 
 export function getSummonerUrl(summonerName) {
@@ -79,8 +79,13 @@ export function getChampionLoadingUrl(champion) {
     return "http://ddragon.leagueoflegends.com/cdn/img/champion/loading/" + champion + "_0.jpg";
 }
 
+// export function getChampionsUrl() {
+//     return "https://na1.api.riotgames.com/lol/static-data/v3/champions?locale=en_US&dataById=false&api_key=" + process.env.REACT_APP_RIOT_API_KEY;
+// }
+
+//not used right now as we keep our champion data locally instead of pulling every time
 export function getChampionsUrl() {
-    return "https://na1.api.riotgames.com/lol/static-data/v3/champions?locale=en_US&dataById=false&api_key=" + process.env.REACT_APP_RIOT_API_KEY;
+    return "http://ddragon.leagueoflegends.com/cdn/" + constant.version + "/data/en_US/champion.json";
 }
 
 export function getFreeChampionsUrl() {
