@@ -2,6 +2,143 @@ import * as constant from './constants';
 import * as champions from './champions';
 import * as summonerSpells from './summoner-spells';
 
+//Helper function to standardize format of champions
+//Allows sorting functions to recieve and output in same format
+export function standardizeChampions(champions) {
+    let standardizedChampions = [];
+    Object.keys(champions).map((champion) => standardizedChampions.push(champions[champion]));
+    return standardizedChampions;
+}
+
+//puts every item object into an array, adds object as a key property
+export function standardizeItems(items) {
+    let standardizedItems = [];
+    Object.keys(items).map((item) => {
+        items[item].key = item;
+        standardizedItems.push(items[item]);
+    });
+    return standardizedItems;
+}
+
+export function getKDA(k, d, a) {
+    if (d === 0 && (k > 0 || a > 0)) {
+        return "∞";
+    }
+    return ((k + a) / d).toFixed(2);
+}
+
+//URL FUNCTIONS
+
+export function getStatusUrl(region) {
+    return "https://" + region + ".api.riotgames.com/lol/status/v3/shard-data?api_key=" + process.env.REACT_APP_RIOT_API_KEY;
+}
+
+export function getVersionUrl() {
+    return "https://ddragon.leagueoflegends.com/api/versions.json";
+}
+
+export function getItemData() {
+    return "http://ddragon.leagueoflegends.com/cdn/" + constant.version + "/data/en_US/item.json";
+}
+
+// URL FUNCTIONS - IMAGES
+
+export function getProfileIconUrl(version, profileIconId) {
+    return "http://ddragon.leagueoflegends.com/cdn/" + version + "/img/profileicon/" + profileIconId + ".png"
+}
+
+export function getChampionIconUrl(champion) {
+    return "https://ddragon.leagueoflegends.com/cdn/" + constant.version + "/img/champion/" + champion + ".png";
+}
+
+export function getChampionSplashUrl(champion) {
+    return "http://ddragon.leagueoflegends.com/cdn/img/champion/splash/" + champion + "_0.jpg";
+}
+
+export function getChampionSplashBySkinUrl(champion, skin) {
+    return "http://ddragon.leagueoflegends.com/cdn/img/champion/splash/" + champion + "_" + skin + ".jpg";
+}
+
+export function getChampionLoadingUrl(champion) {
+    return "http://ddragon.leagueoflegends.com/cdn/img/champion/loading/" + champion + "_0.jpg";
+}
+
+export function getItemUrl(item) {
+    return "http://ddragon.leagueoflegends.com/cdn/" + constant.version + "/img/item/" + item + ".png"
+}
+
+export function getSummonerSpellUrl(summonerSpell) {
+    return "http://ddragon.leagueoflegends.com/cdn/" + constant.version + "/img/spell/" + summonerSpell + ".png";
+}
+
+//champion, gold, items, minion, score, spells
+export function getScoreboardIcons(icon) {
+    return "http://ddragon.leagueoflegends.com/cdn/5.5.1/img/ui/" + icon + ".png";
+}
+
+// export function getChampionsUrl() {
+//     return "https://na1.api.riotgames.com/lol/static-data/v3/champions?locale=en_US&dataById=false&api_key=" + process.env.REACT_APP_RIOT_API_KEY;
+// }
+
+//not used right now as we keep our champion data locally instead of pulling every time
+export function getChampionsUrl() {
+    return "http://ddragon.leagueoflegends.com/cdn/" + constant.version + "/data/en_US/champion.json";
+}
+
+export function getFreeChampionsUrl() {
+    return "https://na1.api.riotgames.com/lol/platform/v3/champions?freeToPlay=true&api_key=" + process.env.REACT_APP_RIOT_API_KEY;
+}
+
+//URL FUNCTIONS - SUMMONER INFO
+
+export function getSummonerUrl(summonerName) {
+    return "https://na1.api.riotgames.com/lol/summoner/v3/summoners/by-name/" + summonerName + "?api_key="+ process.env.REACT_APP_RIOT_API_KEY;
+}
+
+export function getMasteryUrl(summonerId) {
+    return "https://na1.api.riotgames.com/lol/champion-mastery/v3/champion-masteries/by-summoner/" + summonerId + "?api_key=" + process.env.REACT_APP_RIOT_API_KEY;
+}
+
+export function getMatchHistory10Url(accountId) {
+    return "https://na1.api.riotgames.com/lol/match/v3/matchlists/by-account/" + accountId + "?endIndex=10&api_key=" + process.env.REACT_APP_RIOT_API_KEY;
+}
+
+export function getMatchUrl(gameId) {
+    return "https://na1.api.riotgames.com/lol/match/v3/matches/" + gameId + "?api_key=" + process.env.REACT_APP_RIOT_API_KEY;
+}
+
+export function getNumGamesByEloUrl(elo) {
+    if (elo === "PLATINUM+") {
+        return "http://api.champion.gg/v2/general?api_key=" + process.env.REACT_APP_CHAMPION_GG_API_KEY;
+    }
+    return "http://api.champion.gg/v2/general?elo=" + elo + "&api_key=" + process.env.REACT_APP_CHAMPION_GG_API_KEY;
+}
+
+//CHAMPION STATS
+
+//gets all champion/role combinations (which is less than the limit, 1000)
+export function getAllChampionWinRatesByElo(elo) {
+    if (elo === "PLATINUM+") {
+        return "http://api.champion.gg/v2/champions?limit=1000&champData=kda,damage,averageGames,minions,goldEarned&sort=championId-asce&api_key=" + process.env.REACT_APP_CHAMPION_GG_API_KEY;
+    }
+    return "http://api.champion.gg/v2/champions?elo=" + elo + "&limit=1000&champData=kda,damage,averageGames,minions,goldEarned&sort=championId-asce&api_key=" + process.env.REACT_APP_CHAMPION_GG_API_KEY;
+}
+
+export function getChampionWinRateByEloUrl(id, elo) {
+    if (elo === "PLATINUM+") {
+        return "http://api.champion.gg/v2/champions/" + id + "?champData=kda,damage,averageGames,minions,goldEarned&api_key=" + process.env.REACT_APP_CHAMPION_GG_API_KEY;
+    }
+    return "api.champion.gg/v2/champions/" + id + "/?elo=" + elo + "&champData=kda,damage,averageGames,minions,goldEarned&api_key=" + process.env.REACT_APP_CHAMPION_GG_API_KEY;
+}
+
+export function getChampionMatchupsByEloUrl(id, elo) {
+    if (elo === "PLATINUM+") {
+        return "http://api.champion.gg/v2/champions/" + id + "/matchups?limit=1000&api_key=" + process.env.REACT_APP_CHAMPION_GG_API_KEY;
+    }
+    return "http://api.champion.gg/v2/champions/" + id + "/matchups?elo=" + elo + "&limit=1000&api_key=" + process.env.REACT_APP_CHAMPION_GG_API_KEY;
+}
+
+//PROPERTY CONVERSION FUNCTIONS
 
 export function championIdToKey(id) {
     //get an array of data's "properties" (champs)
@@ -30,120 +167,6 @@ export function summonerSpellIdToName(id) {
             return summonerSpells.summonerSpells.data[summonerSpellsProperties[i]].key;
         }
     }
-}
-
-//Helper function to standardize format of champions
-//Allows sorting functions to recieve and output in same format
-export function standardizeChampions(champions) {
-    let standardizedChampions = [];
-    Object.keys(champions).map((champion) => standardizedChampions.push(champions[champion]));
-    return standardizedChampions;
-}
-
-export function getKDA(k, d, a) {
-    if (d === 0 && (k > 0 || a > 0)) {
-        return "∞";
-    }
-    return ((k + a) / d).toFixed(2);
-}
-
-export function getStatusUrl(region) {
-    return "https://" + region + ".api.riotgames.com/lol/status/v3/shard-data?api_key=" + process.env.REACT_APP_RIOT_API_KEY;
-}
-
-export function getVersionUrl() {
-    return "https://ddragon.leagueoflegends.com/api/versions.json";
-}
-
-export function getSummonerUrl(summonerName) {
-    return "https://na1.api.riotgames.com/lol/summoner/v3/summoners/by-name/" + summonerName + "?api_key="+ process.env.REACT_APP_RIOT_API_KEY;
-}
-
-export function getProfileIconUrl(version, profileIconId) {
-    return "http://ddragon.leagueoflegends.com/cdn/" + version + "/img/profileicon/" + profileIconId + ".png"
-}
-
-export function getChampionIconUrl(champion) {
-    return "https://ddragon.leagueoflegends.com/cdn/" + constant.version + "/img/champion/" + champion + ".png";
-}
-
-export function getChampionSplashUrl(champion) {
-    return "http://ddragon.leagueoflegends.com/cdn/img/champion/splash/" + champion + "_0.jpg";
-}
-
-export function getChampionSplashBySkinUrl(champion, skin) {
-    return "http://ddragon.leagueoflegends.com/cdn/img/champion/splash/" + champion + "_" + skin + ".jpg";
-}
-
-export function getChampionLoadingUrl(champion) {
-    return "http://ddragon.leagueoflegends.com/cdn/img/champion/loading/" + champion + "_0.jpg";
-}
-
-// export function getChampionsUrl() {
-//     return "https://na1.api.riotgames.com/lol/static-data/v3/champions?locale=en_US&dataById=false&api_key=" + process.env.REACT_APP_RIOT_API_KEY;
-// }
-
-//not used right now as we keep our champion data locally instead of pulling every time
-export function getChampionsUrl() {
-    return "http://ddragon.leagueoflegends.com/cdn/" + constant.version + "/data/en_US/champion.json";
-}
-
-export function getFreeChampionsUrl() {
-    return "https://na1.api.riotgames.com/lol/platform/v3/champions?freeToPlay=true&api_key=" + process.env.REACT_APP_RIOT_API_KEY;
-}
-
-export function getMasteryUrl(summonerId) {
-    return "https://na1.api.riotgames.com/lol/champion-mastery/v3/champion-masteries/by-summoner/" + summonerId + "?api_key=" + process.env.REACT_APP_RIOT_API_KEY;
-}
-
-export function getMatchHistory10Url(accountId) {
-    return "https://na1.api.riotgames.com/lol/match/v3/matchlists/by-account/" + accountId + "?endIndex=10&api_key=" + process.env.REACT_APP_RIOT_API_KEY;
-}
-
-export function getMatchUrl(gameId) {
-    return "https://na1.api.riotgames.com/lol/match/v3/matches/" + gameId + "?api_key=" + process.env.REACT_APP_RIOT_API_KEY;
-}
-
-export function getItemUrl(item) {
-    return "http://ddragon.leagueoflegends.com/cdn/" + constant.version + "/img/item/" + item + ".png"
-}
-
-export function getSummonerSpellUrl(summonerSpell) {
-    return "http://ddragon.leagueoflegends.com/cdn/" + constant.version + "/img/spell/" + summonerSpell + ".png";
-}
-
-//champion, gold, items, minion, score, spells
-export function getScoreboardIcons(icon) {
-    return "http://ddragon.leagueoflegends.com/cdn/5.5.1/img/ui/" + icon + ".png";
-}
-
-export function getNumGamesByEloUrl(elo) {
-    if (elo === "PLATINUM+") {
-        return "http://api.champion.gg/v2/general?api_key=" + process.env.REACT_APP_CHAMPION_GG_API_KEY;
-    }
-    return "http://api.champion.gg/v2/general?elo=" + elo + "&api_key=" + process.env.REACT_APP_CHAMPION_GG_API_KEY;
-}
-
-//gets all champion/role combinations (which is less than the limit, 1000)
-export function getAllChampionWinRatesByElo(elo) {
-    if (elo === "PLATINUM+") {
-        return "http://api.champion.gg/v2/champions?limit=1000&champData=kda,damage,averageGames,minions,goldEarned&sort=championId-asce&api_key=" + process.env.REACT_APP_CHAMPION_GG_API_KEY;
-    }
-    return "http://api.champion.gg/v2/champions?elo=" + elo + "&limit=1000&champData=kda,damage,averageGames,minions,goldEarned&sort=championId-asce&api_key=" + process.env.REACT_APP_CHAMPION_GG_API_KEY;
-}
-
-export function getChampionWinRateByEloUrl(id, elo) {
-    if (elo === "PLATINUM+") {
-        return "http://api.champion.gg/v2/champions/" + id + "?champData=kda,damage,averageGames,minions,goldEarned&api_key=" + process.env.REACT_APP_CHAMPION_GG_API_KEY;
-    }
-    return "api.champion.gg/v2/champions/" + id + "/?elo=" + elo + "&champData=kda,damage,averageGames,minions,goldEarned&api_key=" + process.env.REACT_APP_CHAMPION_GG_API_KEY;
-}
-
-export function getChampionMatchupsByEloUrl(id, elo) {
-    if (elo === "PLATINUM+") {
-        return "http://api.champion.gg/v2/champions/" + id + "/matchups?limit=1000&api_key=" + process.env.REACT_APP_CHAMPION_GG_API_KEY;
-    }
-    return "http://api.champion.gg/v2/champions/" + id + "/matchups?elo=" + elo + "&limit=1000&api_key=" + process.env.REACT_APP_CHAMPION_GG_API_KEY;
 }
 
 export function getMonthString(month) {

@@ -5,6 +5,7 @@ import Header from './header';
 import Navigation from './navigation';
 import SearchContainer from './search-container';
 import Champions from './champions';
+import Items from './items';
 import Game from './game';
 import Statistics from './statistics';
 
@@ -29,7 +30,7 @@ export default class App extends Component {
             <Route path={"/champions"}
                    component={Champions} />
             <Route path={"/items"}
-                   />
+                   component={Items} />
             <Route path={"/statistics/champion-win-rates"}
                    component={() => <Statistics activePage="championWinRates"/>} />
             <Route path={"/statistics/champion-matchups"}

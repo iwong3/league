@@ -1,0 +1,29 @@
+.Items {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.itemImages {
+    display: flex;
+    flex-direction: column;
+}
+
+.itemImagesRow {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px 0px;
+}
+
+.itemIconGroup {
+    display: flex;
+    border: 1px solid #ccbe91;
+    margin: 0px 10px;
+}
+
+.itemIcon {
+    width: 64px;
+    height: 64px;
+}
