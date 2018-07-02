@@ -43,6 +43,7 @@ export default class FreeToPlay extends Component {
         return (
             <div className="freeChampion_activeChampion">
                 <img className="freeChampion_activeChampionSplash"
+                     alt={utility.championIdToName(id)}
                      src={this.state.freeChampionsSplashUrls[this.state.activeChampionIndex]}
                      onClick={() => this.searchChampion(utility.championIdToName(id))} />
                 <div className="freeChampion_activeChampionName">{utility.championIdToName(id)}</div>
