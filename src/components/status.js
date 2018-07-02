@@ -143,24 +143,24 @@ export default class Status extends Component {
                                     <div className="serviceGroup">
                                         <div className="serviceStatus" style={this.setServiceStatusColor(this.state.statusData.services[0].status)}></div>
                                         <div className="serviceName">{this.state.statusData.services[0].name}</div>
-                                        {/* <div className="serviceStatus"></div> */}
+                                        <div className="serviceStatusText">{this.state.statusData.services[0].status}</div>
                                     </div>
                                     <div className="serviceGroup">
                                         <div className="serviceStatus" style={this.setServiceStatusColor(this.state.statusData.services[1].status)}></div>
                                         <div className="serviceName">{this.state.statusData.services[1].name}</div>
-                                        {/* <div className="serviceStatus"></div> */}
+                                        <div className="serviceStatusText">{this.state.statusData.services[0].status}</div>
                                     </div>
                                 </div>
                                 <div className="serviceRow">
                                     <div className="serviceGroup">
                                         <div className="serviceStatus" style={this.setServiceStatusColor(this.state.statusData.services[2].status)}></div>
                                         <div className="serviceName">{this.state.statusData.services[2].name}</div>
-                                        {/* <div className="serviceStatus"></div> */}
+                                        <div className="serviceStatusText">{this.state.statusData.services[0].status}</div>
                                     </div>
                                     <div className="serviceGroup">
                                         <div className="serviceStatus" style={this.setServiceStatusColor(this.state.statusData.services[3].status)}></div>
                                         <div className="serviceName">{this.state.statusData.services[3].name}</div>
-                                        {/* <div className="serviceStatus"></div> */}
+                                        <div className="serviceStatusText">{this.state.statusData.services[0].status}</div>
                                     </div>
                                 </div>
                             </div>

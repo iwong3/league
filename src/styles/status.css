@@ -30,7 +30,6 @@
 .statusBody {
     display: flex;
     flex-direction: column;
-    /* justify-content: center; */
     align-items: center;
     width: 1200px;
 }
@@ -99,10 +98,8 @@
 
 .serviceRow {
     display: flex;
-    /* justify-content: center; */
     align-items: center;
     height: 100px;
-    /* border: 1px solid #ccbe91; */
 }
 
 .serviceGroup {
@@ -126,8 +123,29 @@
     width: 25px;
     height: 25px;
     background: #004c00;
-    /* border: 1px solid #ccbe91; */
     border-radius: 50px;
     margin-bottom: 10px;
     margin-right: 25px;
+}
+
+.serviceStatusText {
+    visibility: hidden;
+    width: 120px;
+    position: absolute;
+    padding-bottom: 100px;
+    z-index: 2;
+}
+
+.serviceStatusText::after {
+    content: " ";
+    position: absolute;
+    margin-top: 25px;
+    margin-left: -60px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #ccbe91 transparent transparent transparent;
+}
+
+.serviceGroup:hover .serviceStatusText {
+    visibility: visible;
 }
