@@ -579,6 +579,15 @@ export default class Items extends Component {
         });
     }
 
+    //update search state as user types
+    handleSearchChange = (event) => {
+        this.setState({
+            search: event.target.value
+        }, function() {
+            this.sortItems(this.state.originalItems, this.state.sort, this.state.search);
+        });
+    }
+
     displayItems = (items) => {
         let rowSize = 12;
         let itemImages = [];
@@ -817,7 +826,22 @@ export default class Items extends Component {
                             </div>
                         </div>
                     </div>
-                    {this.displayItems(this.state.items)}
+                    <div className="championsGroup">
+                        <div className="championsLabel">
+                            <h1>Items</h1>
+                        </div>
+                        {/* SEARCH BAR */}
+                        <div className="championSearch">
+                            <input id="searchBar"
+                                type="text"
+                                autoComplete="off"
+                                value={this.state.search}
+                                placeholder="Find An Item..."
+                                onChange={this.handleSearchChange}
+                            />
+                        </div>
+                        {this.displayItems(this.state.items)}
+                    </div>
                 </div>
             );
         } else {
