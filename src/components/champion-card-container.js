@@ -46,7 +46,7 @@ export default class ChampionCardContainer extends Component {
                 <ChampionCard champion={this.props.champion}
                               handleClick={this.handleClick} />
                 <ChampionCardExpanded champion={this.props.champion}
-                                      className={this.showChampionCardExpanded()}/>
+                                      className={this.showChampionCardExpanded()} />
             </div>
         );
     }

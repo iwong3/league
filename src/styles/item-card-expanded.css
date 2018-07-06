@@ -1,0 +1,32 @@
+.ItemCardExpanded {
+    display: flex;
+    flex-direction: column;
+    /* background: url(../images/champion_region_bg/Ionia.png); */
+    color: #ccbe91;
+    margin: 0px 10px;
+    height: 625px;
+    transition: max-height, filter, border;
+    transition-timing-function: linear, ease;
+    transition-duration: .2s, .2s;
+}
+
+.itemCardHidden {
+    max-height: 0;
+    overflow: hidden;
+    border: 1px solid transparent;
+    filter: brightness(0);
+}
+
+.itemCardExpanded {
+    overflow: hidden;
+    max-height: 500px;
+    border: 1px solid #937341;
+    border-top: none;
+}
+
+.ItemCardExpanded_textGroup {
+    font-family: "Tajawal", sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin: 10px;
+}

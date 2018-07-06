@@ -585,7 +585,7 @@ export default class ChampionCard extends Component {
     render() {
         return (
             <div className="ChampionCard"
-                 onClick={this.props.handleClick}>
+                 onClick={this.props.handleClick} >
                 <div className="championArt"
                      style={this.getChampionArt(this.props.champion)} >
                 </div>

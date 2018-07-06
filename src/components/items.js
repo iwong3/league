@@ -3,6 +3,8 @@ import axios from 'axios';
 
 import * as utility from '../utilities/functions';
 
+import ItemCardContainer from './item-card-container';
+
 import "../styles/items.css";
 
 
@@ -11,6 +13,12 @@ export default class Items extends Component {
     constructor(props) {
         super(props);
 
+        //defenseStats: armor, health, healthregen, spellblock(magicresist)
+        //attackStats: attackspeed, criticalstrike, damage(attackdamage), lifesteal, onhit, armorpenetration
+        //magicStats: cooldownreduction, mana, manaregen, spelldamage(abilitypower), magicpenetration
+        //movementStats: boots, nonbootsmovement(othermovement), tenacity
+        //otherStats: jungle, lane, active,c onsumable, goldper, visiontrinket(vision & trinkets)
+        //map: twistedtreeline, summonersrift, howlingabyss, inactive
         this.state = {
             items: null,
             originalItems: null,
@@ -19,13 +27,14 @@ export default class Items extends Component {
                 costReverse: false,
                 order: "alphabet",
                 defenseStats: [false, false, false, false],
-                attackStats: [false, false, false, false],
-                magicStats: [false, false, false, false],
+                attackStats: [false, false, false, false, false, false],
+                magicStats: [false, false, false, false, false],
                 movementStats: [false, false, false],
                 otherStats: [false, false, false, false, false, false],
                 map: [false, false, false, false]
             },
-            search: ""
+            search: "",
+            displayCards: true
         }
     }
 
@@ -41,7 +50,6 @@ export default class Items extends Component {
              });
     }
 
-    //onhit, armor pen, magic pen
     sortItems = (items, sort, search) => {
         let itemsCopy = items;
 
@@ -70,6 +78,12 @@ export default class Items extends Component {
         if (sort.attackStats[3]) {
             itemsCopy = this.sortItemsTags(itemsCopy, "LifeSteal");
         }
+        if (sort.attackStats[4]) {
+            itemsCopy = this.sortItemsTags(itemsCopy, "OnHit");
+        }
+        if (sort.attackStats[5]) {
+            itemsCopy = this.sortItemsTags(itemsCopy, "ArmorPenetration");
+        }
         if (sort.magicStats[0]) {
             itemsCopy = this.sortItemsTags(itemsCopy, "CooldownReduction");
         }
@@ -81,6 +95,9 @@ export default class Items extends Component {
         }
         if (sort.magicStats[3]) {
             itemsCopy = this.sortItemsTags(itemsCopy, "SpellDamage");
+        }
+        if (sort.magicStats[4]) {
+            itemsCopy = this.sortItemsTags(itemsCopy, "MagicPenetration");
         }
         if (sort.movementStats[0]) {
             itemsCopy = this.sortItemsTags(itemsCopy, "Boots");
@@ -330,6 +347,12 @@ export default class Items extends Component {
             case ("LifeSteal"):
                 sortCopy.attackStats[3] = !sortCopy.attackStats[3];
                 break;
+            case ("OnHit"):
+                sortCopy.attackStats[4] = !sortCopy.attackStats[4];
+                break;
+            case ("ArmorPenetration"):
+                sortCopy.attackStats[5] = !sortCopy.attackStats[5];
+                break;
             case ("CooldownReduction"):
                 sortCopy.magicStats[0] = !sortCopy.magicStats[0];
                 break;
@@ -341,6 +364,9 @@ export default class Items extends Component {
                 break;
             case ("SpellDamage"):
                 sortCopy.magicStats[3] = !sortCopy.magicStats[3];
+                break;
+            case ("MagicPenetration"):
+                sortCopy.magicStats[4] = !sortCopy.magicStats[4];
                 break;
             case ("Boots"):
                 sortCopy.movementStats[0] = !sortCopy.movementStats[0];
@@ -461,6 +487,16 @@ export default class Items extends Component {
                     active = true;
                 }
                 break;
+            case ("OnHit"):
+                if (this.state.sort.attackStats[4]) {
+                    active = true;
+                }
+                break;
+            case ("ArmorPenetration"):
+                if (this.state.sort.attackStats[5]) {
+                    active = true;
+                }
+                break;
             case ("CooldownReduction"):
                 if (this.state.sort.magicStats[0]) {
                     active = true;
@@ -478,6 +514,11 @@ export default class Items extends Component {
                 break;
             case ("SpellDamage"):
                 if (this.state.sort.magicStats[3]) {
+                    active = true;
+                }
+                break;
+            case ("MagicPenetration"):
+                if (this.state.sort.magicStats[4]) {
                     active = true;
                 }
                 break;
@@ -567,8 +608,8 @@ export default class Items extends Component {
                 costReverse: false,
                 order: "alphabet",
                 defenseStats: [false, false, false, false],
-                attackStats: [false, false, false, false],
-                magicStats: [false, false, false, false],
+                attackStats: [false, false, false, false, false, false],
+                magicStats: [false, false, false, false, false],
                 movementStats: [false, false, false],
                 otherStats: [false, false, false, false, false, false],
                 map: [false, false, false, false]
@@ -596,18 +637,21 @@ export default class Items extends Component {
 
         for (let i = 0; i < items.length; i++) {
             itemImageUrl = utility.getItemUrl(items[i].key);
-            if (i % 12 === 0) {
+            if (i !== 0 && i % rowSize === 0) {
                 itemImages.push(
                     <div className="itemImagesRow">{itemImagesRow}</div>
                 );
                 itemImagesRow = [];
             }
+
             itemImagesRow.push(
                 <div className="itemIconGroup">
                     <div className="itemIcon" style={{"background": "url(" + itemImageUrl + ") center"}}></div>
                 </div>
             );
-            if (i === items.length - 1 && i % rowSize !== rowSize - 1) {
+
+            //push the last row
+            if (i === items.length - 1 && itemImagesRow.length > 0) {
                 itemImages.push(
                     <div className="itemImagesRow">{itemImagesRow}</div>
                 );
@@ -617,6 +661,67 @@ export default class Items extends Component {
         return (
             <div className="itemImages">{itemImages}</div>
         );
+    }
+
+    displayItemCards = (items) => {
+        let rowSize = 3;
+        let itemImages = [];
+        let itemImagesRow = [];
+        let itemImageUrl = "";
+
+        for (let i = 0; i < items.length; i++) {
+            itemImageUrl = utility.getItemUrl(items[i].key);
+            if (i !== 0 && i % rowSize === 0) {
+                itemImages.push(
+                    <div className="itemImagesRow">{itemImagesRow}</div>
+                );
+                itemImagesRow = [];
+            }
+
+            itemImagesRow.push(
+                <ItemCardContainer item={items[i]}
+                                   itemImageUrl={itemImageUrl} />
+            );
+            
+            //push the last row
+            if (i === items.length - 1 && itemImagesRow.length > 0) {
+                itemImages.push(
+                    <div className="itemImagesRow">{itemImagesRow}</div>
+                );
+            }
+        }
+
+        return (
+            <div className="itemImages">{itemImages}</div>
+        );
+    }
+
+    setItemDisplayCards = (display) => {
+        if (display) {
+            this.setState(prevState => ({
+                displayCards: true
+            }));
+        } else {
+            this.setState(prevState => ({
+                displayCards: false
+            }));
+        }
+    }
+
+    setActiveStyle = (display) => {
+        if (display === "cards" && this.state.displayCards) {
+            return ({
+                "color": "#cd2626"
+            });
+        }
+        if (display === "icons" && !this.state.displayCards) {
+            return ({
+                "color": "#cd2626"
+            });
+        }
+        return ({
+            "color": "#f1e6d2"
+        });
     }
 
     render() {
@@ -701,12 +806,22 @@ export default class Items extends Component {
                                 <div className="championsSortSecondaryText"
                                      onClick={() => this.setSearchCriteria("Damage")}
                                      style={this.setCriteriaStyle("Damage")} >
-                                    Damage
+                                    Attack Damage
                                 </div>
                                 <div className="championsSortSecondaryText"
                                      onClick={() => this.setSearchCriteria("LifeSteal")}
                                      style={this.setCriteriaStyle("LifeSteal")} >
                                     Life Steal
+                                </div>
+                                <div className="championsSortSecondaryText"
+                                     onClick={() => this.setSearchCriteria("OnHit")}
+                                     style={this.setCriteriaStyle("OnHit")} >
+                                    On-Hit
+                                </div>
+                                <div className="championsSortSecondaryText"
+                                     onClick={() => this.setSearchCriteria("ArmorPenetration")}
+                                     style={this.setCriteriaStyle("ArmorPenetration")} >
+                                    Armor Pen
                                 </div>
                             </div>
                             {/* MAGIC STATS */}
@@ -714,7 +829,7 @@ export default class Items extends Component {
                                 <div className="championsSortSecondaryText"
                                      onClick={() => this.setSearchCriteria("CooldownReduction")}
                                      style={this.setCriteriaStyle("CooldownReduction")} >
-                                    Cooldown Reduction
+                                    CDR
                                 </div>
                                 <div className="championsSortSecondaryText"
                                      onClick={() => this.setSearchCriteria("Mana")}
@@ -730,6 +845,11 @@ export default class Items extends Component {
                                      onClick={() => this.setSearchCriteria("SpellDamage")}
                                      style={this.setCriteriaStyle("SpellDamage")} >
                                     Ability Power
+                                </div>
+                                <div className="championsSortSecondaryText"
+                                     onClick={() => this.setSearchCriteria("MagicPenetration")}
+                                     style={this.setCriteriaStyle("MagicPenetration")} >
+                                    Magic Pen
                                 </div>
                             </div>
                             {/* MOVEMENT STATS */}
@@ -810,10 +930,14 @@ export default class Items extends Component {
                         {/* CARDS & ICONS * RESET */}
                         <div className="championSortBottomRow">
                             <div className="championDisplayType">
-                                <div className="championsSortSecondaryText">
+                                <div className="championsSortSecondaryText"
+                                     onClick={() => this.setItemDisplayCards(true)}
+                                     style={this.setActiveStyle("cards")} >
                                     Cards
                                 </div>
-                                <div className="championsSortSecondaryText">
+                                <div className="championsSortSecondaryText"
+                                     onClick={() => this.setItemDisplayCards(false)}
+                                     style={this.setActiveStyle("icons")} >
                                     Icons
                                 </div>
                             </div>
@@ -840,7 +964,20 @@ export default class Items extends Component {
                                 onChange={this.handleSearchChange}
                             />
                         </div>
-                        {this.displayItems(this.state.items)}
+                        <div className="championsGallery">
+                            {   this.state.displayCards
+                                ?
+                                this.displayItemCards(this.state.items)
+                                :
+                                this.displayItems(this.state.items)
+                            }
+                            {   this.state.items.length === 0
+                                ?
+                                <div className="noChamps">No Items Found</div>
+                                :
+                                <none/>
+                            }
+                        </div>
                     </div>
                 </div>
             );

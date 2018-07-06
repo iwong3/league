@@ -1,0 +1,37 @@
+.ItemCard {
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+    font-family: "Tajawal", sans-serif;
+    border: 1px solid #937341;
+    color: #ccbe91;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    width: 360px;
+    margin: 0px 10px;
+    padding: 10px 10px;
+    transition: 0.2s ease all;
+}
+
+.ItemCard:hover {
+    filter: brightness(1.2);
+}
+
+.ItemCard_icon {
+    border: 1px solid #937341;
+    width: 64px;
+    height: 64px;
+}
+
+.ItemCard_textGroup {
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    justify-content: space-between;
+    width: 266px;
+    margin: 2.5px 10px 0px 10px;
+}
+
+.ItemCard_textRow#ItemCard_plaintext {
+    font-size: 12px;
+}
