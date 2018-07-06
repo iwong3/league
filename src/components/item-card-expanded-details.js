@@ -26,16 +26,27 @@ export default class ItemCardExpandedDetails extends Component {
     }
 
     displayBuilds = () => {
+        let builds = [];
         if (this.props.item.into) {
-            return (
+            builds.push(
                 <div className="ItemCardExpanded_textGroup">
                     <div className="ItemCardExpandedDetails_textRow">Builds Into</div>
                     {this.displayIntoItems(this.props.item.into)}
                 </div>
             );
-        } else {
-            return (<none/>);
+        } 
+        if (this.props.item.from) {
+            builds.push(
+                <div className="ItemCardExpanded_textGroup">
+                    <div className="ItemCardExpandedDetails_textRow">Builds From</div>
+                    {this.displayFromItems(this.props.item.from)}
+                </div>
+            );
         }
+
+        return (
+            <div className="ItemCardExpandedDetails_builds">{builds}</div>
+        );
     }
 
     //to-do: sort into items by price
@@ -53,6 +64,24 @@ export default class ItemCardExpandedDetails extends Component {
 
         return (
             <div className="Item_intoItems">{intoItems}</div>
+        );
+    }
+
+    //display current item first, then from items (TREE)
+    displayFromItems = (from) => {
+        let fromItems = [];
+        let itemImageUrl = "";
+
+        for (let i = 0; i < from.length; i++) {
+            itemImageUrl = utility.getItemUrl(from[i]);
+            fromItems.push(
+                <div className="ItemCard_intoItemsIcon"
+                     style={{"background": "url(" + itemImageUrl + ") center"}}></div>
+            );
+        }
+
+        return (
+            <div className="Item_intoItems">{fromItems}</div>
         );
     }
 
