@@ -1,0 +1,25 @@
+.ItemCardExpandedDetails_textRow {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0px 10px 0px;
+}
+
+.Item_intoItems {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.ItemCard_intoItemsIcon {
+    border: 1px solid #937341;
+    width: 64px;
+    height: 64px;
+    margin: 5px;
+    transition: 0.2s ease all;
+    cursor: pointer;
+}
+
+.ItemCard_intoItemsIcon:hover {
+    filter: brightness(1.2);
+}

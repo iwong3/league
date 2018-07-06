@@ -19,7 +19,7 @@ export default class ItemCardExpanded extends Component {
     }
 
     componentWillReceiveProps = (newProps) => {
-        if (newProps.champion !== this.props.champion) {
+        if (newProps.item !== this.props.item) {
             this.setState(prevState => ({
                 activeTab: "stats"
             }));

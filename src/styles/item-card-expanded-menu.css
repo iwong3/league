@@ -1,0 +1,18 @@
+.Item_leftMenuButton {
+    border: none;
+    border-right: 1px solid #937341;
+    border-bottom: 1px solid #937341;
+}
+
+.Item_rightMenuButton {
+    border: none;
+    border-left: 1px solid #937341;
+    border-bottom: 1px solid #937341;
+}
+
+.activeItemCardTab {
+    border-right: none !important;
+    border-left: none !important;
+    border-bottom: 1px solid transparent !important;
+    color: #ccbe91;
+}

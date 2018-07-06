@@ -32,8 +32,7 @@
 }
 
 .activeCardTab {
-    /* background: #000000; */
     background: none;
-    border-bottom: 1px solid transparent;
+    border-bottom: 1px solid transparent !important;
     color: #ccbe91;
 }

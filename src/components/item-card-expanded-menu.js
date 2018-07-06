@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-// import '../styles/item-card-expanded-menu.css';
+import '../styles/item-card-expanded-menu.css';
 
 
 export default class ItemCardExpandedMenu extends Component {
@@ -11,13 +11,13 @@ export default class ItemCardExpandedMenu extends Component {
 
     setTabStyle = (tab) => {
         if (tab === "stats" && tab === this.props.activeTab) {
-            return "leftMenuButton activeCardTab";
+            return "Item_leftMenuButton activeItemCardTab";
         } else if (tab === "stats") {
-            return "leftMenuButton";
+            return "Item_leftMenuButton";
         } else if (tab === "builds" && tab === this.props.activeTab) {
-            return "rightMenuButton activeCardTab";
+            return "Item_rightMenuButton activeItemCardTab";
         } else if (tab === "builds") {
-            return "rightMenuButton";
+            return "Item_rightMenuButton";
         } else if (tab === this.props.activeTab) {
             return "activeCardTab";
         }

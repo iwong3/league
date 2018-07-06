@@ -16,7 +16,7 @@ export default class ItemCardContainer extends Component {
         this.handleClick = this.handleClick.bind(this);
     }
 
-    componentWillReceieveProps = (newProps) => {
+    componentWillReceiveProps = (newProps) => {
         if (newProps.item !== this.props.item) {
             this.setState(prevState => ({
                 isExpanded: false
