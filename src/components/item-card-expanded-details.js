@@ -86,6 +86,9 @@ export default class ItemCardExpandedDetails extends Component {
         );
     }
 
+    //creates array that represents item tree
+    //format: [base item, children item, ..., children item]
+    //chidren item has the same format as the item tree. ex: [base item, [base item, children item, children item], children item]
     populateItemTree = (item) => {
         let group = [];
         group.push(item);
@@ -99,10 +102,12 @@ export default class ItemCardExpandedDetails extends Component {
         return group;
     }
     
+    //kind of recursively generates HTML code for item tree
     displayItemTree = (items, numSiblings, first) => {
         let itemTree = [];
         let itemImageUrl = utility.getItemUrl(items[0]);
 
+        //"base" case
         if (items.length === 1) {
             return (
                 <div className="itemTree" style={{"width": 100 / numSiblings + "%"}}>
@@ -165,7 +170,6 @@ export default class ItemCardExpandedDetails extends Component {
         return (
             itemTree
         );
-
     }
 
     render() {
