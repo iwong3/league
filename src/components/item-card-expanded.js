@@ -38,7 +38,8 @@ export default class ItemCardExpanded extends Component {
                 <ItemCardExpandedMenu activeTab={this.state.activeTab}
                                       setActiveTab={this.setActiveTab} />
                 <ItemCardExpandedDetails item={this.props.item}
-                                         activeTab={this.state.activeTab} />
+                                         activeTab={this.state.activeTab}
+                                         items={this.props.items} />
             </div>
         );
     }

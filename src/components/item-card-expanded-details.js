@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import * as utility from '../utilities/functions';
 import * as constant from '../utilities/constants';
+import * as object from '../utilities/objects';
 
 import '../styles/item-card-expanded-details.css';
 
@@ -39,7 +40,7 @@ export default class ItemCardExpandedDetails extends Component {
             builds.push(
                 <div className="ItemCardExpanded_textGroup">
                     <div className="ItemCardExpandedDetails_textRow">Builds From</div>
-                    {this.displayFromItems(this.props.item.from)}
+                    {this.displayItemTree(this.populateItemTree(this.props.item.key), 1, true)}
                 </div>
             );
         }
@@ -83,6 +84,134 @@ export default class ItemCardExpandedDetails extends Component {
         return (
             <div className="Item_intoItems">{fromItems}</div>
         );
+    }
+
+    populateItemTree = (item) => {
+        let group = [];
+        group.push(item);
+
+        if (this.props.items[item].from) {
+            for (let i = 0; i < this.props.items[item].from.length; i++) {
+                group.push(this.populateItemTree(this.props.items[item].from[i]));
+            }
+        }
+
+        return group;
+    }
+
+    displayItemTree(items) {
+        let itemTree = [];
+        let itemImageUrl = utility.getItemUrl(items[0]);
+        itemTree.push(
+            <div className="ItemCard_intoItemsIcon"
+                 style={{"background": "url(" + itemImageUrl + ") center"}}></div>
+        );
+        for (let i = 0; i < items.length; i++) {
+            if (i === 0) {
+                continue;
+            }
+            itemTree.push(
+                <div className="itemTreeRow">
+                    {this.displayItemTree(items[i])}
+                </div>
+            );
+        }
+
+        return (
+            <div className="itemTree">{itemTree}</div>
+        );
+    }
+
+    displayItemTree(items) {
+        let itemTree = [];
+        let itemImageUrl = utility.getItemUrl(items[0]);
+        itemTree.push(
+            <div className="ItemCard_intoItemsIcon"
+                 style={{"background": "url(" + itemImageUrl + ") center"}}></div>
+        );
+        for (let i = 0; i < items.length; i++) {
+            if (i === 0) {
+                continue;
+            }
+            itemTree.push(
+                <div className="itemTreeRow">
+                    {this.displayItemTree(items[i])}
+                </div>
+            );
+        }
+
+        return (
+            <div className="itemTree">{itemTree}</div>
+        );
+    }
+    
+    displayItemTree = (items, numSiblings, first) => {
+        let itemTree = [];
+        let itemImageUrl = utility.getItemUrl(items[0]);
+
+        if (items.length === 1) {
+            return (
+                <div className="itemTree" style={{"width": 100 / numSiblings + "%"}}>
+                    <div className="itemTreeRowHead"
+                        style={{"background": "url(" + itemImageUrl + ") center"}}></div>
+                </div>
+            );
+        }
+        if (items.length === 2) {
+            itemTree.push(
+                <div className="itemTree" style={{"width": 100 / numSiblings + "%"}}>
+                    <div className="itemTreeRowHead"
+                            style={{"background": "url(" + itemImageUrl + ") center"}}></div>
+                    <div className="itemTreeRow">
+                        {this.displayItemTree(items[1], 1, false)}
+                    </div>
+                </div>
+            );
+        }
+        if (items.length === 3) {
+            itemTree.push(
+                <div className="itemTree" style={first ? {"width": "100%"} : {"width": 100 / numSiblings + "%"}}>
+                    <div className="itemTreeRowHead"
+                            style={{"background": "url(" + itemImageUrl + ") center"}}></div>
+                    <div className="itemTreeRow">
+                        {this.displayItemTree(items[1], 2, false)}
+                        {this.displayItemTree(items[2], 2, false)}
+                    </div>
+                </div>
+            );
+        }
+        if (items.length === 4) {
+            itemTree.push(
+                <div className="itemTree" style={first ? {"width": "100%"} : {"width": 100 / numSiblings + "%"}}>
+                    <div className="itemTreeRowHead"
+                            style={{"background": "url(" + itemImageUrl + ") center"}}></div>
+                    <div className="itemTreeRow">
+                        {this.displayItemTree(items[1], 3, false)}
+                        {this.displayItemTree(items[2], 3, false)}
+                        {this.displayItemTree(items[3], 3, false)}
+                    </div>
+                </div>
+            );
+        }
+        if (items.length === 5) {
+            itemTree.push(
+                <div className="itemTree" style={first ? {"width": "100%"} : {"width": 100 / numSiblings + "%"}}>
+                    <div className="itemTreeRowHead"
+                            style={{"background": "url(" + itemImageUrl + ") center"}}></div>
+                    <div className="itemTreeRow">
+                        {this.displayItemTree(items[1], 4, false)}
+                        {this.displayItemTree(items[2], 4, false)}
+                        {this.displayItemTree(items[3], 4, false)}
+                        {this.displayItemTree(items[4], 4, false)}
+                    </div>
+                </div>
+            );
+        }
+
+        return (
+            itemTree
+        );
+
     }
 
     render() {

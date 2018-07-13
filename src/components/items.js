@@ -34,7 +34,8 @@ export default class Items extends Component {
                 map: [false, false, false, false]
             },
             search: "",
-            displayCards: true
+            displayCards: true,
+            unfilteredItems: null
         }
     }
 
@@ -43,6 +44,7 @@ export default class Items extends Component {
         axios.get(itemsUrl)
              .then(res => {
                 this.setState({
+                    unfilteredItems: res.data.data,
                     originalItems: utility.standardizeItems(res.data.data)
                 }, function() {
                     this.sortItems(this.state.originalItems, this.state.sort, this.state.search);
@@ -680,7 +682,8 @@ export default class Items extends Component {
 
             itemImagesRow.push(
                 <ItemCardContainer item={items[i]}
-                                   itemImageUrl={itemImageUrl} />
+                                   itemImageUrl={itemImageUrl}
+                                   items={this.state.unfilteredItems} />
             );
             
             //push the last row

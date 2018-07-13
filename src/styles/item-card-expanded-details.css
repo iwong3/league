@@ -11,7 +11,29 @@
     flex-wrap: wrap;
 }
 
+.itemTree {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.itemTreeRowHead {
+    display: flex;
+    border: 1px solid #937341;
+    width: 64px;
+    height: 64px;
+    transition: 0.2s ease all;
+    cursor: pointer;
+}
+
+.itemTreeRow {
+    display: flex;
+    margin: 15px 0px;
+    width: 100%;
+}
+
 .ItemCard_intoItemsIcon {
+    display: flex;
     border: 1px solid #937341;
     width: 64px;
     height: 64px;
@@ -20,6 +42,6 @@
     cursor: pointer;
 }
 
-.ItemCard_intoItemsIcon:hover {
+.ItemCard_intoItemsIcon:hover, .itemTreeRowHead:hover {
     filter: brightness(1.2);
 }

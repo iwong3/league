@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import ItemCard from './item-card';
 import ItemCardExpanded from './item-card-expanded';
 
+import '../styles/item-card-container.css';
+
 
 export default class ItemCardContainer extends Component {
 
@@ -44,7 +46,8 @@ export default class ItemCardContainer extends Component {
                           itemImageUrl={this.props.itemImageUrl}
                           handleClick={this.handleClick} />
                 <ItemCardExpanded item={this.props.item}
-                                  className={this.showItemCardExpanded()} />
+                                  className={this.showItemCardExpanded()}
+                                  items={this.props.items} />
             </div>
         );
     }
