@@ -98,52 +98,6 @@ export default class ItemCardExpandedDetails extends Component {
 
         return group;
     }
-
-    displayItemTree(items) {
-        let itemTree = [];
-        let itemImageUrl = utility.getItemUrl(items[0]);
-        itemTree.push(
-            <div className="ItemCard_intoItemsIcon"
-                 style={{"background": "url(" + itemImageUrl + ") center"}}></div>
-        );
-        for (let i = 0; i < items.length; i++) {
-            if (i === 0) {
-                continue;
-            }
-            itemTree.push(
-                <div className="itemTreeRow">
-                    {this.displayItemTree(items[i])}
-                </div>
-            );
-        }
-
-        return (
-            <div className="itemTree">{itemTree}</div>
-        );
-    }
-
-    displayItemTree(items) {
-        let itemTree = [];
-        let itemImageUrl = utility.getItemUrl(items[0]);
-        itemTree.push(
-            <div className="ItemCard_intoItemsIcon"
-                 style={{"background": "url(" + itemImageUrl + ") center"}}></div>
-        );
-        for (let i = 0; i < items.length; i++) {
-            if (i === 0) {
-                continue;
-            }
-            itemTree.push(
-                <div className="itemTreeRow">
-                    {this.displayItemTree(items[i])}
-                </div>
-            );
-        }
-
-        return (
-            <div className="itemTree">{itemTree}</div>
-        );
-    }
     
     displayItemTree = (items, numSiblings, first) => {
         let itemTree = [];
