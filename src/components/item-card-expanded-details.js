@@ -19,8 +19,10 @@ export default class ItemCardExpandedDetails extends Component {
     }
 
     displayStats = () => {
+
         return (
             <div className="ItemCardExpanded_textGroup">
+                <div className="ItemCardExpanded_textRow">Cost: {this.props.item.gold.total}</div>
                 <div className="ItemCardExpanded_textRow" dangerouslySetInnerHTML={{__html: this.props.item.description}} ></div>
             </div>
         )

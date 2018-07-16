@@ -1,3 +1,7 @@
+.ItemCardExpandedDetails {
+    overflow-y: scroll;
+}
+
 .ItemCardExpandedDetails_textRow {
     display: flex;
     justify-content: center;
@@ -44,4 +48,12 @@
 
 .ItemCard_intoItemsIcon:hover, .itemTreeRowHead:hover {
     filter: brightness(1.2);
+}
+
+.ItemCardExpanded_textRow {
+    margin: 15px 0px;
+}
+
+unique, aura, active {
+    color: white;
 }
