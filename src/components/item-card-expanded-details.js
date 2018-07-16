@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 
 import * as utility from '../utilities/functions';
-import * as constant from '../utilities/constants';
-import * as object from '../utilities/objects';
 
 import '../styles/item-card-expanded-details.css';
 

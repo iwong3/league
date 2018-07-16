@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 
-import * as utility from '../utilities/functions';
-
 import ItemCardExpandedMenu from './item-card-expanded-menu';
 import ItemCardExpandedDetails from './item-card-expanded-details';
 

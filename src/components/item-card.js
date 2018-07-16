@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 
-import * as utility from '../utilities/functions';
-
 import '../styles/item-card.css';
 
 
