@@ -26,21 +26,22 @@
 }
 
 .Search #searchBar {
-    background: #000000;
-    border: 1px solid #ccbe91;
-    border-right: none;
-    border-top-left-radius: 5px;
-    border-bottom-left-radius: 5px;
-    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.19);
+    background: none;
+    border: none;
     font-family: "Tajawal", sans-serif;
-    letter-spacing: 1px;
+    font-size: 18px;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
-    font-size: 20px;
     color: #ccbe91;
-    padding: 5px 20px;
+    text-align: center;
+    padding: 0px 20px;
+    width: 300px;
     height: 40px;
-    width: 30%;
 }
+
+.Search #searchBar:focus {
+    outline: none;
+} 
 
 .Search #searchBar::placeholder {
     color: #ccbe91;

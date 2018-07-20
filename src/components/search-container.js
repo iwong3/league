@@ -49,9 +49,9 @@ export default class SearchContainer extends Component {
         }
         return ({
             "display": "flex",
-            "justifyContent": "space-evenly",
+            "flexDirection": "column",
             "alignItems": "center",
-            "paddingTop": "10%",
+            "paddingTop": "5%",
             "paddingBottom": "10%",
             "height": "375px"
         })
@@ -61,6 +61,7 @@ export default class SearchContainer extends Component {
         return (
             <div className="SearchContainer"
                  style={this.setStyle()} >
+                {this.state.summonerName ? <none/> : <div className="SearchContainerTitle">Summoners</div>}
                 <Search />
                 {this.state.summonerName ? <SummonerContainer summonerName={this.state.summonerName}/> : <none/>}
             </div>

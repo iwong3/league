@@ -61,13 +61,13 @@ export default class Search extends Component {
                            type="text"
                            autoComplete="off"
                            value={this.state.summonerName}
-                           placeholder="Summoner Name..."
+                           placeholder="Find a Summoner"
                            onChange={this.handleSearchChange}
                     />
-                    <button id="searchButton"
+                    {/* <button id="searchButton"
                             type="submit">
                         Search
-                    </button>
+                    </button> */}
                 </form>
             </div>
         )

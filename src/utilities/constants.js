@@ -117,3 +117,6 @@ export const regions = [
         "name": "Latin America South"
     }
 ]
+
+export const accoundId = "34199109";
+export const id = "21000695";
