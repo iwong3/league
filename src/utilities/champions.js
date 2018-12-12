@@ -845,8 +845,14 @@ export const champions = {
             "key": "Gragas",
             "name": "Gragas",
             "title": "the Rabble Rouser"
+        },
+        "Neeko": {
+            "id": 518,
+            "key": "Neeko",
+            "name": "Neeko",
+            "title": "the Curious Chameleon"
         }
     },
     "type": "champion",
-    "version": "8.11.1"
+    "version": "8.24.1"
 }

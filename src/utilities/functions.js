@@ -85,8 +85,12 @@ export function getChampionsUrl() {
     return "http://ddragon.leagueoflegends.com/cdn/" + constant.version + "/data/en_US/champion.json";
 }
 
+// export function getFreeChampionsUrl() {
+//     return "https://na1.api.riotgames.com/lol/platform/v3/champions?freeToPlay=true&api_key=" + process.env.REACT_APP_RIOT_API_KEY;
+// }
+
 export function getFreeChampionsUrl() {
-    return "https://na1.api.riotgames.com/lol/platform/v3/champions?freeToPlay=true&api_key=" + process.env.REACT_APP_RIOT_API_KEY;
+    return "https://na1.api.riotgames.com/lol/platform/v3/champion-rotations?api_key=" + process.env.REACT_APP_RIOT_API_KEY;
 }
 
 //URL FUNCTIONS - SUMMONER INFO

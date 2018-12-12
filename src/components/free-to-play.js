@@ -24,13 +24,13 @@ export default class FreeToPlay extends Component {
         axios.get(freeToPlayUrl)
              .then(res => {
                  this.setState({
-                     freeChampions: res.data.champions,
-                     activeChampionId: res.data.champions[0].id,
+                     freeChampions: res.data.freeChampionIds,
+                     activeChampionId: res.data.freeChampionIds[0],
                      activeChampionIndex: 0
                  }, function() {
                      let splashUrls = [];
                      for (let i = 0; i < this.state.freeChampions.length; i++) {
-                        splashUrls[i] = utility.getChampionSplashUrl(utility.championIdToKey(this.state.freeChampions[i].id));
+                        splashUrls[i] = utility.getChampionSplashUrl(utility.championIdToKey(this.state.freeChampions[i]));
                      }
                      this.setState({
                          freeChampionsSplashUrls: splashUrls
@@ -58,16 +58,16 @@ export default class FreeToPlay extends Component {
         let championLoadingUrl = "";
 
         for (let i = 0; i < champions.length; i++) {
-            currentChampionKey = utility.championIdToKey(champions[i].id);
-            currentChampionName = utility.championIdToName(champions[i].id);
+            currentChampionKey = utility.championIdToKey(champions[i]);
+            currentChampionName = utility.championIdToName(champions[i]);
             championLoadingUrl = utility.getChampionIconUrl(currentChampionKey);
             freeChampions.push(
                 <div className="freeChampionBanner"
-                     onMouseOver={() => this.setActiveChampion(champions[i].id, i)} >
+                     onMouseOver={() => this.setActiveChampion(champions[i], i)} >
                     <div className="freeChampionCardBorder">
                         <img src={championLoadingUrl}
                              alt={currentChampionName}
-                             style={this.checkActiveChampionIconStyle(champions[i].id)} />
+                             style={this.checkActiveChampionIconStyle(champions[i])} />
                     </div>
                     <div className="freeChampionName">
                         {currentChampionName}
